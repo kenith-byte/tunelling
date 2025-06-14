@@ -1,0 +1,182 @@
+port: 7890
+socks-port: 7891
+redir-port: 7892
+mixed-port: 7893
+tproxy-port: 7895
+ipv6: false
+mode: rule
+log-level: silent
+allow-lan: true
+external-controller: 0.0.0.0:9090
+secret: ""
+bind-address: "*"
+unified-delay: true
+profile:
+  store-selected: true
+dns:
+  enable: true
+  ipv6: false
+  enhanced-mode: redir-host
+  listen: 0.0.0.0:7874
+  nameserver:
+    - 8.8.8.8
+    - 1.0.0.1
+    - https://dns.google/dns-query
+  fallback:
+    - 1.1.1.1
+    - 8.8.4.4
+    - https://cloudflare-dns.com/dns-query
+    - 112.215.203.254
+  default-nameserver:
+    - 8.8.8.8
+    - 1.1.1.1
+    - 112.215.203.254
+proxies:
+  - name: (ID) Amazon.com, Inc
+    server: ava.game.naver.com
+    port: 443
+    type: vless
+    uuid: f83b2581-440b-4059-ad18-2086f2d4c3ce
+    alterId: 0
+    cipher: auto
+    tls: false
+    skip-cert-verify: true
+    servername: ava.game.naver.com.violetvpn.biz.id
+    network: ws
+    ws-opts:
+      path: /id-amz
+      headers:
+        Host: ava.game.naver.com.violetvpn.biz.id
+    udp: true
+  - name: (ID) RumahWeb
+    server: ava.game.naver.com
+    port: 443
+    type: vless
+    uuid: f60e55d2-57e0-40e8-8146-56eeff893719
+    cipher: auto
+    tls: true
+    skip-cert-verify: true
+    servername: ava.game.naver.com.violetvpn.biz.id
+    network: ws
+    ws-opts:
+      path: /id-rweb
+      headers:
+        Host: ava.game.naver.com.violetvpn.biz.id
+    udp: true
+  - name: (SG) Melbikomas Uab
+    server: ava.game.naver.com
+    port: 443
+    type: vless
+    uuid: aae98731-898a-4cd3-8c7f-d09af2387d63
+    cipher: auto
+    tls: true
+    skip-cert-verify: true
+    servername: ava.game.naver.com.violetvpn.biz.id
+    network: ws
+    ws-opts:
+      path: /sg-melbi
+      headers:
+        Host: ava.game.naver.com.violetvpn.biz.id
+    udp: true
+  - name: (SG) Contabo Asia
+    server: ava.game.naver.com
+    port: 443
+    type: vless
+    uuid: 44639afd-22b9-40c0-af8b-681a744e494f
+    cipher: auto
+    tls: true
+    skip-cert-verify: true
+    servername: ava.game.naver.com.violetvpn.biz.id
+    network: ws
+    ws-opts:
+      path: /sg-cntb
+      headers:
+        Host: ava.game.naver.com.violetvpn.biz.id
+    udp: true
+
+proxy-groups:
+  - name: AKUN ID
+    type: fallback
+    url: http://www.gstatic.com/generate_204
+    interval: 300
+    proxies:
+      - (ID) Amazon.com, Inc
+      - (ID) RumahWeb
+
+  - name: AKUN SG
+    type: fallback
+    url: http://www.gstatic.com/generate_204
+    interval: 300
+    proxies:
+      - (SG) Melbikomas Uab
+      - (SG) Contabo Asia 
+      
+  - name: IKLAN
+    type: select
+    proxies:
+     - AKUN SG
+     - REJECT
+
+  - name: GAME
+    type: select
+    proxies:
+     - AKUN ID
+     - DIRECT
+     - REJECT
+
+rules:
+ - IP-CIDR,198.18.0.1/16,REJECT,no-resolve
+ - RULE-SET,Block,IKLAN
+ - RULE-SET,Game,GAME
+ - RULE-SET,Umum,AKUN SG
+ - RULE-SET,indo,AKUN ID
+ - RULE-SET,Sosmed,AKUN ID
+ - RULE-SET,Streaming,AKUN SG
+ - RULE-SET,Bankid,AKUN ID
+ - RULE-SET,Tiktok,AKUN SG
+ - RULE-SET,Meta,AKUN ID
+ - RULE-SET,PortGame,GAME
+ - MATCH,AKUN SG
+
+
+rule-providers:
+  Game:
+    type: file
+    behavior: classical
+    path: ./game.yaml 
+  PortGame:
+    type: file
+    behavior: classical
+    path: ./portgame.yaml
+  Umum:
+    type: file
+    behavior: classical
+    path: ./umum.yaml 
+  indo:
+    type: file
+    behavior: classical
+    path: ./indo.yaml
+  Sosmed:
+    type: file
+    behavior: classical
+    path: ./sosmed.yaml
+  Streaming:
+    type: file
+    behavior: classical
+    path: ./streaming.yaml
+  Bankid:
+    type: file
+    behavior: domain
+    path: ./bankid.yaml
+  Tiktok:
+    type: file
+    behavior: domain
+    path: ./tiktok.yaml
+  Meta:
+    type: file
+    behavior: domain
+    path: ./meta.yaml
+  Block:
+    type: file
+    behavior: domain
+    path: ./block.yaml  
