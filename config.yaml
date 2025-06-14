@@ -63,7 +63,7 @@ proxies:
       headers:
         Host: ava.game.naver.com.violetvpn.biz.id
     udp: true
-  - name: (SG) DigtalOcean 🇸🇬
+  - name: (SG) DigitalOcean 🇸🇬
     server: ava.game.naver.com
     port: 443
     type: vless
