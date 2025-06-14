@@ -146,7 +146,7 @@ rules:
  - RULE-SET,Game,GAME 🎲
  - RULE-SET,Sosmed,AKUN SG 🇸🇬
  - RULE-SET,indo,AKUN ID 🇮🇩
- - RULE-SET,Umum,AKUN SG 🇮🇩
+ - RULE-SET,umum,AKUN SG 🇮🇩
  - RULE-SET,Streaming,AKUN SG 🇸🇬
  - RULE-SET,Bankid,AKUN ID 🇮🇩
  - RULE-SET,Tiktok,AKUN SG 🇸🇬
