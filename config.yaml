@@ -32,7 +32,7 @@ dns:
     - 1.1.1.1
     - 112.215.203.254
 proxies:
-  - name: (ID) Amazon.com, Inc
+  - name: (ID) Amazon.com, Inc 🇮🇩
     server: ava.game.naver.com
     port: 443
     type: vless
@@ -48,7 +48,7 @@ proxies:
       headers:
         Host: ava.game.naver.com.violetvpn.biz.id
     udp: true
-  - name: (ID) RumahWeb
+  - name: (ID) RumahWeb 🇮🇩
     server: ava.game.naver.com
     port: 443
     type: vless
@@ -63,22 +63,22 @@ proxies:
       headers:
         Host: ava.game.naver.com.violetvpn.biz.id
     udp: true
-  - name: (SG) Melbikomas Uab
+  - name: (SG) DigtalOcean 🇸🇬
     server: ava.game.naver.com
     port: 443
     type: vless
-    uuid: aae98731-898a-4cd3-8c7f-d09af2387d63
+    uuid: 663c3b5d-02f6-487a-bb98-c12ae0b1f144
     cipher: auto
     tls: true
     skip-cert-verify: true
     servername: ava.game.naver.com.violetvpn.biz.id
     network: ws
     ws-opts:
-      path: /sg-melbi
+      path: /sg-do
       headers:
         Host: ava.game.naver.com.violetvpn.biz.id
     udp: true
-  - name: (SG) Contabo Asia
+  - name: (SG) Contabo Asia 🇸🇬
     server: ava.game.naver.com
     port: 443
     type: vless
@@ -93,50 +93,66 @@ proxies:
       headers:
         Host: ava.game.naver.com.violetvpn.biz.id
     udp: true
+  - name: (SG) Melbikomas Uab 🇸🇬
+    server: ava.game.naver.com
+    port: 443
+    type: vless
+    uuid: b10771d0-71d6-42b6-b2cd-d6527a9b9b5e
+    cipher: auto
+    tls: true
+    skip-cert-verify: true
+    servername: ava.game.naver.com.violetvpn.biz.id
+    network: ws
+    ws-opts:
+      path: /sg-melbi
+      headers:
+        Host: ava.game.naver.com.violetvpn.biz.id
+    udp: true
 
 proxy-groups:
-  - name: AKUN ID
+  - name: AKUN ID 🇮🇩
     type: fallback
     url: http://www.gstatic.com/generate_204
     interval: 300
     proxies:
-      - (ID) Amazon.com, Inc
-      - (ID) RumahWeb
+      - (ID) Amazon.com, Inc 🇮🇩
+      - (ID) RumahWeb 🇮🇩
 
-  - name: AKUN SG
+  - name: AKUN SG 🇸🇬
     type: fallback
     url: http://www.gstatic.com/generate_204
     interval: 300
     proxies:
-      - (SG) Melbikomas Uab
-      - (SG) Contabo Asia 
+      - (SG) DigitalOcean 🇸🇬
+      - (SG) Contabo Asia 🇸🇬
+      - (SG) Melbikomas Uab 🇸🇬
       
-  - name: IKLAN
+  - name: IKLAN ⛔
     type: select
     proxies:
-     - AKUN SG
+     - AKUN SG 🇸🇬
      - REJECT
 
-  - name: GAME
+  - name: GAME 🎲
     type: select
     proxies:
-     - AKUN ID
+     - AKUN ID 🇮🇩
      - DIRECT
      - REJECT
 
 rules:
  - IP-CIDR,198.18.0.1/16,REJECT,no-resolve
- - RULE-SET,Block,IKLAN
- - RULE-SET,Game,GAME
- - RULE-SET,Umum,AKUN SG
- - RULE-SET,indo,AKUN ID
- - RULE-SET,Sosmed,AKUN ID
- - RULE-SET,Streaming,AKUN SG
- - RULE-SET,Bankid,AKUN ID
- - RULE-SET,Tiktok,AKUN SG
- - RULE-SET,Meta,AKUN ID
- - RULE-SET,PortGame,GAME
- - MATCH,AKUN ID
+ - RULE-SET,Block,IKLAN ⛔
+ - RULE-SET,Game,GAME 🎲
+ - RULE-SET,Umum,AKUN SG 🇸🇬
+ - RULE-SET,indo,AKUN ID 🇮🇩
+ - RULE-SET,Sosmed,AKUN ID 🇮🇩
+ - RULE-SET,Streaming,AKUN SG 🇸🇬
+ - RULE-SET,Bankid,AKUN ID 🇮🇩
+ - RULE-SET,Tiktok,AKUN SG 🇸🇬
+ - RULE-SET,Meta,AKUN ID 🇮🇩
+ - RULE-SET,PortGame,GAME 🎲
+ - MATCH,AKUN ID 🇮🇩
 
 
 rule-providers:
