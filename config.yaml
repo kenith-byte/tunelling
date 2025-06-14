@@ -136,7 +136,7 @@ rules:
  - RULE-SET,Tiktok,AKUN SG
  - RULE-SET,Meta,AKUN ID
  - RULE-SET,PortGame,GAME
- - MATCH,AKUN SG
+ - MATCH,AKUN ID
 
 
 rule-providers:
