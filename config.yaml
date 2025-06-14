@@ -144,7 +144,7 @@ rules:
  - IP-CIDR,198.18.0.1/16,REJECT,no-resolve
  - RULE-SET,Block,IKLAN ⛔
  - RULE-SET,Game,GAME 🎲
- - RULE-SET,Sosmed,AKUN SG 🇸🇬
+ - RULE-SET,Sosmed,AKUN ID 🇮🇩
  - RULE-SET,indo,AKUN ID 🇮🇩
  - RULE-SET,Umum,AKUN SG 🇸🇬
  - RULE-SET,Streaming,AKUN SG 🇸🇬
