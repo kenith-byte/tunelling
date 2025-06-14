@@ -63,7 +63,7 @@ proxies:
       headers:
         Host: ava.game.naver.com.violetvpn.biz.id
     udp: true
-  - name: (SG) DigitalOcean 🇸🇬
+  - name: (SG) DigitalOcean, LLC 🇸🇬
     server: ava.game.naver.com
     port: 443
     type: vless
@@ -123,7 +123,7 @@ proxy-groups:
     url: http://www.gstatic.com/generate_204
     interval: 300
     proxies:
-      - (SG) DigitalOcean 🇸🇬
+      - (SG) DigitalOcean, LLC 🇸🇬
       - (SG) Contabo Asia 🇸🇬
       - (SG) Melbikomas Uab 🇸🇬
       
