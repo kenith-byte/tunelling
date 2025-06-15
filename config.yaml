@@ -255,7 +255,7 @@ proxies:
     udp: true
 
 proxy-groups:
-  - name: AKUN ID 🇮🇩
+  - name: SERVER ID 🇮🇩
     type: fallback
     url: http://www.gstatic.com/generate_204
     interval: 300
@@ -265,7 +265,7 @@ proxy-groups:
       - (ID) PT. Telekomunikasi 🇮🇩
       - (ID) PT. Pusat Media 🇮🇩
   
-  - name: AKUN SG 🇸🇬
+  - name: SERVER SG 🇸🇬
     type: fallback
     url: http://www.gstatic.com/generate_204
     interval: 300
@@ -278,13 +278,13 @@ proxy-groups:
   - name: IKLAN ⛔
     type: select
     proxies:
-     - AKUN SG 🇸🇬
+     - SERVER SG 🇸🇬
      - REJECT
 
   - name: GAME 🎲
     type: select
     proxies:
-     - AKUN ID 🇮🇩
+     - SERVER ID 🇮🇩
      - DIRECT
      - REJECT
 
@@ -292,15 +292,15 @@ rules:
  - IP-CIDR,198.18.0.1/16,REJECT,no-resolve
  - RULE-SET,Block,IKLAN ⛔
  - RULE-SET,Game,GAME 🎲
- - RULE-SET,Sosmed,AKUN ID 🇮🇩
- - RULE-SET,Indo,AKUN ID 🇮🇩
- - RULE-SET,Umum,AKUN SG 🇸🇬
- - RULE-SET,Streaming,AKUN SG 🇸🇬
- - RULE-SET,Banking,AKUN ID 🇮🇩
- - RULE-SET,Tiktok,AKUN SG 🇸🇬
- - RULE-SET,Meta,AKUN ID 🇮🇩
+ - RULE-SET,Sosmed,SERVER ID 🇮🇩
+ - RULE-SET,Indo,SERVER ID 🇮🇩
+ - RULE-SET,Umum,SERVER SG 🇸🇬
+ - RULE-SET,Streaming,SERVER SG 🇸🇬
+ - RULE-SET,Banking,SERVER ID 🇮🇩
+ - RULE-SET,Tiktok,SERVER SG 🇸🇬
+ - RULE-SET,Meta,SERVER ID 🇮🇩
  - RULE-SET,PortGame,GAME 🎲
- - MATCH,AKUN SG 🇸🇬
+ - MATCH,SERVER SG 🇸🇬
 
 
 rule-providers:
@@ -343,4 +343,4 @@ rule-providers:
   Block:
     type: file
     behavior: domain
-    path: ./block.yaml  
+    path: ./block.yaml
