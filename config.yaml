@@ -156,6 +156,38 @@ proxies:
       headers:
         Host: ava.game.naver.com.violetvpn.biz.id
     udp: true
+  - name: (ID) Akamai Technologies 🇮🇩
+    server: ava.game.naver.com
+    port: 443
+    type: vless
+    uuid: 1f8ef8d3-473c-4bb3-8f64-b3e0d2a54649
+    alterId: 0
+    cipher: auto
+    tls: false
+    skip-cert-verify: true
+    servername: ava.game.naver.com.violetvpn.biz.id
+    network: ws
+    ws-opts:
+      path: /id-akm
+      headers:
+        Host: ava.game.naver.com.violetvpn.biz.id
+    udp: true
+  - name: (ID) Pt Pusat Media 🇮🇩
+    server: ava.game.naver.com
+    port: 443
+    type: vless
+    uuid: 540b3e3d-1cd5-4f05-bc51-2393248b9351
+    alterId: 0
+    cipher: auto
+    tls: false
+    skip-cert-verify: true
+    servername: ava.game.naver.com.violetvpn.biz.id
+    network: ws
+    ws-opts:
+      path: /id-pusat
+      headers:
+        Host: ava.game.naver.com.violetvpn.biz.id
+    udp: true
   - name: (SG) DigitalOcean, LLC 🇸🇬
     server: ava.game.naver.com
     port: 443
@@ -186,18 +218,33 @@ proxies:
       headers:
         Host: ava.game.naver.com.violetvpn.biz.id
     udp: true
-  - name: (SG) Melbikomas Uab 🇸🇬
+  - name: (SG) Oracle Corporation 🇸🇬
     server: ava.game.naver.com
     port: 443
     type: vless
-    uuid: b10771d0-71d6-42b6-b2cd-d6527a9b9b5e
+    uuid: 0a00bf52-ca9f-48c8-a874-ac7f0a69c2fc
     cipher: auto
     tls: true
     skip-cert-verify: true
     servername: ava.game.naver.com.violetvpn.biz.id
     network: ws
     ws-opts:
-      path: /sg-melbi
+      path: /sg-orcl
+      headers:
+        Host: ava.game.naver.com.violetvpn.biz.id
+    udp: true
+  - name: (SG) Regxa Company 🇸🇬
+    server: ava.game.naver.com
+    port: 443
+    type: vless
+    uuid: 81f8c61b-74f2-446a-926f-adf1cc2f47b4
+    cipher: auto
+    tls: true
+    skip-cert-verify: true
+    servername: ava.game.naver.com.violetvpn.biz.id
+    network: ws
+    ws-opts:
+      path: /sg-rgxa
       headers:
         Host: ava.game.naver.com.violetvpn.biz.id
     udp: true
@@ -210,6 +257,8 @@ proxy-groups:
     proxies:
       - (ID) Amazon.com, Inc 🇮🇩
       - (ID) RumahWeb 🇮🇩
+      - (ID) Akamai Technologies 🇮🇩
+      - (ID) Pt Pusat Media 🇮🇩
 
   - name: AKUN SG 🇸🇬
     type: fallback
@@ -218,7 +267,8 @@ proxy-groups:
     proxies:
       - (SG) DigitalOcean, LLC 🇸🇬
       - (SG) Contabo Asia 🇸🇬
-      - (SG) Melbikomas Uab 🇸🇬
+      - (SG) Oracle Corporation 🇸🇬
+      - (SG) Regxa Company 🇸🇬
       
   - name: IKLAN ⛔
     type: select
@@ -226,7 +276,7 @@ proxy-groups:
      - AKUN SG 🇸🇬
      - REJECT
 
-  - name: GAME 🎲
+  - name: GAME 🎰
     type: select
     proxies:
      - AKUN ID 🇮🇩
@@ -236,7 +286,7 @@ proxy-groups:
 rules:
  - IP-CIDR,198.18.0.1/16,REJECT,no-resolve
  - RULE-SET,Block,IKLAN ⛔
- - RULE-SET,Game,GAME 🎲
+ - RULE-SET,Game,GAME 🎰
  - RULE-SET,Sosmed,AKUN ID 🇮🇩
  - RULE-SET,indo,AKUN ID 🇮🇩
  - RULE-SET,Umum,AKUN SG 🇸🇬
@@ -244,7 +294,7 @@ rules:
  - RULE-SET,Bankid,AKUN ID 🇮🇩
  - RULE-SET,Tiktok,AKUN SG 🇸🇬
  - RULE-SET,Meta,AKUN ID 🇮🇩
- - RULE-SET,PortGame,GAME 🎲
+ - RULE-SET,PortGame,GAME 🎰
  - MATCH,AKUN SG 🇸🇬
 
 
