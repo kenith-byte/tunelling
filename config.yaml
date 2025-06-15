@@ -124,6 +124,7 @@ dns:
     - "*.ffxiv.com"
     - "*.mcdn.bilivideo.cn"
     - +.media.dssott.com
+
 proxies:
   - name: (ID) Amazon.com, Inc 🇮🇩
     server: ava.game.naver.com
@@ -141,6 +142,7 @@ proxies:
       headers:
         Host: ava.game.naver.com.violetvpn.biz.id
     udp: true
+
   - name: (ID) RumahWeb 🇮🇩
     server: ava.game.naver.com
     port: 443
@@ -156,6 +158,7 @@ proxies:
       headers:
         Host: ava.game.naver.com.violetvpn.biz.id
     udp: true
+
   - name: (ID) PT. Telekomunikasi 🇮🇩
     server: ava.game.naver.com
     port: 443
@@ -172,7 +175,8 @@ proxies:
       headers:
         Host: ava.game.naver.com.violetvpn.biz.id
     udp: true
-  - name: (ID) Pt Pusat Media 🇮🇩
+
+  - name: (ID) PT. Pusat Media 🇮🇩
     server: ava.game.naver.com
     port: 443
     type: vless
@@ -188,6 +192,7 @@ proxies:
       headers:
         Host: ava.game.naver.com.violetvpn.biz.id
     udp: true
+
   - name: (SG) DigitalOcean, LLC 🇸🇬
     server: ava.game.naver.com
     port: 443
@@ -203,6 +208,7 @@ proxies:
       headers:
         Host: ava.game.naver.com.violetvpn.biz.id
     udp: true
+
   - name: (SG) Contabo Asia 🇸🇬
     server: ava.game.naver.com
     port: 443
@@ -218,6 +224,7 @@ proxies:
       headers:
         Host: ava.game.naver.com.violetvpn.biz.id
     udp: true
+
   - name: (SG) Oracle Corporation 🇸🇬
     server: ava.game.naver.com
     port: 443
@@ -233,6 +240,7 @@ proxies:
       headers:
         Host: ava.game.naver.com.violetvpn.biz.id
     udp: true
+
   - name: (SG) Regxa Company 🇸🇬
     server: ava.game.naver.com
     port: 443
@@ -250,20 +258,6 @@ proxies:
     udp: true
 
 proxy-groups:
-  - name: INTERNET UMUM 🌍
-    type: select
-    url: http://www.gstatic.com/generate_204
-    interval: 300
-    proxies:
-      - (ID) Amazon.com, Inc 🇮🇩
-      - (ID) RumahWeb 🇮🇩
-      - (ID) PT. Telekomunikasi 🇮🇩
-      - (ID) Pt Pusat Media 🇮🇩
-      - (SG) DigitalOcean, LLC 🇸🇬
-      - (SG) Contabo Asia 🇸🇬
-      - (SG) Oracle Corporation 🇸🇬
-      - (SG) Regxa Company 🇸🇬
-  
   - name: AKUN ID 🇮🇩
     type: fallback
     url: http://www.gstatic.com/generate_204
@@ -272,7 +266,7 @@ proxy-groups:
       - (ID) Amazon.com, Inc 🇮🇩
       - (ID) RumahWeb 🇮🇩
       - (ID) PT. Telekomunikasi 🇮🇩
-      - (ID) Pt Pusat Media 🇮🇩
+      - (ID) PT. Pusat Media 🇮🇩
   
   - name: AKUN SG 🇸🇬
     type: fallback
@@ -309,7 +303,7 @@ rules:
  - RULE-SET,Tiktok,AKUN SG 🇸🇬
  - RULE-SET,Meta,AKUN ID 🇮🇩
  - RULE-SET,PortGame,GAME 🎲
- - MATCH,INTERNET UMUM 🌍
+ - MATCH,AKUN SG 🇸🇬
 
 
 rule-providers:
