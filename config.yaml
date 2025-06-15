@@ -296,12 +296,13 @@ rules:
  - RULE-SET,Block,IKLAN ⛔
  - RULE-SET,Game,GAME 🎲
  - RULE-SET,Sosmed,AKUN ID 🇮🇩
- - RULE-SET,indo,AKUN ID 🇮🇩
+ - RULE-SET,Indo,AKUN ID 🇮🇩
  - RULE-SET,Umum,AKUN SG 🇸🇬
  - RULE-SET,Streaming,AKUN SG 🇸🇬
- - RULE-SET,Bankid,AKUN ID 🇮🇩
+ - RULE-SET,Banking,AKUN ID 🇮🇩
  - RULE-SET,Tiktok,AKUN SG 🇸🇬
  - RULE-SET,Meta,AKUN ID 🇮🇩
+ - RULE-SET,Speedtest,AKUN SG 🇸🇬
  - RULE-SET,PortGame,GAME 🎲
  - MATCH,AKUN SG 🇸🇬
 
@@ -319,7 +320,7 @@ rule-providers:
     type: file
     behavior: classical
     path: ./umum.yaml 
-  indo:
+  Indo:
     type: file
     behavior: classical
     path: ./indo.yaml
@@ -331,7 +332,7 @@ rule-providers:
     type: file
     behavior: classical
     path: ./streaming.yaml
-  Bankid:
+  Banking:
     type: file
     behavior: domain
     path: ./bankid.yaml
@@ -343,6 +344,10 @@ rule-providers:
     type: file
     behavior: domain
     path: ./meta.yaml
+  Speedtest:
+    type: file
+    behavior: domain
+    path: ./speedtest.yaml
   Block:
     type: file
     behavior: domain
