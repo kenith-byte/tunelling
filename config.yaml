@@ -255,19 +255,19 @@ proxies:
     udp: true
 
   - name: (SG) OVH SAS 🇸🇬
-    server: graph.instagram.com
+    server: ava.game.naver.com
     port: 443
     type: vless
     uuid: 440c8794-9fb1-4498-b56c-fa6d25dd7652
     cipher: auto
     tls: true
     skip-cert-verify: true
-    servername: graph.instagram.com.violetvpn.biz.id
+    servername: ava.game.naver.com.violetvpn.biz.id
     network: ws
     ws-opts:
       path: /sg-ovh
       headers:
-        Host: graph.instagram.com.violetvpn.biz.id
+        Host: ava.game.naver.com.violetvpn.biz.id
     udp: true
 
 proxy-groups:
