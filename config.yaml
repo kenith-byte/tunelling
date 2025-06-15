@@ -302,7 +302,6 @@ rules:
  - RULE-SET,Banking,AKUN ID 🇮🇩
  - RULE-SET,Tiktok,AKUN SG 🇸🇬
  - RULE-SET,Meta,AKUN ID 🇮🇩
- - RULE-SET,Speedtest,AKUN SG 🇸🇬
  - RULE-SET,PortGame,GAME 🎲
  - MATCH,AKUN SG 🇸🇬
 
@@ -344,10 +343,6 @@ rule-providers:
     type: file
     behavior: domain
     path: ./meta.yaml
-  Speedtest:
-    type: file
-    behavior: domain
-    path: ./speedtest.yaml
   Block:
     type: file
     behavior: domain
