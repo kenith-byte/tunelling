@@ -263,8 +263,7 @@ proxy-groups:
       - (SG) Contabo Asia 🇸🇬
       - (SG) Oracle Corporation 🇸🇬
       - (SG) Regxa Company 🇸🇬
-      
-proxy-groups:
+  
   - name: AKUN ID 🇮🇩
     type: fallback
     url: http://www.gstatic.com/generate_204
