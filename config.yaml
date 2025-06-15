@@ -250,6 +250,21 @@ proxies:
     udp: true
 
 proxy-groups:
+  - name: INTERNET UMUM 🌍
+    type: select
+    url: http://www.gstatic.com/generate_204
+    interval: 300
+    proxies:
+      - (ID) Amazon.com, Inc 🇮🇩
+      - (ID) RumahWeb 🇮🇩
+      - (ID) PT. Telekomunikasi 🇮🇩
+      - (ID) Pt Pusat Media 🇮🇩
+      - (SG) DigitalOcean, LLC 🇸🇬
+      - (SG) Contabo Asia 🇸🇬
+      - (SG) Oracle Corporation 🇸🇬
+      - (SG) Regxa Company 🇸🇬
+      
+proxy-groups:
   - name: AKUN ID 🇮🇩
     type: fallback
     url: http://www.gstatic.com/generate_204
@@ -259,7 +274,7 @@ proxy-groups:
       - (ID) RumahWeb 🇮🇩
       - (ID) PT. Telekomunikasi 🇮🇩
       - (ID) Pt Pusat Media 🇮🇩
-
+  
   - name: AKUN SG 🇸🇬
     type: fallback
     url: http://www.gstatic.com/generate_204
@@ -276,7 +291,7 @@ proxy-groups:
      - AKUN SG 🇸🇬
      - REJECT
 
-  - name: GAME 🎰
+  - name: GAME 🎲
     type: select
     proxies:
      - AKUN ID 🇮🇩
@@ -286,7 +301,7 @@ proxy-groups:
 rules:
  - IP-CIDR,198.18.0.1/16,REJECT,no-resolve
  - RULE-SET,Block,IKLAN ⛔
- - RULE-SET,Game,GAME 🎰
+ - RULE-SET,Game,GAME 🎲
  - RULE-SET,Sosmed,AKUN ID 🇮🇩
  - RULE-SET,indo,AKUN ID 🇮🇩
  - RULE-SET,Umum,AKUN SG 🇸🇬
@@ -294,8 +309,8 @@ rules:
  - RULE-SET,Bankid,AKUN ID 🇮🇩
  - RULE-SET,Tiktok,AKUN SG 🇸🇬
  - RULE-SET,Meta,AKUN ID 🇮🇩
- - RULE-SET,PortGame,GAME 🎰
- - MATCH,AKUN SG 🇸🇬
+ - RULE-SET,PortGame,GAME 🎲
+ - MATCH,INTERNET UMUM 🌍
 
 
 rule-providers:
