@@ -190,7 +190,7 @@ proxies:
         Host: ava.game.naver.com.violetvpn.biz.id
     udp: true
 
-  - name: (SG) OVH Singapore Pte. Ltd 🇸🇬
+  - name: (SG) OVH SAS 🇸🇬
     server: ava.game.naver.com
     port: 443
     type: vless
@@ -273,7 +273,7 @@ proxies:
 proxy-groups:
   - name: SERVER ID 🇮🇩
     type: fallback
-    url: http://www.gstatic.com/generate_204
+    url: http://cp.cloudflare.com/generate_204
     interval: 300
     proxies:
       - (ID) Amazon.com, Inc 🇮🇩
@@ -283,10 +283,10 @@ proxy-groups:
   
   - name: SERVER SG 🇸🇬
     type: fallback
-    url: http://www.gstatic.com/generate_204
+    url: http://cp.cloudflare.com/generate_204
     interval: 300
     proxies:
-      - (SG) OVH Singapore Pte. Ltd 🇸🇬
+      - (SG) OVH SAS 🇸🇬
       - (SG) DigitalOcean, LLC 🇸🇬
       - (SG) Oracle Corporation 🇸🇬
       - (SG) Regxa Company 🇸🇬
