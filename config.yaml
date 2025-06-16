@@ -65,38 +65,6 @@ proxies:
         Host: ava.game.naver.com.violetvpn.biz.id
     udp: true
 
-  - name: (ID) PT. Telekomunikasi 🇮🇩
-    server: ava.game.naver.com
-    port: 443
-    type: vless
-    uuid: 0959758e-3068-475b-bbef-d3956439f7b9
-    cipher: auto
-    tls: true
-    skip-cert-verify: true
-    servername: ava.game.naver.com.violetvpn.biz.id
-    network: ws
-    ws-opts:
-      path: /id-tele
-      headers:
-        Host: ava.game.naver.com.violetvpn.biz.id
-    udp: true
-
-  - name: (ID) PT. Pusat Media 🇮🇩
-    server: ava.game.naver.com
-    port: 443
-    type: vless
-    uuid: 540b3e3d-1cd5-4f05-bc51-2393248b9351
-    cipher: auto
-    tls: true
-    skip-cert-verify: true
-    servername: ava.game.naver.com.violetvpn.biz.id
-    network: ws
-    ws-opts:
-      path: /id-pusat
-      headers:
-        Host: ava.game.naver.com.violetvpn.biz.id
-    udp: true
-
   - name: (SG) Tencent 🇸🇬
     server: ava.game.naver.com
     port: 443
@@ -111,70 +79,6 @@ proxies:
       path: /websocket-vless
       headers:
         Host: ava.game.naver.com.vip-12.indoxray.top
-    udp: true
-
-  - name: (SG) DigitalOcean, LLC 🇸🇬
-    server: ava.game.naver.com
-    port: 443
-    type: vless
-    uuid: 663c3b5d-02f6-487a-bb98-c12ae0b1f144
-    cipher: auto
-    tls: true
-    skip-cert-verify: true
-    servername: ava.game.naver.com.violetvpn.biz.id
-    network: ws
-    ws-opts:
-      path: /sg-do
-      headers:
-        Host: ava.game.naver.com.violetvpn.biz.id
-    udp: true
-
-  - name: (SG) Oracle Corporation 🇸🇬
-    server: ava.game.naver.com
-    port: 443
-    type: vless
-    uuid: 0a00bf52-ca9f-48c8-a874-ac7f0a69c2fc
-    cipher: auto
-    tls: true
-    skip-cert-verify: true
-    servername: ava.game.naver.com.violetvpn.biz.id
-    network: ws
-    ws-opts:
-      path: /sg-orcl
-      headers:
-        Host: ava.game.naver.com.violetvpn.biz.id
-    udp: true
-
-  - name: (SG) Regxa Company 🇸🇬
-    server: ava.game.naver.com
-    port: 443
-    type: vless
-    uuid: 81f8c61b-74f2-446a-926f-adf1cc2f47b4
-    cipher: auto
-    tls: true
-    skip-cert-verify: true
-    servername: ava.game.naver.com.violetvpn.biz.id
-    network: ws
-    ws-opts:
-      path: /sg-rgxa
-      headers:
-        Host: ava.game.naver.com.violetvpn.biz.id
-    udp: true
-
-  - name: (SG) Contabo Asia 🇸🇬
-    server: ava.game.naver.com
-    port: 443
-    type: vless
-    uuid: 44639afd-22b9-40c0-af8b-681a744e494f
-    cipher: auto
-    tls: true
-    skip-cert-verify: true
-    servername: ava.game.naver.com.violetvpn.biz.id
-    network: ws
-    ws-opts:
-      path: /sg-cntb
-      headers:
-        Host: ava.game.naver.com.violetvpn.biz.id
     udp: true
 
   - name: (SG) OVH SAS 🇸🇬
@@ -200,18 +104,12 @@ proxy-groups:
     proxies:
       - (ID) Amazon.com, Inc 🇮🇩
       - (ID) RumahWeb 🇮🇩
-      - (ID) PT. Telekomunikasi 🇮🇩
-      - (ID) PT. Pusat Media 🇮🇩
   
   - name: SERVER SG 🇸🇬
     type: load-balance
     strategy: round-robin
     proxies:
       - (SG) Tencent 🇸🇬
-      - (SG) DigitalOcean, LLC 🇸🇬
-      - (SG) Oracle Corporation 🇸🇬
-      - (SG) Regxa Company 🇸🇬
-      - (SG) Contabo Asia 🇸🇬
       - (SG) OVH SAS 🇸🇬
       
   - name: IKLAN ⛔
