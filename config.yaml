@@ -190,6 +190,22 @@ proxies:
         Host: ava.game.naver.com.violetvpn.biz.id
     udp: true
 
+  - name: (SG) OVH Singapore Pte. Ltd 🇸🇬
+    server: ava.game.naver.com
+    port: 443
+    type: vless
+    uuid: 440c8794-9fb1-4498-b56c-fa6d25dd7652
+    cipher: auto
+    tls: true
+    skip-cert-verify: true
+    servername: ava.game.naver.com.violetvpn.biz.id
+    network: ws
+    ws-opts:
+      path: /sg-ovh
+      headers:
+        Host: ava.game.naver.com.violetvpn.biz.id
+    udp: true
+
   - name: (SG) DigitalOcean, LLC 🇸🇬
     server: ava.game.naver.com
     port: 443
@@ -202,22 +218,6 @@ proxies:
     network: ws
     ws-opts:
       path: /sg-do
-      headers:
-        Host: ava.game.naver.com.violetvpn.biz.id
-    udp: true
-
-  - name: (SG) Contabo Asia 🇸🇬
-    server: ava.game.naver.com
-    port: 443
-    type: vless
-    uuid: 44639afd-22b9-40c0-af8b-681a744e494f
-    cipher: auto
-    tls: true
-    skip-cert-verify: true
-    servername: ava.game.naver.com.violetvpn.biz.id
-    network: ws
-    ws-opts:
-      path: /sg-cntb
       headers:
         Host: ava.game.naver.com.violetvpn.biz.id
     udp: true
@@ -254,18 +254,18 @@ proxies:
         Host: ava.game.naver.com.violetvpn.biz.id
     udp: true
 
-  - name: (SG) OVH SAS 🇸🇬
+  - name: (SG) Contabo Asia 🇸🇬
     server: ava.game.naver.com
     port: 443
     type: vless
-    uuid: 440c8794-9fb1-4498-b56c-fa6d25dd7652
+    uuid: 44639afd-22b9-40c0-af8b-681a744e494f
     cipher: auto
     tls: true
     skip-cert-verify: true
     servername: ava.game.naver.com.violetvpn.biz.id
     network: ws
     ws-opts:
-      path: /sg-ovh
+      path: /sg-cntb
       headers:
         Host: ava.game.naver.com.violetvpn.biz.id
     udp: true
@@ -286,11 +286,11 @@ proxy-groups:
     url: http://www.gstatic.com/generate_204
     interval: 300
     proxies:
+      - (SG) OVH Singapore Pte. Ltd 🇸🇬
       - (SG) DigitalOcean, LLC 🇸🇬
-      - (SG) Contabo Asia 🇸🇬
       - (SG) Oracle Corporation 🇸🇬
       - (SG) Regxa Company 🇸🇬
-      - (SG) OVH SAS 🇸🇬
+      - (SG) Contabo Asia 🇸🇬
       
   - name: IKLAN ⛔
     type: select
