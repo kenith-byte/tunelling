@@ -196,8 +196,7 @@ proxies:
 proxy-groups:
   - name: SERVER ID 🇮🇩
     type: load-balance
-    url: http://www.gstatic.com/generate_204
-    interval: 60
+    strategy: round-robin
     proxies:
       - (ID) Amazon.com, Inc 🇮🇩
       - (ID) RumahWeb 🇮🇩
@@ -206,8 +205,7 @@ proxy-groups:
   
   - name: SERVER SG 🇸🇬
     type: load-balance
-    url: http://www.gstatic.com/generate_204
-    interval: 60
+    strategy: round-robin
     proxies:
       - (SG) Tencent 🇸🇬
       - (SG) DigitalOcean, LLC 🇸🇬
