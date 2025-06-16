@@ -309,13 +309,13 @@ rules:
  - IP-CIDR,198.18.0.1/16,REJECT,no-resolve
  - RULE-SET,Block,IKLAN ⛔
  - RULE-SET,Game,GAME 🎲
- - RULE-SET,Sosmed,SERVER ID 🇮🇩
+ - RULE-SET,Sosmed,SERVER SG 🇸🇬
  - RULE-SET,Indo,SERVER ID 🇮🇩
  - RULE-SET,Umum,SERVER SG 🇸🇬
  - RULE-SET,Streaming,SERVER SG 🇸🇬
  - RULE-SET,Banking,SERVER ID 🇮🇩
  - RULE-SET,Tiktok,SERVER SG 🇸🇬
- - RULE-SET,Meta,SERVER ID 🇮🇩
+ - RULE-SET,Meta,SERVER SG 🇸🇬
  - RULE-SET,PortGame,GAME 🎲
  - MATCH,SERVER SG 🇸🇬
 
