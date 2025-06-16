@@ -76,7 +76,7 @@ proxies:
     servername: ava.game.naver.com.vip-12.indoxray.top
     network: ws
     ws-opts:
-      path: /vless
+      path: /websocket-vless
       headers:
         Host: ava.game.naver.com.vip-12.indoxray.top
     udp: true
