@@ -97,20 +97,20 @@ proxies:
         Host: ava.game.naver.com.violetvpn.biz.id
     udp: true
 
-  - name: (SG) OVH SAS 🇸🇬
+  - name: (SG) Tencent 🇸🇬
     server: ava.game.naver.com
     port: 443
     type: vless
-    uuid: 440c8794-9fb1-4498-b56c-fa6d25dd7652
+    uuid: 78bd974c-31af-45ed-b9e0-f2d8b5ffd680
     cipher: auto
     tls: true
     skip-cert-verify: true
-    servername: ava.game.naver.com.violetvpn.biz.id
+    servername: ava.game.naver.com.vip-12.indoxray.top
     network: ws
     ws-opts:
-      path: /sg-ovh
+      path: /websocket-vless
       headers:
-        Host: ava.game.naver.com.violetvpn.biz.id
+        Host: ava.game.naver.com.vip-12.indoxray.top
     udp: true
 
   - name: (SG) DigitalOcean, LLC 🇸🇬
@@ -177,25 +177,25 @@ proxies:
         Host: ava.game.naver.com.violetvpn.biz.id
     udp: true
 
-  - name: (SG) Tencent 🇸🇬
+  - name: (SG) OVH SAS 🇸🇬
     server: ava.game.naver.com
     port: 443
     type: vless
-    uuid: 78bd974c-31af-45ed-b9e0-f2d8b5ffd680
+    uuid: 440c8794-9fb1-4498-b56c-fa6d25dd7652
     cipher: auto
     tls: true
     skip-cert-verify: true
-    servername: ava.game.naver.com.vip-12.indoxray.top
+    servername: ava.game.naver.com.violetvpn.biz.id
     network: ws
     ws-opts:
-      path: /websocket-vless
+      path: /sg-ovh
       headers:
-        Host: ava.game.naver.com.vip-12.indoxray.top
+        Host: ava.game.naver.com.violetvpn.biz.id
     udp: true
 
 proxy-groups:
   - name: SERVER ID 🇮🇩
-    type: fallback
+    type: load-balance
     url: http://www.gstatic.com/generate_204
     interval: 60
     proxies:
@@ -205,16 +205,16 @@ proxy-groups:
       - (ID) PT. Pusat Media 🇮🇩
   
   - name: SERVER SG 🇸🇬
-    type: fallback
+    type: load-balance
     url: http://www.gstatic.com/generate_204
     interval: 60
     proxies:
-      - (SG) OVH SAS 🇸🇬
+      - (SG) Tencent 🇸🇬
       - (SG) DigitalOcean, LLC 🇸🇬
       - (SG) Oracle Corporation 🇸🇬
       - (SG) Regxa Company 🇸🇬
       - (SG) Contabo Asia 🇸🇬
-      - (SG) Tencent 🇸🇬
+      - (SG) OVH SAS 🇸🇬
       
   - name: IKLAN ⛔
     type: select
