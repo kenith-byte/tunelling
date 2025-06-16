@@ -273,8 +273,8 @@ proxies:
 proxy-groups:
   - name: SERVER ID 🇮🇩
     type: fallback
-    url: http://cp.cloudflare.com/generate_204
-    interval: 300
+    url: http://captive.apple.com
+    interval: 60
     proxies:
       - (ID) Amazon.com, Inc 🇮🇩
       - (ID) RumahWeb 🇮🇩
@@ -283,8 +283,8 @@ proxy-groups:
   
   - name: SERVER SG 🇸🇬
     type: fallback
-    url: http://cp.cloudflare.com/generate_204
-    interval: 300
+    url: http://captive.apple.com
+    interval: 60
     proxies:
       - (SG) OVH SAS 🇸🇬
       - (SG) DigitalOcean, LLC 🇸🇬
