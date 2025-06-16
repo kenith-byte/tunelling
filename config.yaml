@@ -76,9 +76,25 @@ proxies:
     servername: ava.game.naver.com.vip-12.indoxray.top
     network: ws
     ws-opts:
-      path: /websocket-vless
+      path: /vless
       headers:
         Host: ava.game.naver.com.vip-12.indoxray.top
+    udp: true
+
+  - name: (SG) OVH SAS 🇸🇬
+    server: ava.game.naver.com
+    port: 443
+    type: vless
+    uuid: 440c8794-9fb1-4498-b56c-fa6d25dd7652
+    cipher: auto
+    tls: true
+    skip-cert-verify: true
+    servername: ava.game.naver.com.violetvpn.biz.id
+    network: ws
+    ws-opts:
+      path: /sg-ovh
+      headers:
+        Host: ava.game.naver.com.violetvpn.biz.id
     udp: true
 
 proxy-groups:
@@ -94,6 +110,7 @@ proxy-groups:
     strategy: round-robin
     proxies:
       - (SG) Tencent 🇸🇬
+      - (SG) OVH SAS 🇸🇬
       
   - name: IKLAN ⛔
     type: select
