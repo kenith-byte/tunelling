@@ -273,7 +273,7 @@ proxies:
 proxy-groups:
   - name: SERVER ID 🇮🇩
     type: fallback
-    url: http://captive.apple.com
+    url: http://sgp1.vultr.com/
     interval: 60
     proxies:
       - (ID) Amazon.com, Inc 🇮🇩
@@ -283,7 +283,7 @@ proxy-groups:
   
   - name: SERVER SG 🇸🇬
     type: fallback
-    url: http://captive.apple.com
+    url: http://sgp1.vultr.com/
     interval: 60
     proxies:
       - (SG) OVH SAS 🇸🇬
