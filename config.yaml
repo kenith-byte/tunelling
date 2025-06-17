@@ -99,10 +99,9 @@ proxies:
 
 proxy-groups:
   - name: SERVER ID 🇮🇩
-    type: load-balance
+    type: fallback
     url: http://www.gstatic.com/generate_204
-    interval: 120
-    strategy: round-robin
+    interval: 90
     proxies:
       - (ID) Amazon.com, Inc 🇮🇩
       - (ID) RumahWeb 🇮🇩
@@ -131,14 +130,14 @@ proxy-groups:
   - name: SOSMED 🌍
     type: select
     proxies:
-     - SERVER SG 🇸🇬
+     - SERVER ID 🇮🇩
      - DIRECT
 
 rules:
  - IP-CIDR,198.18.0.1/16,REJECT,no-resolve
  - RULE-SET,Block,IKLAN ⛔
  - RULE-SET,Game,GAME 🎲
- - RULE-SET,Sosmed,SERVER SG 🇸🇬
+ - RULE-SET,Sosmed,SERVER ID 🇮🇩
  - RULE-SET,Indo,SERVER ID 🇮🇩
  - RULE-SET,Umum,SERVER SG 🇸🇬
  - RULE-SET,Streaming,SERVER SG 🇸🇬
