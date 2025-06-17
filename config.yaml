@@ -39,7 +39,7 @@ dns:
 
 proxies:
   - name: (ID) Amazon.com, Inc 🇮🇩
-    server: ava.game.naver.com
+    server: violetvpn.biz.id
     port: 443
     type: vless
     uuid: 51604dea-5450-4926-96de-1dee9dbcc6ad
@@ -55,7 +55,7 @@ proxies:
     udp: true
 
   - name: (ID) RumahWeb 🇮🇩
-    server: investor.fb.com
+    server: app.gopay.co.id
     port: 443
     type: vless
     uuid: 16ca11e1-fc61-4b8d-8760-a6a9717f6cd1
