@@ -112,13 +112,14 @@ dns:
     - "*.ffxiv.com"
     - "*.mcdn.bilivideo.cn"
     - +.media.dssott.com
+  ip-cidr: 240.0.0.0/4
   use-hosts: true
   listen: 127.0.0.1:7874
   nameserver:
     - 8.8.8.8
     - 1.1.1.1
-    - https://dns.alidns.com/dns-query
-    - 112.215.203.254
+    - 36.86.63.185
+    - 202.152.240.50
   fallback:
     - 1.0.0.1
     - 8.8.4.4
