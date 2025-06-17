@@ -149,7 +149,7 @@ proxies:
     udp: true
 
   - name: (ID) RumahWeb 🇮🇩
-    server: df.game.naver.com
+    server: investor.fb.com
     port: 443
     type: vless
     uuid: 16ca11e1-fc61-4b8d-8760-a6a9717f6cd1
