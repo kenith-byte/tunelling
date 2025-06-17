@@ -136,32 +136,32 @@ proxies:
     server: ava.game.naver.com
     port: 443
     type: vless
-    uuid: 14814b9d-11df-411c-b023-99198d0d4cc1
+    uuid: 51604dea-5450-4926-96de-1dee9dbcc6ad
     cipher: auto
     tls: true
     skip-cert-verify: true
-    servername: ava.game.naver.com.violetvpn.biz.id
+    servername: graph.instagram.com.violetvpn.biz.id
     network: ws
     ws-opts:
       path: /id-amz
       headers:
-        Host: ava.game.naver.com.violetvpn.biz.id
+        Host: graph.instagram.com.violetvpn.biz.id
     udp: true
 
   - name: (ID) RumahWeb 🇮🇩
-    server: ava.game.naver.com
+    server: df.game.naver.com
     port: 443
     type: vless
-    uuid: f60e55d2-57e0-40e8-8146-56eeff893719
+    uuid: 16ca11e1-fc61-4b8d-8760-a6a9717f6cd1
     cipher: auto
     tls: true
     skip-cert-verify: true
-    servername: ava.game.naver.com.violetvpn.biz.id
+    servername: violetvpn.biz.id
     network: ws
     ws-opts:
       path: /id-rweb
       headers:
-        Host: ava.game.naver.com.violetvpn.biz.id
+        Host: violetvpn.biz.id
     udp: true
 
   - name: (SG) Tencent 🇸🇬
