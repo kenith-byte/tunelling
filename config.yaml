@@ -101,17 +101,16 @@ proxy-groups:
   - name: SERVER ID 🇮🇩
     type: load-balance
     url: http://www.gstatic.com/generate_204
-    interval: 30
+    interval: 120
     strategy: round-robin
     proxies:
       - (ID) Amazon.com, Inc 🇮🇩
       - (ID) RumahWeb 🇮🇩
   
   - name: SERVER SG 🇸🇬
-    type: load-balance
+    type: fallback
     url: http://www.gstatic.com/generate_204
-    interval: 30
-    strategy: round-robin
+    interval: 90
     proxies:
       - (SG) Tencent 🇸🇬
       - (SG) OVH SAS 🇸🇬
