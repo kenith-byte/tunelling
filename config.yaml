@@ -112,7 +112,6 @@ dns:
     - "*.ffxiv.com"
     - "*.mcdn.bilivideo.cn"
     - +.media.dssott.com
-  ip-cidr: 240.0.0.0/4
   use-hosts: true
   listen: 127.0.0.1:7874
   nameserver:
@@ -124,7 +123,7 @@ dns:
     - 1.0.0.1
     - 8.8.4.4
     - https://dns.alidns.com/dns-query
-    - 114.114.114.114
+    - https://dns.google/dns-query
     - tls://dns.google
     - tls://1.1.1.1
   default-nameserver:
@@ -199,18 +198,20 @@ proxies:
 
 proxy-groups:
   - name: SERVER ID 🇮🇩
-    type: fallback
+    type: load-balance
     url: http://www.gstatic.com/generate_204
-    interval: 180
+    interval: 300
+    strategy: consistent-hashing
     udp: true
     proxies:
       - (ID) Amazon.com, Inc 🇮🇩
       - (ID) RumahWeb 🇮🇩
   
   - name: SERVER SG 🇸🇬
-    type: fallback
+    type: load-balance
     url: http://www.gstatic.com/generate_204
-    interval: 180
+    interval: 300
+    strategy: consistent-hashing
     udp: true
     proxies:
       - (SG) Tencent 🇸🇬
