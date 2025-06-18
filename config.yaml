@@ -169,16 +169,16 @@ proxy-groups:
 
 rules:
   - IP-CIDR,198.18.0.1/16,REJECT,no-resolve
-  - RULE-SET,Block,IKLAN ⛔
-  - RULE-SET,Game,(ID) Linode 🇮🇩
-  - RULE-SET,Sosmed,(SG) Tencent 🇸🇬
-  - RULE-SET,Indo,(ID) Linode 🇮🇩
-  - RULE-SET,Umum,(SG) Tencent 🇸🇬
-  - RULE-SET,Streaming,(SG) Tencent 🇸🇬
-  - RULE-SET,Banking,(ID) Linode 🇮🇩
-  - RULE-SET,Meta,(SG) Tencent 🇸🇬
-  - RULE-SET,PortGame,(ID) Linode 🇮🇩
-  - MATCH,(SG) Tencent 🇸🇬
+  - RULE-SET,Block,PR0XIES
+  - RULE-SET,Game,PR0XIES
+  - RULE-SET,Sosmed,PR0XIES
+  - RULE-SET,Indo,PR0XIES
+  - RULE-SET,Umum,PR0XIES
+  - RULE-SET,Streaming,PR0XIES
+  - RULE-SET,Banking,PR0XIES
+  - RULE-SET,Meta,PR0XIES
+  - RULE-SET,PortGame,PR0XIES
+  - MATCH,PR0XIES
 
 rule-providers:
   Game:
