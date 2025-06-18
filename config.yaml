@@ -190,7 +190,7 @@ rules:
   - IP-CIDR,198.18.0.1/16,REJECT,no-resolve
   - RULE-SET,Block,IKLAN ⛔
   - RULE-SET,Game,GAME 🎲
-  - RULE-SET,Sosmed,AKUN SG 🇸🇬
+  - RULE-SET,Sosmed,SERVER SG 🇸🇬
   - RULE-SET,Indo,SERVER ID 🇮🇩
   - RULE-SET,Umum,SERVER SG 🇸🇬
   - RULE-SET,Streaming,SERVER SG 🇸🇬
