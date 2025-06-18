@@ -197,7 +197,7 @@ proxy-groups:
     udp: true
     proxies:
       - (ID) Amazon.com, Inc 🇮🇩
-      - (ID) RumahWeb 🇮🇩
+      - (ID) Linode 🇮🇩
 
   - name: SERVER SG 🇸🇬
     type: load-balance
