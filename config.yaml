@@ -189,17 +189,17 @@ proxies:
 proxy-groups:
   - name: SERVER ID 🇮🇩
     type: load-balance
-    strategy: consistent-hashing
+    strategy: round-robin
     url: http://www.gstatic.com/generate_204
     interval: 180
     udp: true
     proxies:
-      - (ID) Amazon.com, Inc 🇮🇩
+      - (ID) CV Rumahweb 🇮🇩
       - (ID) Linode 🇮🇩
 
   - name: SERVER SG 🇸🇬
     type: load-balance
-    strategy: consistent-hashing
+    strategy: round-robin
     url: http://www.gstatic.com/generate_204
     interval: 180
     udp: true
