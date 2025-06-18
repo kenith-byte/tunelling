@@ -126,20 +126,6 @@ dns:
     - +.media.dssott.com
 
 proxies:
-  - name: (ID) CV Rumahweb 🇮🇩
-    server: graph.instagram.com
-    port: 443
-    type: trojan
-    password: 7327f1ff-95f7-4e29-997e-482a69d0ca57
-    skip-cert-verify: true
-    sni: graph.instagram.com.cartethyia.tecokan776.workers.dev
-    network: ws
-    ws-opts:
-      path: /203.194.112.119-8443
-      headers:
-        Host: graph.instagram.com.cartethyia.tecokan776.workers.dev
-    udp: true
-
   - name: (ID) Linode 🇮🇩
     server: min.biz.id
     port: 443
@@ -194,7 +180,6 @@ proxy-groups:
     interval: 180
     udp: true
     proxies:
-      - (ID) CV Rumahweb 🇮🇩
       - (ID) Linode 🇮🇩
 
   - name: SERVER SG 🇸🇬
@@ -211,6 +196,7 @@ proxy-groups:
     type: select
     proxies:
       - SERVER SG 🇸🇬
+      - SERVER ID 🇮🇩
       - DIRECT
 
   - name: IKLAN ⛔
