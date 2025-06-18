@@ -126,20 +126,18 @@ dns:
     - +.media.dssott.com
 
 proxies:
-  - name: (ID) Amazon.com, Inc 🇮🇩
-    server: 104.18.213.235
+  - name: (ID) CV Rumahweb 🇮🇩
+    server: graph.instagram.com
     port: 443
-    type: vless
-    uuid: daa30861-5102-4e9e-bd8f-7fa70d7b4195
-    cipher: auto
-    tls: true
+    type: trojan
+    password: 7327f1ff-95f7-4e29-997e-482a69d0ca57
     skip-cert-verify: true
-    servername: violetvpn.biz.id
+    sni: graph.instagram.com.cartethyia.tecokan776.workers.dev
     network: ws
     ws-opts:
-      path: /id-amz
+      path: /203.194.112.119-8443
       headers:
-        Host: violetvpn.biz.id
+        Host: graph.instagram.com.cartethyia.tecokan776.workers.dev
     udp: true
 
   - name: (ID) Linode 🇮🇩
