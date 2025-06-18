@@ -156,26 +156,9 @@ proxies:
         Host: ava.game.naver.com.vip-12.indoxray.top
     udp: true
 
-  - name: (SG) OVH SAS 🇸🇬
-    server: violetvpn.biz.id
-    port: 443
-    type: vless
-    uuid: 08967efd-400e-494c-ae85-786bf0dffa6e
-    cipher: auto
-    tls: true
-    skip-cert-verify: true
-    servername: graph.instagram.com.violetvpn.biz.id
-    network: ws
-    ws-opts:
-      path: /sg-ovh
-      headers:
-        Host: graph.instagram.com.violetvpn.biz.id
-    udp: true
-
 proxy-groups:
   - name: SERVER ID 🇮🇩
-    type: load-balance
-    strategy: round-robin
+    type: fallback
     url: http://www.gstatic.com/generate_204
     interval: 180
     udp: true
@@ -183,21 +166,12 @@ proxy-groups:
       - (ID) Linode 🇮🇩
 
   - name: SERVER SG 🇸🇬
-    type: load-balance
-    strategy: round-robin
+    type: fallback
     url: http://www.gstatic.com/generate_204
     interval: 180
     udp: true
     proxies:
       - (SG) Tencent 🇸🇬
-      - (SG) OVH SAS 🇸🇬
-
-  - name: SOSMED 🌍
-    type: select
-    proxies:
-      - SERVER SG 🇸🇬
-      - SERVER ID 🇮🇩
-      - DIRECT
 
   - name: IKLAN ⛔
     type: select
@@ -214,9 +188,9 @@ proxy-groups:
 
 rules:
   - IP-CIDR,198.18.0.1/16,REJECT,no-resolve
-  - RULE-SET,Sosmed,SOSMED 🌍
   - RULE-SET,Block,IKLAN ⛔
   - RULE-SET,Game,GAME 🎲
+  - RULE-SET,Sosmed,AKUN SG 🇸🇬
   - RULE-SET,Indo,SERVER ID 🇮🇩
   - RULE-SET,Umum,SERVER SG 🇸🇬
   - RULE-SET,Streaming,SERVER SG 🇸🇬
