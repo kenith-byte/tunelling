@@ -157,7 +157,7 @@ proxies:
     udp: true
 
 proxy-groups:
-  - name: PR0XIES
+  - name: SERVER SG
     type: load-balance
     strategy: round-robin
     url: http://www.gstatic.com/generate_204
@@ -165,20 +165,26 @@ proxy-groups:
     udp: true
     proxies:
       - (SG) Tencent 🇸🇬
+
+  - name: SERVER INDO
+    type: load-balance
+    strategy: round-robin
+    url: http://www.gstatic.com/generate_204
+    interval: 180
+    udp: true
+    proxies:
       - (ID) Linode 🇮🇩
 
 rules:
   - IP-CIDR,198.18.0.1/16,REJECT,no-resolve
-  - RULE-SET,Block,PR0XIES
-  - RULE-SET,Game,PR0XIES
-  - RULE-SET,Sosmed,PR0XIES
-  - RULE-SET,Indo,PR0XIES
-  - RULE-SET,Umum,PR0XIES
-  - RULE-SET,Streaming,PR0XIES
-  - RULE-SET,Banking,PR0XIES
-  - RULE-SET,Meta,PR0XIES
-  - RULE-SET,PortGame,PR0XIES
-  - MATCH,PR0XIES
+  - RULE-SET,Block,SERVER SG
+  - RULE-SET,Game,SERVER INDO
+  - RULE-SET,Sosmed,SERVER SG
+  - RULE-SET,Indo,SERVER INDO
+  - RULE-SET,Umum,SERVER SG
+  - RULE-SET,Streaming,SERVER INDO
+  - RULE-SET,Banking,SERVER SG
+  - MATCH,SERVER SG
 
 rule-providers:
   Game:
@@ -189,10 +195,6 @@ rule-providers:
     type: file
     behavior: classical
     path: ./sosmed.yaml
-  PortGame:
-    type: file
-    behavior: classical
-    path: ./portgame.yaml
   Umum:
     type: file
     behavior: classical
@@ -209,14 +211,6 @@ rule-providers:
     type: file
     behavior: domain
     path: ./bankid.yaml
-  Tiktok:
-    type: file
-    behavior: domain
-    path: ./tiktok.yaml
-  Meta:
-    type: file
-    behavior: domain
-    path: ./meta.yaml
   Block:
     type: file
     behavior: domain
