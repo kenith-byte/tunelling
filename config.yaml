@@ -201,14 +201,14 @@ rules:
   - MATCH,SERVER SG 🇸🇬
 
 rule-providers:
-  Sosmed:
-    type: file
-    behavior: classical
-    path: ./sosmed.yaml
   Game:
     type: file
     behavior: classical
     path: ./game.yaml
+  Sosmed:
+    type: file
+    behavior: classical
+    path: ./sosmed.yaml
   PortGame:
     type: file
     behavior: classical
