@@ -157,48 +157,28 @@ proxies:
     udp: true
 
 proxy-groups:
-  - name: SERVER ID 🇮🇩
-    type: fallback
-    url: http://www.gstatic.com/generate_204
-    interval: 180
-    udp: true
-    proxies:
-      - (ID) Linode 🇮🇩
-
-  - name: SERVER SG 🇸🇬
-    type: fallback
+  - name: PR0XIES
+    type: load-balance
+    strategy: round-robin
     url: http://www.gstatic.com/generate_204
     interval: 180
     udp: true
     proxies:
       - (SG) Tencent 🇸🇬
-
-  - name: IKLAN ⛔
-    type: select
-    proxies:
-      - SERVER SG 🇸🇬
-      - REJECT
-
-  - name: GAME 🎲
-    type: select
-    proxies:
-      - SERVER ID 🇮🇩
-      - DIRECT
-      - REJECT
+      - (ID) Linode 🇮🇩
 
 rules:
   - IP-CIDR,198.18.0.1/16,REJECT,no-resolve
   - RULE-SET,Block,IKLAN ⛔
-  - RULE-SET,Game,GAME 🎲
-  - RULE-SET,Sosmed,SERVER SG 🇸🇬
-  - RULE-SET,Indo,SERVER ID 🇮🇩
-  - RULE-SET,Umum,SERVER SG 🇸🇬
-  - RULE-SET,Streaming,SERVER SG 🇸🇬
-  - RULE-SET,Banking,SERVER ID 🇮🇩
-  - RULE-SET,Tiktok,SERVER SG 🇸🇬
-  - RULE-SET,Meta,SERVER SG 🇸🇬
-  - RULE-SET,PortGame,GAME 🎲
-  - MATCH,SERVER SG 🇸🇬
+  - RULE-SET,Game,(ID) Linode 🇮🇩
+  - RULE-SET,Sosmed,(SG) Tencent 🇸🇬
+  - RULE-SET,Indo,(ID) Linode 🇮🇩
+  - RULE-SET,Umum,(SG) Tencent 🇸🇬
+  - RULE-SET,Streaming,(SG) Tencent 🇸🇬
+  - RULE-SET,Banking,(ID) Linode 🇮🇩
+  - RULE-SET,Meta,(SG) Tencent 🇸🇬
+  - RULE-SET,PortGame,(ID) Linode 🇮🇩
+  - MATCH,(SG) Tencent 🇸🇬
 
 rule-providers:
   Game:
