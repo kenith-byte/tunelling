@@ -147,8 +147,8 @@ proxies:
     port: 443
     type: trojan
     password: ed01654f-8cea-42d1-8ea0-7646f994f3d6
-    sni: graph.instagram.com.min.biz.id
     skip-cert-verify: true
+    sni: graph.instagram.com.min.biz.id
     network: ws
     ws-opts:
       path: /172.232.239.151-587
