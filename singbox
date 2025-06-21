@@ -1,0 +1,1105 @@
+{
+  "log": {
+    "disabled": true,
+    "level": "debug",
+    "output": "Nekobox.log",
+    "timestamp": true
+  },
+  "dns": {
+    "servers": [
+      {
+        "tag": "google-dns",
+        "address": "tls://dns.google",
+        "address_resolver": "dns-local",
+        "address_strategy": "prefer_ipv4",
+        "strategy": "ipv4_only",
+        "detour": "Latency"
+      },
+      {
+        "tag": "cloudflare-dns",
+        "address": "tls://one.one.one.one",
+        "address_resolver": "dns-local",
+        "address_strategy": "prefer_ipv4",
+        "strategy": "ipv4_only",
+        "detour": "Latency"
+      },
+      {
+        "tag": "dns-local",
+        "address": "local",
+        "address_resolver": "local",
+        "address_strategy": "prefer_ipv4",
+        "strategy": "ipv4_only"
+      },
+      {
+        "tag": "block-dns",
+        "address": "rcode://success",
+        "detour": "block"
+      }
+    ],
+    "rules": [
+      {
+        "domain": [
+          "quiz.int.vidio.com",
+          "plus-store.naver.com",
+          "ava.game.naver.com",
+          "investor.fb.com",
+          "quiz.vidio.com",
+          "investors.spotify.com",
+          "nontontv.vidio.com"
+        ],
+        "server": "dns-local"
+      },
+      {
+        "network": "udp",
+        "port": 443,
+        "action": "reject",
+        "method": "drop"
+      },
+      {
+        "domain": [
+          "yumiwolker.mayumiyui.workers.dev",
+          "nautica.vokip29018.workers.dev",
+          "nuclear.us.kg",
+          "joss.krikkrik.tech",
+          "rest.web.id",
+          "cak.biz.id",
+          "min.biz.id",
+          "nautica.foolvpn.me",
+          "yumicftigarun.web.id",
+          "violetvpn.biz.id",
+          "vip-12.indoxray.top",
+          "akun.bansos.biz.id",
+          "siren.nayumiwandi.workers.dev",
+          "free.xiongt.biz.id",
+          "free.aloalo.my.id",
+          "yumi.mayumiyui.workers.dev",
+          "aink.workerz.site",
+          "privasi.xhamster.biz.id",
+          "afrcloud.site",
+          "chat.openai.com",
+          "terakomari.mayumiyui.my.id"
+        ],
+        "server": "google-dns",
+        "action": "route"
+      },
+      {
+        "outbound": "Latency",
+        "server": "google-dns",
+        "rewrite_ttl": 600
+      },
+      {
+        "outbound": "Region",
+        "server": "google-dns",
+        "rewrite_ttl": 600
+      },
+      {
+        "outbound": "Ads-Ops",
+        "server": "block-dns"
+      },
+      {
+        "rule_set": [
+          "geosite-facebook",
+          "geosite-instagram"
+        ],
+        "outbound": "direct-out",
+        "action": "route",
+        "server": "dns-local",
+        "rewrite_ttl": 600
+      }
+    ],
+    "strategy": "ipv4_only",
+    "independent_cache": true
+  },
+  "inbounds": [
+    {
+      "type": "tun",
+      "tag": "tun-in",
+      "interface_name": "tunelm0n",
+      "mtu": 1490,
+      "address": [
+        "172.18.0.1/30",
+        "fdfe:dcba:9876::1/126"
+      ],
+      "auto_route": true,
+      "strict_route": true,
+      "stack": "gvisor",
+      "sniff": true,
+      "endpoint_independent_nat": true
+    },
+    {
+      "type": "mixed",
+      "tag": "mixed-in",
+      "listen": "0.0.0.0",
+      "listen_port": 2080,
+      "tcp_fast_open": true,
+      "sniff": true,
+      "sniff_override_destination": true
+    },
+    {
+      "type": "socks",
+      "tag": "socks-in",
+      "listen": "0.0.0.0",
+      "listen_port": 2082,
+      "tcp_fast_open": true
+    },
+    {
+      "type": "direct",
+      "tag": "direct-in",
+      "network": [
+        "tcp",
+        "udp"
+      ],
+      "override_address": "112.215.203.246",
+      "override_port": 53
+    }
+  ],
+  "outbounds": [
+    {
+      "type": "selector",
+      "tag": "Internet",
+      "outbounds": [
+        "Latency",
+        "Region"
+      ],
+      "default": "Latency"
+    },
+    {
+      "type": "urltest",
+      "tag": "Latency",
+      "outbounds": [
+        "ID Linode",
+        "ID Amazon.com,Inc",
+        "ID Pt. Telekomunikasi",
+        "ID RumahWeb",
+        "ID Ciputra World",
+        "ID Pt. Pusat Media",
+        "ID Pt. Pusat Media 1",
+        "ID Ciputra World 1",
+        "ID Akamai Connected Cloud",
+        "ID First Cagayan Converage",
+        "ID Pt. Telkom",
+        "SG Tencent",
+        "SG OVH SAS",
+        "SG Hetzner Online GmbH",
+        "SG Vultr Cust",
+        "SG DigitalOcean,LLC",
+        "SG Oracle Corporation",
+        "MY Kaopu Cloud HK Limited",
+        "SG Alibaba Cloud,LLC",
+        "SG First Server Limited",
+        "SG REGXA,LLC",
+        "SG 365 Group,LLC",
+        "SG Oracle Svenska AB",
+        "SG Greencloud,LLC",
+        "SG 1 Raffles Place",
+        "SG 6 COLLYER QUAY",
+        "SG Oracle Public Cloud",
+        "SG Internet Utilities NA,LLC",
+        "SG AKILE LTD",
+        "SG PDK,LLC",
+        "SG Eons Data Communications Limited",
+        "SG Zappie Host,LLC",
+        "SG DigitalOcean,LLC 1",
+        "SG Godaddy.com,LLC",
+        "SG Amazon Technologies Inc",
+        "SG UCUL-SG",
+        "SG FIRST SERVER LIMITED",
+        "SG Melbikomas"
+      ],
+      "url": "https://connectivitycheck.gstatic.com/generate_204",
+      "interval": "1m0s",
+      "tolerance": 40,
+      "idle_timeout": "5m0s"
+    },
+    {
+      "type": "selector",
+      "tag": "Region",
+      "outbounds": [
+        "ID Linode",
+        "SG Tencent",
+        "SG Alibaba Cloud,LLC",
+        "SG OVH SAS",
+        "MY Kaopu Cloud HK Limited",
+        "SG REGXA,LLC",
+        "SG Oracle Corporation"
+      ],
+      "default": "SG Tencent"
+    },
+    {
+      "type": "selector",
+      "tag": "Ads-Ops",
+      "outbounds": [
+        "block",
+        "Internet"
+      ]
+    },
+    {
+      "type": "selector",
+      "tag": "Rule-WA",
+      "outbounds": [
+        "direct-out",
+        "Internet"
+      ],
+      "default": "direct-out"
+    },
+    {
+      "type": "direct",
+      "tag": "direct-out"
+    },
+    {
+      "type": "block",
+      "tag": "block"
+    },
+    {
+      "type": "trojan",
+      "tag": "ID Linode",
+      "tcp_fast_open": true,
+      "server": "min.biz.id",
+      "server_port": 443,
+      "password": "ed01654f-8cea-42d1-8ea0-7646f994f3d6",
+      "tls": {
+        "enabled": true,
+        "server_name": "graph.instagram.com.min.biz.id"
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/172.232.239.151-587",
+        "headers": {
+          "Host": "min.biz.id"
+        }
+      }
+    },
+    {
+      "type": "trojan",
+      "tag": "ID Amazon.com,Inc",
+      "tcp_fast_open": true,
+      "server": "min.biz.id",
+      "server_port": 443,
+      "password": "8873bd43-d960-4bcb-827f-a131a0dd26df",
+      "tls": {
+        "enabled": true,
+        "server_name": "graph.instagram.com.min.biz.id"
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/43.218.77.16-443",
+        "headers": {
+          "Host": "min.biz.id"
+        }
+      }
+    },
+    {
+      "type": "trojan",
+      "tag": "ID Pt. Telekomunikasi",
+      "tcp_fast_open": true,
+      "server": "min.biz.id",
+      "server_port": 443,
+      "password": "5b32ff9e-13b9-4f6c-abc8-8b71eb440da5",
+      "tls": {
+        "enabled": true,
+        "server_name": "graph.instagram.com.min.biz.id"
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/36.95.152.58-12137",
+        "headers": {
+          "Host": "min.biz.id"
+        }
+      }
+    },
+    {
+      "type": "trojan",
+      "tag": "ID RumahWeb",
+      "tcp_fast_open": true,
+      "server": "min.biz.id",
+      "server_port": 443,
+      "password": "5b32ff9e-13b9-4f6c-abc8-8b71eb440da5",
+      "tls": {
+        "enabled": true,
+        "server_name": "graph.instagram.com.min.biz.id"
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/203.194.112.119-8443",
+        "headers": {
+          "Host": "min.biz.id"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "ID Ciputra World",
+      "tcp_fast_open": true,
+      "server": "ava.game.naver.com",
+      "server_port": 443,
+      "uuid": "6bd04139-ed81-410f-8015-cc349c3cd426",
+      "tls": {
+        "enabled": true,
+        "server_name": "ava.game.naver.com.joss.krikkrik.tech"
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/Free-VPN-CF-Geo-Project/ID19",
+        "headers": {
+          "Host": "ava.game.naver.com.joss.krikkrik.tech"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "ID Pt. Pusat Media",
+      "tcp_fast_open": true,
+      "server": "ava.game.naver.com",
+      "server_port": 443,
+      "uuid": "fca0a4cd-6657-41eb-9f0b-8ed3c0fb4bd6",
+      "tls": {
+        "enabled": true,
+        "server_name": "ava.game.naver.com.min.biz.id"
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/103.6.207.108-8080",
+        "headers": {
+          "Host": "ava.game.naver.com.min.biz.id"
+        }
+      }
+    },
+    {
+      "type": "trojan",
+      "tag": "ID Pt. Pusat Media 1",
+      "tcp_fast_open": true,
+      "server": "cak.biz.id",
+      "server_port": 443,
+      "password": "b807c2f7-ea3c-44c4-95d3-e1ad7b513983",
+      "tls": {
+        "enabled": true,
+        "server_name": "graph.instagram.com.cak.biz.id"
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/103.6.207.108-8080",
+        "headers": {
+          "Host": "cak.biz.id"
+        }
+      }
+    },
+    {
+      "type": "trojan",
+      "tag": "ID Ciputra World 1",
+      "tcp_fast_open": true,
+      "server": "joss.krikkrik.tech",
+      "server_port": 443,
+      "password": "b48cb304-ac7f-45b7-8b27-ca766ce9a58b",
+      "tls": {
+        "enabled": true,
+        "server_name": "graph.instagram.com.joss.krikkrik.tech"
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/Free-VPN-CF-Geo-Project/ID19",
+        "headers": {
+          "Host": "joss.krikkrik.tech"
+        }
+      }
+    },
+    {
+      "type": "trojan",
+      "tag": "ID Akamai Connected Cloud",
+      "tcp_fast_open": true,
+      "server": "joss.krikkrik.tech",
+      "server_port": 443,
+      "password": "9f1feb2f-73cd-42d7-b736-f2686c2eda84",
+      "tls": {
+        "enabled": true,
+        "server_name": "graph.instagram.com.joss.krikkrik.tech"
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/Free-VPN-CF-Geo-Project/ID8",
+        "headers": {
+          "Host": "joss.krikkrik.tech"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "ID First Cagayan Converage",
+      "tcp_fast_open": true,
+      "server": "ava.game.naver.com",
+      "server_port": 443,
+      "uuid": "7d0a1623-1a80-4a1d-895d-bdcb903ed637",
+      "tls": {
+        "enabled": true,
+        "server_name": "ava.game.naver.com.joss.krikkrik.tech"
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/Free-VPN-CF-Geo-Project/ID11",
+        "headers": {
+          "Host": "ava.game.naver.com.joss.krikkrik.tech"
+        }
+      }
+    },
+    {
+      "type": "trojan",
+      "tag": "ID Pt. Telkom",
+      "tcp_fast_open": true,
+      "server": "joss.krikkrik.tech",
+      "server_port": 443,
+      "password": "c9b2fa1f-ca0e-4063-8089-21bdc89d3e4a",
+      "tls": {
+        "enabled": true,
+        "server_name": "graph.instagram.com.joss.krikkrik.tech"
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/Free-VPN-CF-Geo-Project/ID13",
+        "headers": {
+          "Host": "joss.krikkrik.tech"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "SG Tencent",
+      "tcp_fast_open": true,
+      "server": "ava.game.naver.com",
+      "server_port": 443,
+      "uuid": "78bd974c-31af-45ed-b9e0-f2d8b5ffd680",
+      "tls": {
+        "enabled": true,
+        "server_name": "ava.game.naver.com.vip-12.indoxray.top"
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/websocket-vless",
+        "headers": {
+          "Host": "ava.game.naver.com.vip-12.indoxray.top"
+        }
+      }
+    },
+    {
+      "type": "trojan",
+      "tag": "SG OVH SAS",
+      "tcp_fast_open": true,
+      "server": "rest.web.id",
+      "server_port": 443,
+      "password": "947ad582-9a95-4843-8360-d787b0f53c42",
+      "tls": {
+        "enabled": true,
+        "server_name": "graph.instagram.com.rest.web.id"
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/51.79.254.182-443",
+        "headers": {
+          "Host": "rest.web.id"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "SG Hetzner Online GmbH",
+      "tcp_fast_open": true,
+      "server": "ava.game.naver.com",
+      "server_port": 443,
+      "uuid": "477bc2e3-6523-43c9-bb29-15ed14af2409",
+      "tls": {
+        "enabled": true,
+        "server_name": "ava.game.naver.com.rest.web.id"
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/5.223.49.4-2053",
+        "headers": {
+          "Host": "ava.game.naver.com.rest.web.id"
+        }
+      }
+    },
+    {
+      "type": "trojan",
+      "tag": "SG Vultr Cust",
+      "tcp_fast_open": true,
+      "server": "rest.web.id",
+      "server_port": 443,
+      "password": "3dfed026-9234-46a8-93b7-6c330e88ae8a",
+      "tls": {
+        "enabled": true,
+        "server_name": "graph.instagram.com.rest.web.id"
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/139.180.215.77-57878",
+        "headers": {
+          "Host": "rest.web.id"
+        }
+      }
+    },
+    {
+      "type": "trojan",
+      "tag": "SG DigitalOcean,LLC",
+      "tcp_fast_open": true,
+      "server": "rest.web.id",
+      "server_port": 443,
+      "password": "3dfed026-9234-46a8-93b7-6c330e88ae8a",
+      "tls": {
+        "enabled": true,
+        "server_name": "graph.instagram.com.rest.web.id"
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/178.128.80.43-443",
+        "headers": {
+          "Host": "rest.web.id"
+        }
+      }
+    },
+    {
+      "type": "trojan",
+      "tag": "SG Oracle Corporation",
+      "tcp_fast_open": true,
+      "server": "rest.web.id",
+      "server_port": 443,
+      "password": "3dfed026-9234-46a8-93b7-6c330e88ae8a",
+      "tls": {
+        "enabled": true,
+        "server_name": "graph.instagram.com.rest.web.id"
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/129.150.58.86-57621",
+        "headers": {
+          "Host": "rest.web.id"
+        }
+      }
+    },
+    {
+      "type": "trojan",
+      "tag": "MY Kaopu Cloud HK Limited",
+      "tcp_fast_open": true,
+      "server": "rest.web.id",
+      "server_port": 443,
+      "password": "062f0b00-1e7a-4457-95a5-7e481919db57",
+      "tls": {
+        "enabled": true,
+        "server_name": "graph.instagram.com.rest.web.id"
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/38.60.193.247-13300",
+        "headers": {
+          "Host": "rest.web.id"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "SG Alibaba Cloud,LLC",
+      "tcp_fast_open": true,
+      "server": "ava.game.naver.com",
+      "server_port": 443,
+      "uuid": "02c61b54-1584-474a-9c8e-be6e6f0308e4",
+      "tls": {
+        "enabled": true,
+        "server_name": "ava.game.naver.com.cak.biz.id"
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/47.245.95.160-1443",
+        "headers": {
+          "Host": "ava.game.naver.com.cak.biz.id"
+        }
+      }
+    },
+    {
+      "type": "trojan",
+      "tag": "SG First Server Limited",
+      "tcp_fast_open": true,
+      "server": "cak.biz.id",
+      "server_port": 443,
+      "password": "0d61c6d9-8f03-4887-83a0-1c4892eddcc2",
+      "tls": {
+        "enabled": true,
+        "server_name": "graph.instagram.com.cak.biz.id"
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/194.36.178.36-8443",
+        "headers": {
+          "Host": "cak.biz.id"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "SG REGXA,LLC",
+      "tcp_fast_open": true,
+      "server": "ava.game.naver.com",
+      "server_port": 443,
+      "uuid": "0d61c6d9-8f03-4887-83a0-1c4892eddcc2",
+      "tls": {
+        "enabled": true,
+        "server_name": "ava.game.naver.com.cak.biz.id"
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/206.206.76.208-8443",
+        "headers": {
+          "Host": "ava.game.naver.com.cak.biz.id"
+        }
+      }
+    },
+    {
+      "type": "trojan",
+      "tag": "SG 365 Group,LLC",
+      "tcp_fast_open": true,
+      "server": "cak.biz.id",
+      "server_port": 443,
+      "password": "0d61c6d9-8f03-4887-83a0-1c4892eddcc2",
+      "tls": {
+        "enabled": true,
+        "server_name": "graph.instagram.com.cak.biz.id"
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/167.253.158.63-8443",
+        "headers": {
+          "Host": "cak.biz.id"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "SG Oracle Svenska AB",
+      "tcp_fast_open": true,
+      "server": "ava.game.naver.com",
+      "server_port": 443,
+      "uuid": "774defcf-8080-4737-aa70-284af331788d",
+      "tls": {
+        "enabled": true,
+        "server_name": "ava.game.naver.com.rest.web.id"
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/213.35.108.135-12596",
+        "headers": {
+          "Host": "ava.game.naver.com.rest.web.id"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "SG Greencloud,LLC",
+      "tcp_fast_open": true,
+      "server": "ava.game.naver.com",
+      "server_port": 443,
+      "uuid": "774defcf-8080-4737-aa70-284af331788d",
+      "tls": {
+        "enabled": true,
+        "server_name": "ava.game.naver.com.rest.web.id"
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/194.127.193.240-50791",
+        "headers": {
+          "Host": "ava.game.naver.com.rest.web.id"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "SG 1 Raffles Place",
+      "tcp_fast_open": true,
+      "server": "ava.game.naver.com",
+      "server_port": 443,
+      "uuid": "774defcf-8080-4737-aa70-284af331788d",
+      "tls": {
+        "enabled": true,
+        "server_name": "ava.game.naver.com.rest.web.id"
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/161.117.249.114-2025",
+        "headers": {
+          "Host": "ava.game.naver.com.rest.web.id"
+        }
+      }
+    },
+    {
+      "type": "trojan",
+      "tag": "SG 6 COLLYER QUAY",
+      "tcp_fast_open": true,
+      "server": "rest.web.id",
+      "server_port": 443,
+      "password": "be2536a5-ac10-469c-b412-9428d377059b",
+      "tls": {
+        "enabled": true,
+        "server_name": "graph.instagram.com.rest.web.id"
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/150.109.24.233-6666",
+        "headers": {
+          "Host": "rest.web.id"
+        }
+      }
+    },
+    {
+      "type": "trojan",
+      "tag": "SG Oracle Public Cloud",
+      "tcp_fast_open": true,
+      "server": "rest.web.id",
+      "server_port": 443,
+      "password": "d742df4e-0737-4d2a-803a-9f824fd1192a",
+      "tls": {
+        "enabled": true,
+        "server_name": "graph.instagram.com.rest.web.id"
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/47.245.91.197-9000",
+        "headers": {
+          "Host": "rest.web.id"
+        }
+      }
+    },
+    {
+      "type": "trojan",
+      "tag": "SG Internet Utilities NA,LLC",
+      "tcp_fast_open": true,
+      "server": "rest.web.id",
+      "server_port": 443,
+      "password": "df13bd76-897b-4c6a-889f-246fa4b10d82",
+      "tls": {
+        "enabled": true,
+        "server_name": "graph.instagram.com.rest.web.id"
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/64.49.14.41-2053",
+        "headers": {
+          "Host": "rest.web.id"
+        }
+      }
+    },
+    {
+      "type": "trojan",
+      "tag": "SG AKILE LTD",
+      "tcp_fast_open": true,
+      "server": "rest.web.id",
+      "server_port": 443,
+      "password": "065b482d-c687-435a-a38b-8264a78dce3e",
+      "tls": {
+        "enabled": true,
+        "server_name": "graph.instagram.com.rest.web.id"
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/43.156.181.203-443",
+        "headers": {
+          "Host": "rest.web.id"
+        }
+      }
+    },
+    {
+      "type": "trojan",
+      "tag": "SG PDK,LLC",
+      "tcp_fast_open": true,
+      "server": "rest.web.id",
+      "server_port": 443,
+      "password": "43123fc1-323b-4697-9946-f871a1516852",
+      "tls": {
+        "enabled": true,
+        "server_name": "graph.instagram.com.rest.web.id"
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/31.192.238.71-2053",
+        "headers": {
+          "Host": "rest.web.id"
+        }
+      }
+    },
+    {
+      "type": "trojan",
+      "tag": "SG Eons Data Communications Limited",
+      "tcp_fast_open": true,
+      "server": "rest.web.id",
+      "server_port": 443,
+      "password": "95d2acf7-26b6-4c5c-ab4d-057f90263b4d",
+      "tls": {
+        "enabled": true,
+        "server_name": "graph.instagram.com.rest.web.id"
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/38.181.70.7-16240",
+        "headers": {
+          "Host": "rest.web.id"
+        }
+      }
+    },
+    {
+      "type": "trojan",
+      "tag": "SG Zappie Host,LLC",
+      "tcp_fast_open": true,
+      "server": "rest.web.id",
+      "server_port": 443,
+      "password": "6d677f1d-a0e1-4124-9e77-2b952a47b710",
+      "tls": {
+        "enabled": true,
+        "server_name": "graph.instagram.com.rest.web.id"
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/83.142.30.5-2096",
+        "headers": {
+          "Host": "rest.web.id"
+        }
+      }
+    },
+    {
+     "type": "vless",
+      "tag": "SG DigitalOcean,LLC 1",
+      "tcp_fast_open": true,
+      "server": "ava.game.naver.com",
+      "server_port": 443,
+      "uuid": "6d677f1d-a0e1-4124-9e77-2b952a47b710",
+      "tls": {
+        "enabled": true,
+        "server_name": "ava.game.naver.com.rest.web.id"
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/143.198.196.196-8443",
+        "headers": {
+          "Host": "ava.game.naver.com.rest.web.id"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "SG Godaddy.com,LLC",
+      "tcp_fast_open": true,
+      "server": "ava.game.naver.com",
+      "server_port": 443,
+      "uuid": "945b739d-1c46-4209-a750-a7a48855abc6",
+      "tls": {
+        "enabled": true,
+        "server_name": "ava.game.naver.com.violetvpn.biz.id"
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/sg-gody",
+        "headers": {
+          "Host": "ava.game.naver.com.violetvpn.biz.id"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "SG Amazon Technologies Inc",
+      "tcp_fast_open": true,
+      "server": "ava.game.naver.com.rest.web.id",
+      "server_port": 443,
+      "uuid": "58013ba7-a845-4628-a2e7-f61acb9f1df2",
+      "tls": {
+        "enabled": true,
+        "server_name": "ava.game.naver.com.rest.web.id"
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/13.228.155.72-443",
+        "headers": {
+          "Host": "ava.game.naver.com.rest.web.id"
+        }
+      }
+    },
+    {
+      "type": "trojan",
+      "tag": "SG UCUL-SG",
+      "tcp_fast_open": true,
+      "server": "rest.web.id",
+      "server_port": 443,
+      "password": "58013ba7-a845-4628-a2e7-f61acb9f1df2",
+      "tls": {
+        "enabled": true,
+        "server_name": "graph.instagram.com.rest.web.id"
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/164.52.2.100-443",
+        "headers": {
+          "Host": "rest.web.id"
+        }
+      }
+    },
+    {
+      "type": "trojan",
+      "tag": "SG FIRST SERVER LIMITED",
+      "tcp_fast_open": true,
+      "server": "rest.web.id",
+      "server_port": 443,
+      "password": "ca71ce40-ef9c-436a-8810-780ef5adb38b",
+      "tls": {
+        "enabled": true,
+        "server_name": "graph.instagram.com.rest.web.id"
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/194.36.179.17-8443",
+        "headers": {
+          "Host": "rest.web.id"
+        }
+      }
+    },
+    {
+      "type": "trojan",
+      "tag": "SG Melbikomas",
+      "tcp_fast_open": true,
+      "server": "rest.web.id",
+      "server_port": 443,
+      "password": "3adc483b-909a-4c22-b009-38ee7b28a495",
+      "tls": {
+        "enabled": true,
+        "server_name": "graph.instagram.com.rest.web.id"
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/91.192.81.154-2053",
+        "headers": {
+          "Host": "rest.web.id"
+        }
+      }
+    }
+  ],
+  "route": {
+    "rules": [
+      {
+        "type": "logical",
+        "mode": "or",
+        "rules": [
+          {
+            "protocol": "dns"
+          },
+          {
+            "port": 53
+          }
+        ],
+        "action": "hijack-dns"
+      },
+      {
+        "rule_set": [
+          "geosite-rule-ads",
+          "Ads-Adaway",
+          "Ads-Abpindo",
+          "Ads-PornIndo"
+        ],
+        "outbound": "Ads-Ops"
+      },
+      {
+        "domain": "youtube.com",
+        "outbound": "Internet"
+      },
+      {
+        "domain_suffix": [
+          "fna.whatsapp.net",
+          "wa.me",
+          "whatsapp-plus.info",
+          "whatsapp-plus.me",
+          "whatsapp-plus.net",
+          "whatsapp.cc",
+          "whatsapp.com",
+          "whatsapp.info",
+          "whatsapp.net",
+          "whatsapp.org",
+          "whatsapp.tv",
+          "whatsappbrand.com"
+        ],
+        "outbound": "Rule-WA"
+      },
+      {
+        "ip_is_private": true,
+        "outbound": "Internet"
+      },
+      {
+        "rule_set": "GeoIp-Id",
+        "outbound": "Internet"
+      },
+      {
+        "rule_set": [
+          "geosite-facebook",
+          "geosite-instagram"
+        ],
+        "inbound": [
+          "direct-in"
+        ],
+        "outbound": "direct-out",
+        "action": "route"
+      }
+    ],
+    "rule_set": [
+      {
+        "type": "remote",
+        "tag": "geosite-rule-ads",
+        "format": "binary",
+        "url": "https://github.com/dickymuliafiqri/sing-box-examples/releases/download/latest/geosite-rule-ads.srs",
+        "download_detour": "Internet"
+      },
+      {
+        "type": "remote",
+        "tag": "Ads-Adaway",
+        "format": "binary",
+        "url": "https://github.com/Mayumiwandi/Lecilia/raw/refs/heads/main/Sing-box/adaway.srs",
+        "download_detour": "Internet"
+      },
+      {
+        "type": "remote",
+        "tag": "Ads-Abpindo",
+        "format": "binary",
+        "url": "https://github.com/Mayumiwandi/Lecilia/raw/refs/heads/main/Sing-box/abpindo.srs",
+        "download_detour": "Internet"
+      },
+      {
+        "type": "remote",
+        "tag": "Ads-PornIndo",
+        "format": "binary",
+        "url": "https://github.com/Mayumiwandi/Lecilia/raw/refs/heads/main/Sing-box/pornholeindo.srs",
+        "download_detour": "Internet"
+      },
+      {
+        "type": "remote",
+        "tag": "GeoIp-Id",
+        "format": "binary",
+        "url": "https://github.com/Loyalsoldier/geoip/raw/refs/heads/release/srs/id.srs",
+        "download_detour": "Internet"
+      },
+      {
+        "type": "remote",
+        "tag": "geosite-facebook",
+        "format": "binary",
+        "url": "https://github.com/malikshi/sing-box-geo/raw/refs/heads/rule-set-geosite/geosite-facebook.srs",
+        "download_detour": "Internet"
+      },
+      {
+        "type": "remote",
+        "tag": "geosite-instagram",
+        "format": "binary",
+        "url": "https://github.com/malikshi/sing-box-geo/raw/refs/heads/rule-set-geosite/geosite-instagram.srs",
+        "download_detour": "Internet"
+      }
+    ],
+    "final": "Internet",
+    "auto_detect_interface": true
+  },
+  "experimental": {
+    "clash_api": {
+      "external_controller": "127.0.0.1:9091",
+      "external_ui": "dist",
+      "external_ui_download_url": "https://github.com/Zephyruso/zashboard/releases/latest/download/dist-cdn-fonts.zip",
+      "external_ui_download_detour": "Internet",
+      "default_mode": "rule",
+      "access_control_allow_origin": "*"
+    }
+  }
+}
