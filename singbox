@@ -42,6 +42,7 @@
           "quiz.int.vidio.com",
           "plus-store.naver.com",
           "ava.game.naver.com",
+          "graph.instagram.com",
           "investor.fb.com",
           "quiz.vidio.com",
           "investors.spotify.com",
@@ -206,7 +207,7 @@
         "SG FIRST SERVER LIMITED",
         "SG Melbikomas"
       ],
-      "url": "https://connectivitycheck.gstatic.com/generate_204",
+      "url": "http://www.gstatic.com/generate_204",
       "interval": "1m0s",
       "tolerance": 40,
       "idle_timeout": "5m0s"
@@ -217,10 +218,10 @@
       "outbounds": [
         "ID Linode",
         "SG Tencent",
-        "SG Alibaba Cloud,LLC",
+        "SG Melbikomas",
         "SG OVH SAS",
         "MY Kaopu Cloud HK Limited",
-        "SG REGXA,LLC",
+        "SG DigitalOcean,LLC",
         "SG Oracle Corporation"
       ],
       "default": "SG Tencent"
@@ -900,7 +901,7 @@
       "type": "vless",
       "tag": "SG Amazon Technologies Inc",
       "tcp_fast_open": true,
-      "server": "ava.game.naver.com.rest.web.id",
+      "server": "ava.game.naver.com",
       "server_port": 443,
       "uuid": "58013ba7-a845-4628-a2e7-f61acb9f1df2",
       "tls": {
