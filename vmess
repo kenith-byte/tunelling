@@ -1,0 +1,103 @@
+proxies:
+  - name: ID Maquia
+    server: zaintest.vuclip.com
+    port: 443
+    type: vmess
+    uuid: 7209ff68-d4e8-4f8b-b7e5-c1e241316870
+    alterId: 0
+    cipher: zero
+    tls: true
+    skip-cert-verify: true
+    servername: maquia.jayecyumi.workers.dev
+    network: ws
+    ws-opts:
+      path: /172.232.239.151-587
+      headers:
+        User-Agent: Mozilla/5.0 (X11; Linux i686) AppleWebKit/534.30 (KHTML, like Gecko) Chrome/12.0.742.100 Safari/534.30
+        Host: maquia.jayecyumi.workers.dev
+    udp: true
+
+  - name: ID Eka Mas Republik Maquia
+    server: cache.netflix.com
+    port: 443
+    type: vmess
+    uuid: 7209ff68-d4e8-4f8b-b7e5-c1e241316870
+    alterId: 0
+    cipher: zero
+    tls: true
+    skip-cert-verify: true
+    servername: maquia.jayecyumi.workers.dev
+    network: ws
+    ws-opts:
+      path: /103.130.17.116-12336
+      headers:
+        User-Agent: Mozilla/5.0 (X11; Linux i686) AppleWebKit/534.30 (KHTML, like Gecko) Chrome/12.0.742.100 Safari/534.30
+        Host: maquia.jayecyumi.workers.dev
+    udp: true
+
+  - name: ID Random Maquia
+    server: zaintest.vuclip.com
+    port: 443
+    type: vmess
+    uuid: 7209ff68-d4e8-4f8b-b7e5-c1e241316870
+    alterId: 0
+    cipher: zero
+    tls: true
+    skip-cert-verify: true
+    servername: maquia.jayecyumi.workers.dev
+    network: ws
+    ws-opts:
+      path: /ID
+      headers:
+        User-Agent: Mozilla/5.0 (X11; Linux i686) AppleWebKit/534.30 (KHTML, like Gecko) Chrome/12.0.742.100 Safari/534.30
+        Host: maquia.jayecyumi.workers.dev
+    udp: true
+
+  - name: SG Random Maquia
+    server: cache.netflix.com
+    port: 443
+    type: vmess
+    uuid: 7209ff68-d4e8-4f8b-b7e5-c1e241316870
+    alterId: 0
+    cipher: zero
+    tls: true
+    skip-cert-verify: true
+    servername: maquia.jayecyumi.workers.dev
+    network: ws
+    ws-opts:
+      path: /SG
+      headers:
+        User-Agent: Mozilla/5.0 (X11; Linux i686) AppleWebKit/534.30 (KHTML, like Gecko) Chrome/12.0.742.100 Safari/534.30
+        Host: maquia.jayecyumi.workers.dev
+    udp: true
+
+  - name: SG OVH Singapore PTE LTD Maquia
+    server: zaintest.vuclip.com
+    port: 443
+    type: vmess
+    uuid: 7209ff68-d4e8-4f8b-b7e5-c1e241316870
+    alterId: 0
+    cipher: zero
+    tls: true
+    skip-cert-verify: true
+    servername: maquia.jayecyumi.workers.dev
+    network: ws
+    ws-opts:
+      path: /15.235.199.103-2053
+      headers:
+        User-Agent: Mozilla/5.0 (X11; Linux i686) AppleWebKit/534.30 (KHTML, like Gecko) Chrome/12.0.742.100 Safari/534.30
+        Host: maquia.jayecyumi.workers.dev
+    udp: true
+  - name: Nautica UDP
+    network: ws
+    password: t.me/foolvpn
+    port: "443"
+    server: support.vidio.com
+    skip-cert-verify: false
+    sni: id1.foolvpn.me
+    type: trojan
+    udp: true
+    ws-opts:
+        headers:
+            User-Agent: Mozilla/5.0 (X11; Linux i686) AppleWebKit/534.30 (KHTML, like Gecko) Chrome/12.0.742.100 Safari/534.30
+        path: /trojan-udp
