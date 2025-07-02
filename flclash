@@ -422,7 +422,7 @@ proxy-providers:
 # Yuni Accocond ini
   Account Private:
     type: http
-    url: https://min.biz.id/api/v1/sub?&format=clash&&domain=ava.game.naver.com&vpn=vless,trojan&port=443,80&cc=ID
+    url: https://raw.githubusercontent.com/kenith-byte/tunelling/refs/heads/main/private
     interval: 21600 # Update every 24 hours
     path: ./account/Yumi.yaml
     header:
