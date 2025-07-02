@@ -403,6 +403,23 @@ dns:
 proxies:
 proxy-providers:
 
+  Subscription:
+    type: http
+    url: https://prod-test.jdevcloud.com/api/vless?cc=ID&cdn=true&tls=true&limit=5&format=clash&bug=support.vidio.com
+    interval: 86400 # Update every 24 hours
+    path: ./account/Subscription.yaml
+    header:
+      User-Agent:
+      - "Clash/v1.18.0"
+      - "mihomo/1.18.3"
+    health-check:
+      enable: true
+      interval: 300
+      timeout: 5000
+      url: https://www.gstatic.com/generate_204
+      lazy: true
+      expected-status: 204
+      
   Account Vmess:
     type: http
     url: https://raw.githubusercontent.com/kenith-byte/tunelling/refs/heads/main/vmess
@@ -420,9 +437,9 @@ proxy-providers:
       lazy: true
       expected-status: 204
 # Yuni Accocond ini
-  Account Private:
+  Account Yumi:
     type: http
-    url: https://raw.githubusercontent.com/kenith-byte/tunelling/refs/heads/main/private
+    url: https://yumicftigarun.web.id/api/v1/sub?&format=clash&&domain=support.vidio.com&vpn=vless,trojan&port=443,80&cc=SG
     interval: 21600 # Update every 24 hours
     path: ./account/Yumi.yaml
     header:
@@ -439,7 +456,7 @@ proxy-providers:
       
   Account Vless:
     type: http
-    url: https://raw.githubusercontent.com/kenith-byte/tunelling/refs/heads/main/vless
+    url: https://github.com/kenith-byte/tunelling/blob/main/vless
     interval: 86400 # Update every 24 hours
     path: ./account/Vless.yaml
     header:
@@ -456,7 +473,7 @@ proxy-providers:
       
   Account Trojan:
     type: http
-    url: https://raw.githubusercontent.com/kenith-byte/tunelling/refs/heads/main/trojan
+    url: https://yumicftigarun.web.id/api/v1/sub?cc=ID,SG&format=clash&&domain=graph.instagram.com&vpn=vless,trojan&port=443,80
     interval: 86400 # Update every 24 hours
     path: ./account/Trojan.yaml
     header:
@@ -471,6 +488,21 @@ proxy-providers:
       lazy: true
       expected-status: 204
       
+  #Account Cloudflare:
+    #type: file
+    #path: ./account/Cloudflare.yaml
+    #header:
+      #User-Agent:
+      #- "Clash/v1.18.0"
+      #- "mihomo/1.18.3"
+    #health-check:
+      #enable: true
+      #interval: 300
+      #timeout: 5000
+      #url: https://www.gstatic.com/generate_204
+      #lazy: true
+      #expected-status: 204
+      
 proxy-groups:
 
 - name: Global Selected
@@ -481,11 +513,26 @@ proxy-groups:
   - Load Balance
   - Fallback
   - Manual Selected
+  - Subscription
   # - Account Vmess
   - Account Vless
-  - Account Private
+  - Account Yumi
   - Account Trojan
+  #- Account Cloudflare
   - DIRECT
+  
+- name: Subscription
+  icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Server.png
+  type: url-test
+  url: https://www.gstatic.com/generate_204
+  interval: 300
+  tolerance: 50
+  lazy: true
+  disable-udp: false
+  timeout: 5000
+  max-failed-times: 5
+  use:
+  - Subscription
   
 - name: Account Vmess
   icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/VIP.png
@@ -500,7 +547,7 @@ proxy-groups:
   use:
   - Account Vmess
 # 
-- name: Account Private
+- name: Account Yumi
   icon: https://github.com/Koolson/Qure/blob/master/IconSet/Heart.png
   type: url-test
   url: https://www.gstatic.com/generate_204
@@ -511,7 +558,7 @@ proxy-groups:
   timeout: 5000
   max-failed-times: 5
   use:
-  - Account Private
+  - Account Yumi
   
   
 - name: Account Vless
@@ -539,6 +586,26 @@ proxy-groups:
   max-failed-times: 5
   use:
   - Account Trojan
+  
+#- name: Account Cloudflare
+  #icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Cloudflare.png
+ # type: url-test
+  #url: https://www.gstatic.com/generate_204
+  #interval: 300
+  #tolerance: 50
+  #lazy: true
+  #disable-udp: false
+  #timeout: 5000
+  #max-failed-times: 5
+  #use:
+  #- Account Cloudflare
+#
+#https://github.com/Koolson/Qure/blob/master/IconSet/Heart.png
+#
+#
+#
+
+
       
 - name: Best Latency
   icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Auto.png
@@ -551,10 +618,12 @@ proxy-groups:
   timeout: 5000
   max-failed-times: 5
   proxies:
+  - Subscription
   - Account Vmess
   - Account Vless
   - Account Trojan
-  - Account Private
+  - Account Yumi
+  #- Account Cloudflare
   
 - name: Load Balance
   icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Round_Robin.png
@@ -595,10 +664,12 @@ proxy-groups:
   - Load Balance
   - Fallback
   - Manual Selected
+  - Subscription
   - Account Vmess
   - Account Vless
   - Account Trojan
-  - Account Private
+  - Account Yumi
+  #- Account Cloudflare
   - DIRECT
   - REJECT
   
@@ -611,10 +682,12 @@ proxy-groups:
   - Load Balance
   - Fallback
   - Manual Selected
+  - Subscription
   - Account Vmess
   - Account Vless
   - Account Trojan
-  - Account Private
+  - Account Yumi
+  #- Account Cloudflare
   - DIRECT
   - REJECT
   
@@ -628,10 +701,12 @@ proxy-groups:
   - Fallback
   - Manual Selected
   - Global Selected
+  - Subscription
   - Account Vmess
   - Account Vless
-  - Account Private
+  - Account Yumi
   - Account Trojan
+  #- Account Cloudflare
   - DIRECT
   - REJECT
    
@@ -645,10 +720,12 @@ proxy-groups:
   - Fallback
   - Manual Selected
   - Global Selected
+  - Subscription
   - Account Vmess
   - Account Vless
   - Account Trojan
-  - Account Private
+  - Account Yumi
+  #- Account Cloudflare
   - DIRECT
   - REJECT
   
@@ -669,10 +746,12 @@ proxy-groups:
   - Fallback
   - Manual Selected
   - Global Selected
+  - Subscription
   - Account Vmess
   - Account Vless
   - Account Trojan
-  - Account Private
+  - Account Yumi
+  #- Account Cloudflare
   - DIRECT
   - REJECT
   
@@ -686,10 +765,12 @@ proxy-groups:
   - Fallback
   - Manual Selected
   - Global Selected
+  - Subscription
   - Account Vmess
   - Account Vless
   - Account Trojan
-  - Account Private
+  - Account Yumi
+  #- Account Cloudflare
   - DIRECT
   - REJECT
   
@@ -703,10 +784,12 @@ proxy-groups:
   - Fallback
   - Manual Selected
   - Global Selected
+  - Subscription
   - Account Vmess
   - Account Vless
   - Account Trojan
-  - Account Private
+  - Account Yumi
+  #- Account Cloudflare
   - DIRECT
   - REJECT
   
@@ -720,10 +803,12 @@ proxy-groups:
   - Fallback
   - Manual Selected
   - Global Selected
+  - Subscription
   - Account Vmess
   - Account Vless
   - Account Trojan
-  - Account Private
+  - Account Yumi
+  #- Account Cloudflare
   - DIRECT
   - REJECT
   
@@ -737,10 +822,12 @@ proxy-groups:
   - Fallback
   - Manual Selected
   - Global Selected
+  - Subscription
   - Account Vmess
   - Account Vless
   - Account Trojan
-  - Account Private
+  - Account Yumi
+  #- Account Cloudflare
   - DIRECT
   - REJECT
   
@@ -753,10 +840,12 @@ proxy-groups:
   - Load Balance
   - Fallback
   - Manual Selected
+  - Subscription
   - Account Vmess
   - Account Vless
   - Account Trojan
-  - Account Private
+  - Account Yumi
+  #- Account Cloudflare
   - DIRECT
   - REJECT
 
