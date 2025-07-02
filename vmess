@@ -1,4 +1,21 @@
 proxies:
+  - name: PT. Uninet Media Sakti
+    server: cache.netflix.com
+    port: 443
+    type: vmess
+    uuid: 8a28acc6-19be-4c84-a5a3-d14c7506d5cb
+    alterId: 0
+    cipher: zero
+    tls: true
+    skip-cert-verify: true
+    servername: cache.netflix.com.1.round.web.id
+    network: ws
+    ws-opts:
+      path: /vmess
+      headers:
+        Host: cache.netflix.com.1.round.web.id
+    udp: true
+
   - name: PT. Industri Kreatif Digital
     server: zaintest.vuclip.com
     port: 443
