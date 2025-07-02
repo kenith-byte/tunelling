@@ -1,0 +1,70 @@
+proxies:
+ - name: Linode
+    server: min.biz.id
+    port: 443
+    type: trojan
+    password: ed01654f-8cea-42d1-8ea0-7646f994f3d6
+    skip-cert-verify: true
+    sni: graph.instagram.com.min.biz.id
+    network: ws
+    ws-opts:
+      path: /172.232.239.151-587
+      headers:
+        Host: min.biz.id
+    udp: true
+
+  - name: Ciputra World 1 Tower DBS
+    server: free.xiongt.biz.id
+    port: 443
+    type: trojan
+    password: aaaaaaa1-bbbb-4ccc-accc-eeeeeeeeeee1
+    skip-cert-verify: true
+    sni: graph.instagram.com.free.xiongt.biz.id
+    network: ws
+    ws-opts:
+      path: /Free/TG-at-XionAlva/149.129.250.8-443
+      headers:
+        Host: graph.instagram.com.free.xiongt.biz.id
+    udp: true
+
+  - name: PT. Telekomunikasi
+    server: joss.krikkrik.tech
+    port: 443
+    type: trojan
+    password: 4d17c103-5747-46b8-a346-fa32595ffad0
+    skip-cert-verify: true
+    sni: graph.instagram.com.joss.krikkrik.tech
+    network: ws
+    ws-opts:
+      path: /Free-VPN-CF-Geo-Project/36.95.152.58=12137
+      headers:
+        Host: graph.instagram.com.joss.krikkrik.tech
+    udp: true
+
+  - name: PT. Pusat Media
+    server: clubgratis.xyz
+    port: 443
+    type: trojan
+    password: aaaaaaa1-bbbb-4ccc-addd-eeeeeeeeeee1
+    skip-cert-verify: true
+    sni: graph.instagram.com.clubgratis.xyz
+    network: ws
+    ws-opts:
+      path: /Club-Gratis/103.6.207.108-8080
+      headers:
+        Host: graph.instagram.com.clubgratis.xyz
+    udp: true
+
+  - name: Cloudflare
+    server: free.xiongt.my.id
+    port: 443
+    type: trojan
+    password: aaaaaaa1-bbbb-4ccc-accc-eeeeeeeeeee1
+    skip-cert-verify: true
+    sni: graph.instagram.com.free.xiongt.my.id
+    network: ws
+    ws-opts:
+      path: /Free/TG-at-XionAlva/129.150.54.20-13666
+      headers:
+        Host: graph.instagram.com.free.xiongt.my.id
+    udp: true
