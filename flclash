@@ -473,7 +473,7 @@ proxy-providers:
       
   Account Trojan:
     type: http
-    url: https://yumicftigarun.web.id/api/v1/sub?cc=ID,SG&format=clash&&domain=graph.instagram.com&vpn=vless,trojan&port=443,80
+    url: https://raw.githubusercontent.com/kenith-byte/tunelling/refs/heads/main/trojan
     interval: 86400 # Update every 24 hours
     path: ./account/Trojan.yaml
     header:
