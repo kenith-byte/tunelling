@@ -1,0 +1,1374 @@
+port: 2080
+socks-port: 2080
+redir-port: 2080
+mixed-port: 2099
+tproxy-port: 9898
+ipv6: true
+mode: rule
+log-level: silent # info / warning / error / debug / silent
+allow-lan: true
+lan-allowed-ips: # The IP address range allowed to connect, only works when allow-lan is true, the default value is 0.0.0.0/0 and ::/0
+- 0.0.0.0/0
+- ::/0
+lan-disallowed-ips: # The IP address segment that is prohibited from connecting. The blacklist has a higher priority than the whitelist. The default value is empty.
+- 192.168.0.3/32
+# authentication: # http,socks entry authentication username and password
+# - "user1:pass1"
+# - "user2:pass2"
+skip-auth-prefixes: # Set the IP range that skips verification
+- 127.0.0.1/8
+- ::1/128
+bind-address: "*"
+unified-delay: true # Unified Delay
+enable-process: true
+udp: true
+
+#  find-process-mode has 3 values:always, strict, off
+#  - always, enable, force matching of all processes
+#  - strict, by default, whether to enable it is determined by mihomo
+#  - off, do not match the process, recommended for routers
+find-process-mode: strict
+
+#  TCP keep alive interval
+keep-alive-idle: 600 # Idle time Reduce battery consumption on mobile devices
+keep-alive-interval: 30 # Interval time
+disable-keep-alive: true # Currently forced to true on the Android side
+
+global-client-fingerprint: chrome # chrome / firefox / safari / iOS / android / edge / 360 / qq / random
+tcp-concurrent: true # TCP Concurrency
+#interface-name: en0 # Clash's traffic outbound interface
+#routing-mark: 6666 # Provides a default traffic mark for outbound connections on Linux
+global-ua: clash.meta # Custom UA used when downloading external resources, default is clash.meta
+#etag-support: true
+external-doh-server: /dns-query
+
+# External Control (API)
+external-controller: 0.0.0.0:9090
+#external-controller-unix: mihomo.sock
+#external-controller-pipe: \\.\pipe\mihomo
+#external-controller-tls: 127.0.0.1:9443
+#external-controller-cors:
+  #allow-origins:
+    #- http://127.0.0.1
+    #- http://metacubex.github.io/metacubexd
+  #allow-private-network: true
+#external-ui: /data/adb/box/dashboard/metacubexd
+external-ui-url: https://github.com/MetaCubeX/metacubexd/archive/refs/heads/gh-pages.zip
+external-ui-name: metacubexd
+#secret: 12345
+
+# Customize GEO download address
+geodata-loader: memconservative # standard / memconservative
+geodata-mode: true
+geo-auto-update: false
+geo-update-interval: 24
+geox-url:
+  geoip: https://github.com/Loyalsoldier/v2ray-rules-dat/releases/latest/download/geoip.dat
+  geosite: https://github.com/Loyalsoldier/v2ray-rules-dat/releases/latest/download/geosite.dat
+  mmdb: https://github.com/Loyalsoldier/geoip/releases/latest/download/Country.mmdb
+  asn: https://github.com/Loyalsoldier/geoip/releases/latest/download/GeoLite2-ASN.mmdb
+  
+# cache
+profile:
+  store-selected: true # Store the API policy group selection for next startup
+  store-fake-ip: true # Store the fakeip mapping table. When the domain name is connected again, use the original mapping address
+  
+hosts:
+  '*.mihomo.dev': 127.0.0.1
+  'alpha.mihomo.dev': '::1'
+  test.com: [1.1.1.1, 2.2.2.2]
+  baidu.com: google.com
+  # block update system android
+  'ota.googlezip.net': 127.0.0.1
+  'ota-cache1.googlezip.net': 127.0.0.1
+  'ota-cache2.googlezip.net': 127.0.0.1
+  
+tls:
+  certificate: "./tls/ca_cert.pem" # Certificate PEM format or certificate path
+  private-key: "./tls/ca_key.pem" # Private key PEM format corresponding to the certificate, or private key path
+  custom-certifactes:
+    - |
+      -----BEGIN CERTIFICATE-----
+      format/pem...
+      -----END CERTIFICATE-----
+  
+experimental:
+  quic-go-disable-gso: false
+  quic-go-disable-ecn: false
+  
+# Domain name sniffing  
+sniffer:
+  enable: true
+  force-dns-mapping: true
+  parse-pure-ip: true
+  override-destination: true
+  sniff:
+    TLS:
+      ports: [443, 8443]
+    HTTP:
+      ports: [80, 8080-8880]
+      override-destination: true
+    QUIC:
+      ports: [443,8443]
+      override-destination: true
+      sniffing: [http, tls, quic] # add ", quic" after tls
+      port-whitelist: [80, 443, 8080, 8443]
+  force-domain: # Force sniffing, don't add it randomly
+  - "+.netflix.com"
+  - "+.nflxvideo.net"
+  - "+.amazonaws.com"
+  - "+.media.dssot.com"
+  skip-domain: # Ignore sniffing
+  - "+.courier.push.apple.com"
+  - Mijia Cloud
+  - "+.jd.com"
+  - dlg.io.mi.com
+  skip-src-address:
+  - 192.168.0.3/32
+  skip-dst-address:
+  - 192.168.0.3/32
+    
+# ntp:
+#   enable: false
+#   write-to-system: true
+#   server: time.apple.com
+#   port: 123
+#   interval: 30
+  
+# Virtual network card mode  
+tun:
+  enable: true
+  stack: gvisor # gvisor / mixed / system
+  auto-route: true
+  auto-redirect: true
+  auto-detect-interface: true
+  dns-hijack: # additional dns server listen on TUN
+    - any:53
+    - tcp://any:53
+  device: utun0
+  mtu: 1500
+  strict-route: true
+  gso: true
+  gso-max-size: 65536
+  udp-timeout: 300
+  iproute2-table-index: 2022
+  iproute2-rule-index: 9000
+  endpoint-independent-nat: false
+  route-address-set:
+    - ruleset-1
+  route-exclude-address-set:
+    - ruleset-2
+  route-address:
+    - 0.0.0.0/1
+    - 128.0.0.0/1
+    - "::/1"
+    - "8000::/1"
+  route-exclude-address:
+  - 192.168.0.0/16
+  - fc00::/7
+  include-interface:
+  - eth0
+  exclude-interface:
+  - eth1
+  include-uid:
+  - 0
+  include-uid-range:
+  - 1000:9999
+  exclude-uid:
+  - 1000
+  exclude-uid-range:
+  - 1000:9999
+  include-android-user:
+  - 0
+  - 10
+  include-package:
+  - com.android.chrome
+  exclude-package: 
+  - com.whatsapp
+# Old writing
+  inet4-route-address:
+  - 0.0.0.0/1
+  - 128.0.0.0/1
+  inet6-route-address:
+  - "::/1"
+  - "8000::/1"
+  inet4-route-exclude-address:
+  - 192.168.0.0/16
+  inet6-route-exclude-address:
+  - fc00::/7
+  
+# DNS settings  
+dns:
+  enable: true
+  cache-algorithm: arc
+  ipv6: true
+  ipv6-timeout: 300
+  listen: 0.0.0.0:1053
+  prefer-h3: false
+  use-host: true # Custom DNS
+  use-system-hosts: true # Use system DNS true / false
+  respect-rules: true
+  enhanced-mode: redir-host #fake-ip
+  fake-ip-range: 198.18.0.1/16
+  fake-ip-filter-mode: blacklist
+  fake-ip-filter: # fake ip whitelist list The following addresses will not send fakeip mapping for connection
+  - "*.lan"
+  - "*.localdomain"
+  - "*.example"
+  - "*.invalid"
+  - "*.localhost"
+  - "*.test"
+  - "*.local"
+  - "*.home.arpa"
+  - time.*.com
+  - time.*.gov
+  - time.*.edu.cn
+  - time.*.apple.com
+  - time-ios.apple.com
+  - time1.*.com
+  - time2.*.com
+  - time3.*.com
+  - time4.*.com
+  - time5.*.com
+  - time6.*.com
+  - time7.*.com
+  - ntp.*.com
+  - ntp1.*.com
+  - ntp2.*.com
+  - ntp3.*.com
+  - ntp4.*.com
+  - ntp5.*.com
+  - ntp6.*.com
+  - ntp7.*.com
+  - "*.time.edu.cn"
+  - "*.ntp.org.cn"
+  - "+.pool.ntp.org"
+  - time1.cloud.tencent.com
+  - music.163.com
+  - "*.music.163.com"
+  - "*.126.net"
+  - musicapi.taihe.com
+  - music.taihe.com
+  - songsearch.kugou.com
+  - trackercdn.kugou.com
+  - "*.kuwo.cn"
+  - api-jooxtt.sanook.com
+  - api.joox.com
+  - joox.com
+  - y.qq.com
+  - "*.y.qq.com"
+  - streamoc.music.tc.qq.com
+  - mobileoc.music.tc.qq.com
+  - isure.stream.qqmusic.qq.com
+  - dl.stream.qqmusic.qq.com
+  - aqqmusic.tc.qq.com
+  - amobile.music.tc.qq.com
+  - "*.xiami.com"
+  - "*.music.migu.cn"
+  - music.migu.cn
+  - "+.msftconnecttest.com"
+  - "+.msftncsi.com"
+  - msftconnecttest.com
+  - msftncsi.com
+  - localhost.ptlogin2.qq.com
+  - localhost.sec.qq.com
+  - "+.srv.nintendo.net"
+  - "*.n.n.srv.nintendo.net"
+  - "+.stun.playstation.net"
+  - xbox.*.*.microsoft.com
+  - "*.*.xboxlive.com"
+  - xbox.*.microsoft.com
+  - xnotify.xboxlive.com
+  - "+.battlenet.com.cn"
+  - "+.wotgame.cn"
+  - "+.wggames.cn"
+  - "+.wowsgame.cn"
+  - "+.wargaming.net"
+  - proxy.golang.org
+  - stun.*.*
+  - stun.*.*.*
+  - "+.stun.*.*"
+  - "+.stun.*.*.*"
+  - "+.stun.*.*.*.*"
+  - "+.stun.*.*.*.*.*"
+  - heartbeat.belkin.com
+  - "*.linksys.com"
+  - "*.linksyssmartwifi.com"
+  - "*.router.asus.com"
+  - mesu.apple.com
+  - swscan.apple.com
+  - swquery.apple.com
+  - swdownload.apple.com
+  - swcdn.apple.com
+  - swdist.apple.com
+  - lens.l.google.com
+  - stun.l.google.com
+  - "+.nflxvideo.net"
+  - "*.square-enix.com"
+  - "*.finalfantasyxiv.com"
+  - "*.ffxiv.com"
+  - "*.ff14.sdo.com"
+  - ff.dorado.sdo.com
+  - "*.mcdn.bilivideo.cn"
+  - "+.media.dssott.com"
+  - shark007.net
+  - "+.qq.com"
+  - "+.tencent.com"
+  - na.b.g-tun.com
+  - Mijia Cloud
+  - "+.cmbchina.com"
+  - "+.cmbimg.com"
+  - local.adguard.org
+  - "+.sandai.net"
+  - "+.n0808.com"
+  
+# DNS server used to resolve non-IP DNS, only supports pure IP
+  nameserver:
+  
+  - https://dns.google/dns-query
+  - https://doh.opendns.com/dns-query
+  - https://cloudflare-dns.com/dns-query
+  
+  fallback:
+  - tls://dns.google
+  - tls://1dot1dot1dot1.cloudflare-dns.com
+  - tls://doh.opendns.com
+  
+# DNS default server
+  default-nameserver:
+  - 1.1.1.1
+  - 1.0.0.1
+  - 8.8.8.8
+  - 8.8.4.4
+  - 208.67.222.222
+  - 208.67.220.220
+  
+  proxy-server-nameserver:
+  #- https://doh.pub/dns-query
+  - 112.215.203.246 #DNS XL
+  - 112.215.203.247 #DNS XL
+  - 112.215.203.248 #DNS XL
+  - 112.215.203.254 #DNS XL
+  - 112.215.198.248 #DNS XL
+  - 112.215.198.254 #DNS XL
+  - '[2400:9800:1b::246]' 
+  - '[2400:9800:1b::247]'
+  - '[2400:9800:2:2::245]' #DNS XL
+  - '[2400:9800:2:2::246]' #DNS XL
+    
+  direct-nameserver:
+  - system
+  direct-nameserver-follow-policy: false # Whether to follow nameserver-policy. The default is not to follow. This is only effective when direct-nameserver is not empty.
+  
+  # Override DNS policy Example
+  nameserver-policy:
+    #'+.arpa': '10.0.0.1'
+    'rule-set:oisd_big,d3ward':
+    - rcode://success
+    'rule-set:whatsapp,youtube,google':
+    - https://dns.google/dns-query
+    'rule-set:anime,category-porn':
+    - https://cloudflare-dns.com/dns-query
+    'rule-set:category-games,game':
+    - https://doh.opendns.com/dns-query
+    
+  fallback-filter:
+    geoip: true
+    geoip-code: ID
+    geosite:
+      - gfw
+    ipcidr:
+      - 0.0.0.0/8
+      - 10.0.0.0/8
+      - 100.64.0.0/10
+      - 127.0.0.0/8
+      - 169.254.0.0/16
+      - 172.16.0.0/12
+      - 192.0.0.0/24
+      - 192.0.2.0/24
+      - 192.88.99.0/24
+      - 192.168.0.0/16
+      - 198.18.0.0/15
+      - 198.51.100.0/24
+      - 203.0.113.0/24
+      - 224.0.0.0/4
+      - 240.0.0.0/4
+      - 255.255.255.255/32
+    domain:
+      - '+.google.com'
+      - '+.facebook.com'
+      - '+.youtube.com'
+      - '+.telegram.com'
+      
+proxies:
+proxy-providers:
+
+  Subscription:
+    type: http
+    url: https://prod-test.jdevcloud.com/api/vless?cc=ID&cdn=true&tls=true&limit=5&format=clash&bug=support.vidio.com
+    interval: 86400 # Update every 24 hours
+    path: ./account/Subscription.yaml
+    header:
+      User-Agent:
+      - "Clash/v1.18.0"
+      - "mihomo/1.18.3"
+    health-check:
+      enable: true
+      interval: 300
+      timeout: 5000
+      url: https://www.gstatic.com/generate_204
+      lazy: true
+      expected-status: 204
+      
+  Account Vmess:
+    type: http
+    url: https://raw.githubusercontent.com/Mayumiwandi/Privat-YUMI/refs/heads/main/Clash/akun/vmess.yaml
+    interval: 86400 # Update every 24 hours
+    path: ./account/Vmess.yaml
+    header:
+      User-Agent:
+      - "Clash/v1.18.0"
+      - "mihomo/1.18.3"
+    health-check:
+      enable: true
+      interval: 300
+      timeout: 5000
+      url: https://www.gstatic.com/generate_204
+      lazy: true
+      expected-status: 204
+# Yuni Accocond ini
+  Account Yumi:
+    type: http
+    url: https://yumicftigarun.web.id/api/v1/sub?&format=clash&&domain=support.vidio.com&vpn=vless,trojan&port=443,80&cc=SG
+    interval: 21600 # Update every 24 hours
+    path: ./account/Yumi.yaml
+    header:
+      User-Agent:
+      - "Clash/v1.18.0"
+      - "mihomo/1.18.3"
+    health-check:
+      enable: true
+      interval: 300
+      timeout: 5000
+      url: https://www.gstatic.com/generate_204
+      lazy: true
+      expected-status: 204   
+      
+  Account Vless:
+    type: http
+    url: https://yumicftigarun.web.id/api/v1/sub?cc=ID&format=clash&&domain=support.vidio.com&vpn=vless,trojan&port=443,80
+    interval: 86400 # Update every 24 hours
+    path: ./account/Vless.yaml
+    header:
+      User-Agent:
+      - "Clash/v1.18.0"
+      - "mihomo/1.18.3"
+    health-check:
+      enable: true
+      interval: 300
+      timeout: 5000
+      url: https://www.gstatic.com/generate_204
+      lazy: true
+      expected-status: 204
+      
+  Account Trojan:
+    type: http
+    url: https://yumicftigarun.web.id/api/v1/sub?cc=ID,SG&format=clash&&domain=support.vidio.com&vpn=vless,trojan&port=443,80
+    interval: 86400 # Update every 24 hours
+    path: ./account/Trojan.yaml
+    header:
+      User-Agent:
+      - "Clash/v1.18.0"
+      - "mihomo/1.18.3"
+    health-check:
+      enable: true
+      interval: 300
+      timeout: 5000
+      url: https://www.gstatic.com/generate_204
+      lazy: true
+      expected-status: 204
+      
+  #Account Cloudflare:
+    #type: file
+    #path: ./account/Cloudflare.yaml
+    #header:
+      #User-Agent:
+      #- "Clash/v1.18.0"
+      #- "mihomo/1.18.3"
+    #health-check:
+      #enable: true
+      #interval: 300
+      #timeout: 5000
+      #url: https://www.gstatic.com/generate_204
+      #lazy: true
+      #expected-status: 204
+      
+proxy-groups:
+
+- name: Global Selected
+  icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Global.png
+  type: select
+  proxies:
+  - Best Latency
+  - Load Balance
+  - Fallback
+  - Manual Selected
+  - Subscription
+  # - Account Vmess
+  - Account Vless
+  - Account Yumi
+  - Account Trojan
+  #- Account Cloudflare
+  - DIRECT
+  
+- name: Subscription
+  icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Server.png
+  type: url-test
+  url: https://www.gstatic.com/generate_204
+  interval: 300
+  tolerance: 50
+  lazy: true
+  disable-udp: false
+  timeout: 5000
+  max-failed-times: 5
+  use:
+  - Subscription
+  
+- name: Account Vmess
+  icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/VIP.png
+  type: url-test
+  url: https://www.gstatic.com/generate_204
+  interval: 300
+  tolerance: 50
+  lazy: true
+  disable-udp: false
+  timeout: 5000
+  max-failed-times: 5
+  use:
+  - Account Vmess
+# 
+- name: Account Yumi
+  icon: https://github.com/Koolson/Qure/blob/master/IconSet/Heart.png
+  type: url-test
+  url: https://www.gstatic.com/generate_204
+  interval: 300
+  tolerance: 50
+  lazy: true
+  disable-udp: false
+  timeout: 5000
+  max-failed-times: 5
+  use:
+  - Account Yumi
+  
+  
+- name: Account Vless
+  icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Heart.png
+  type: url-test
+  url: https://www.gstatic.com/generate_204
+  interval: 300
+  tolerance: 50
+  lazy: true
+  disable-udp: false
+  timeout: 5000
+  max-failed-times: 5
+  use:
+  - Account Vless
+  
+- name: Account Trojan
+  icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Star.png
+  type: url-test
+  url: https://www.gstatic.com/generate_204
+  interval: 300
+  tolerance: 50
+  lazy: true
+  disable-udp: false
+  timeout: 5000
+  max-failed-times: 5
+  use:
+  - Account Trojan
+  
+#- name: Account Cloudflare
+  #icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Cloudflare.png
+ # type: url-test
+  #url: https://www.gstatic.com/generate_204
+  #interval: 300
+  #tolerance: 50
+  #lazy: true
+  #disable-udp: false
+  #timeout: 5000
+  #max-failed-times: 5
+  #use:
+  #- Account Cloudflare
+#
+#https://github.com/Koolson/Qure/blob/master/IconSet/Heart.png
+#
+#
+#
+
+
+      
+- name: Best Latency
+  icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Auto.png
+  type: url-test
+  url: https://www.gstatic.com/generate_204
+  interval: 300
+  tolerance: 50
+  lazy: true
+  disable-udp: false
+  timeout: 5000
+  max-failed-times: 5
+  proxies:
+  - Subscription
+  - Account Vmess
+  - Account Vless
+  - Account Trojan
+  - Account Yumi
+  #- Account Cloudflare
+  
+- name: Load Balance
+  icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Round_Robin.png
+  type: load-balance
+  url: https://www.gstatic.com/generate_204
+  interval: 300
+  lazy: true
+  strategy: round-robin
+  disable-udp: false
+  include-all-providers: true
+  timeout: 5000
+  max-failed-times: 5
+  use:
+  
+- name: Fallback
+  icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Available.png
+  type: fallback
+  url: https://www.gstatic.com/generate_204
+  interval: 300
+  lazy: true
+  disable-udp: false
+  include-all-providers: true
+  use:
+  
+- name: Manual Selected
+  icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Static.png
+  type: select
+  disable-udp: false
+  include-all-providers: true
+  use:
+  
+- name: Gaming
+  icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Game.png
+  type: select
+  disable-udp: false
+  proxies:
+  - Best Latency
+  - Load Balance
+  - Fallback
+  - Manual Selected
+  - Subscription
+  - Account Vmess
+  - Account Vless
+  - Account Trojan
+  - Account Yumi
+  #- Account Cloudflare
+  - DIRECT
+  - REJECT
+  
+- name: Google
+  icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Google_Search.png
+  type: select
+  disable-udp: false
+  proxies:
+  - Best Latency
+  - Load Balance
+  - Fallback
+  - Manual Selected
+  - Subscription
+  - Account Vmess
+  - Account Vless
+  - Account Trojan
+  - Account Yumi
+  #- Account Cloudflare
+  - DIRECT
+  - REJECT
+  
+- name: Social Media
+  icon: https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/meta.png
+  type: select 
+  disable-udp: false
+  proxies:
+  - Best Latency
+  - Load Balance
+  - Fallback
+  - Manual Selected
+  - Global Selected
+  - Subscription
+  - Account Vmess
+  - Account Vless
+  - Account Yumi
+  - Account Trojan
+  #- Account Cloudflare
+  - DIRECT
+  - REJECT
+   
+- name: Streaming
+  icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Streaming.png
+  type: select 
+  disable-udp: false
+  proxies:
+  - Best Latency
+  - Load Balance
+  - Fallback
+  - Manual Selected
+  - Global Selected
+  - Subscription
+  - Account Vmess
+  - Account Vless
+  - Account Trojan
+  - Account Yumi
+  #- Account Cloudflare
+  - DIRECT
+  - REJECT
+  
+- name: Speed Test
+  icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Speedtest.png
+  type: select
+  disable-udp: false
+  include-all-providers: true
+  use:
+   
+- name: E-commerce
+  icon: https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/Category_Shopping.png
+  type: select 
+  disable-udp: false
+  proxies:
+  - Best Latency
+  - Load Balance
+  - Fallback
+  - Manual Selected
+  - Global Selected
+  - Subscription
+  - Account Vmess
+  - Account Vless
+  - Account Trojan
+  - Account Yumi
+  #- Account Cloudflare
+  - DIRECT
+  - REJECT
+  
+- name: WhatsApp
+  icon: https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/WhatsApp.png
+  type: select 
+  disable-udp: false
+  proxies:
+  - Best Latency
+  - Load Balance
+  - Fallback
+  - Manual Selected
+  - Global Selected
+  - Subscription
+  - Account Vmess
+  - Account Vless
+  - Account Trojan
+  - Account Yumi
+  #- Account Cloudflare
+  - DIRECT
+  - REJECT
+  
+- name: Telegram
+  icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Telegram.png
+  type: select
+  disable-udp: false
+  proxies:
+  - Best Latency
+  - Load Balance
+  - Fallback
+  - Manual Selected
+  - Global Selected
+  - Subscription
+  - Account Vmess
+  - Account Vless
+  - Account Trojan
+  - Account Yumi
+  #- Account Cloudflare
+  - DIRECT
+  - REJECT
+  
+- name: Anime
+  icon: https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/softlyx/HentaiHome.png
+  type: select
+  disable-udp: false
+  proxies:
+  - Best Latency
+  - Load Balance
+  - Fallback
+  - Manual Selected
+  - Global Selected
+  - Subscription
+  - Account Vmess
+  - Account Vless
+  - Account Trojan
+  - Account Yumi
+  #- Account Cloudflare
+  - DIRECT
+  - REJECT
+  
+- name: Open AI
+  icon: https://raw.githubusercontent.com/lige47/QuanX-icon-rule/main/icon/ChatGPT-green.png
+  type: select
+  disable-udp: false
+  proxies:
+  - Best Latency
+  - Load Balance
+  - Fallback
+  - Manual Selected
+  - Global Selected
+  - Subscription
+  - Account Vmess
+  - Account Vless
+  - Account Trojan
+  - Account Yumi
+  #- Account Cloudflare
+  - DIRECT
+  - REJECT
+  
+- name: Nsfw
+  icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Reject.png
+  type: select 
+  disable-udp: false
+  proxies:
+  - Best Latency
+  - Load Balance
+  - Fallback
+  - Manual Selected
+  - Subscription
+  - Account Vmess
+  - Account Vless
+  - Account Trojan
+  - Account Yumi
+  #- Account Cloudflare
+  - DIRECT
+  - REJECT
+
+- name: Block Ads
+  icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Advertising.png
+  type: select
+  disable-udp: false
+  proxies:
+  - REJECT
+  - Global Selected
+
+rule-providers:
+       
+  game:
+    type: http
+    format: yaml
+    behavior: classical
+    path: ./rule_provider/rule_game.yaml
+    url: https://raw.githubusercontent.com/MilimNavaDemonLord/open_clash/main/rule_provider/rule_game.yaml
+    interval: 86400 # Update rules every 24 hours
+       
+  onlineshop:
+    type: http
+    format: yaml
+    behavior: classical
+    path: ./rule_provider/rule_onlineshop.yaml
+    url: https://raw.githubusercontent.com/MilimNavaDemonLord/open_clash/main/rule_provider/rule_onlineshop.yaml
+    interval: 86400 # Update rules every 24 hours
+   
+  payment:
+    type: http
+    format: yaml
+    behavior: classical
+    path: ./rule_provider/rule_payment.yaml
+    url: https://raw.githubusercontent.com/MilimNavaDemonLord/open_clash/main/rule_provider/rule_payment.yaml
+    interval: 86400 # Update rules every 24 hours 
+ 
+  whatsapp:
+    type: http
+    format: yaml
+    behavior: classical
+    path: ./rule_provider/Whatsapp.yaml
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Whatsapp/Whatsapp.yaml
+    interval: 86400 # Update rules every 24 hours 
+    
+  Speedtest:
+    type: http
+    format: yaml
+    behavior: classical
+    path: ./rule_provider/Speedtest.yaml
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Speedtest/Speedtest.yaml
+    interval: 86400 # Update rules every 24 hours 
+    
+  anime:
+    type: http
+    format: yaml
+    behavior: classical
+    path: ./rule_provider/rule_anime.yaml
+    url: https://raw.githubusercontent.com/MilimNavaDemonLord/open_clash/main/rule_provider/rule_anime.yaml
+    interval: 86400 # Update rules every 24 hours 
+    
+  streaming:
+    type: http
+    format: yaml
+    behavior: classical
+    path: ./rule_provider/rule_streaming.yaml
+    url: https://raw.githubusercontent.com/MilimNavaDemonLord/open_clash/main/rule_provider/rule_streaming.yaml
+    interval: 86400 # Update rules every 24 hours 
+    
+  youtubemusic:
+    type: http
+    format: yaml
+    behavior: classical
+    path: ./rule_provider/YouTubeMusic.yaml
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/YouTubeMusic/YouTubeMusic.yaml
+    interval: 86400 # Update rules every 24 hours 
+    
+  d3ward:
+    type: http
+    format: yaml
+    behavior: classical
+    path: ./rule_provider/rule_d3ward.yaml
+    url: https://raw.githubusercontent.com/MilimNavaDemonLord/open_clash/main/rule_provider/rule_d3ward.yaml
+    interval: 86400 # Update rules every 24 hours 
+    
+  category-porn:
+    type: http
+    format: mrs
+    behavior: domain
+    path: ./rule_provider/category-porn.mrs
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/category-porn.mrs
+    interval: 86400 # Update rules every 24 hours
+
+  telegram:
+    type: http
+    format: yaml
+    behavior: classical
+    path: ./rule_provider/Telegram.yaml
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Telegram/Telegram.yaml
+    interval: 86400 # Update rules every 24 hours
+    
+  telegramNL:
+    type: http
+    format: yaml
+    behavior: classical
+    path: ./rule_provider/TelegramNL.yaml
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/TelegramNL/TelegramNL.yaml
+    interval: 86400 # Update rules every 24 hours
+    
+  telegramSG:
+    type: http
+    format: yaml
+    behavior: classical
+    path: ./rule_provider/TelegramSG.yaml
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/TelegramSG/TelegramSG.yaml
+    interval: 86400 # Update rules every 24 hours
+    
+  telegramUS:
+    type: http
+    format: yaml
+    behavior: classical
+    path: ./rule_provider/TelegramUS.yaml
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/TelegramUS/TelegramUS.yaml
+    interval: 86400 # Update rules every 24 hours
+
+  tiktok:
+    type: http
+    format: mrs
+    behavior: domain
+    path: ./rule_provider/tiktok.mrs
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/tiktok.mrs
+    interval: 86400 # Update rules every 24 hours
+
+  x:
+    type: http
+    format: mrs
+    behavior: domain
+    path: ./rule_provider/x.mrs
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/x.mrs
+    interval: 86400 # Update rules every 24 hours
+
+  twitter-ipcidr:
+    type: http
+    format: mrs
+    behavior: ipcidr
+    path: ./rule_provider/twitter-ipcidr.mrs
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/twitter.mrs
+    interval: 86400 # Update rules every 24 hours 
+    
+  facebook:
+    type: http
+    format: mrs
+    behavior: domain
+    path: ./rule_provider/facebook.mrs
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/facebook.mrs
+    interval: 86400 # Update rules every 24 hours
+    
+  facebook-dev:
+    type: http
+    format: mrs
+    behavior: domain
+    path: ./rule_provider/facebook-dev.mrs
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/facebook-dev.mrs
+    interval: 86400 # Update rules every 24 hours
+    
+  facebook-ipcidr:
+    type: http
+    format: mrs
+    behavior: ipcidr
+    path: ./rule_provider/facebook-ipcidr.mrs
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/facebook.mrs
+    interval: 86400 # Update rules every 24 hours 
+    
+  messenger:
+    type: http
+    format: mrs
+    behavior: domain
+    path: ./rule_provider/messenger.mrs
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/messenger.mrs
+    interval: 86400 # Update rules every 24 hours
+    
+  threads:
+    type: http
+    format: mrs
+    behavior: domain
+    path: ./rule_provider/threads.mrs
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/threads.mrs
+    interval: 86400 # Update rules every 24 hours
+    
+  pinterest:
+    type: http
+    format: mrs
+    behavior: domain
+    path: ./rule_provider/pinterest.mrs
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/pinterest.mrs
+    interval: 86400 # Update rules every 24 hours
+    
+  reddit:
+    type: http
+    format: mrs
+    behavior: domain
+    path: ./rule_provider/reddit.mrs
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/reddit.mrs
+    interval: 86400 # Update rules every 24 hours
+    
+  vk:
+    type: http
+    format: mrs
+    behavior: domain
+    path: ./rule_provider/vk.mrs
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/vk.mrs
+    interval: 86400 # Update rules every 24 hours
+    
+  line:
+    type: http
+    format: mrs
+    behavior: domain
+    path: ./rule_provider/line.mrs
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/line.mrs
+    interval: 86400 # Update rules every 24 hours
+    
+  discord:
+    type: http
+    format: mrs
+    behavior: domain
+    path: ./rule_provider/discord.mrs
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/discord.mrs
+    interval: 86400 # Update rules every 24 hours
+    
+  instagram:
+    type: http
+    format: mrs
+    behavior: domain
+    path: ./rule_provider/instagram.mrs
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/instagram.mrs
+    interval: 86400 # Update rules every 24 hours
+    
+  bluesky:
+    type: http
+    format: mrs
+    behavior: domain
+    path: ./rule_provider/bluesky.mrs
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/bluesky.mrs
+    interval: 86400 # Update rules every 24 hours
+    
+  category-forums:
+    type: http
+    format: mrs
+    behavior: domain
+    path: ./rule_provider/category-forums.mrs
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/category-forums.mrs
+    interval: 86400 # Update rules every 24 hours
+    
+  category-ecommerce:
+    type: http
+    format: mrs
+    behavior: domain
+    path: ./rule_provider/category-ecommerce.mrs
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/category-ecommerce.mrs
+    interval: 86400 # Update rules every 24 hours
+    
+  paypal:
+    type: http
+    format: mrs
+    behavior: domain
+    path: ./rule_provider/paypal.mrs
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/paypal.mrs
+    interval: 86400 # Update rules every 24 hours
+    
+  category-games:
+    type: http
+    format: mrs
+    behavior: domain
+    path: ./rule_provider/category-games.mrs
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/category-games.mrs
+    interval: 86400 # Update rules every 24 hours
+    
+  netflix-ipcidr:
+    type: http
+    format: mrs
+    behavior: ipcidr
+    path: ./rule_provider/netflix-ipcidr.mrs
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/netflix.mrs
+    interval: 86400 # Update rules every 24 hours 
+    
+  netflix:
+    type: http
+    format: mrs
+    behavior: domain
+    path: ./rule_provider/netflix.mrs
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/netflix.mrs
+    interval: 86400 # Update rules every 24 hours
+    
+  imdb:
+    type: http
+    format: mrs
+    behavior: domain
+    path: ./rule_provider/imdb.mrs
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/imdb.mrs
+    interval: 86400 # Update rules every 24 hours
+    
+  iqiyi:
+    type: http
+    format: mrs
+    behavior: domain
+    path: ./rule_provider/iqiyi.mrs
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/iqiyi.mrs
+    interval: 86400 # Update rules every 24 hours
+    
+  spotify:
+    type: http
+    format: mrs
+    behavior: domain
+    path: ./rule_provider/spotify.mrs
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/spotify.mrs
+    interval: 86400 # Update rules every 24 hours
+    
+  twitch:
+    type: http
+    format: mrs
+    behavior: domain
+    path: ./rule_provider/twitch.mrs
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/twitch.mrs
+    interval: 86400 # Update rules every 24 hours
+    
+  youtube:
+    type: http
+    format: mrs
+    behavior: domain
+    path: ./rule_provider/youtube.mrs
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/youtube.mrs
+    interval: 86400 # Update rules every 24 hours
+    
+  disney:
+    type: http
+    format: mrs
+    behavior: domain
+    path: ./rule_provider/disney.mrs
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/disney.mrs
+    interval: 86400 # Update rules every 24 hours
+    
+  bilibili:
+    type: http
+    format: mrs
+    behavior: domain
+    path: ./rule_provider/bilibili.mrs
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/bilibili.mrs
+    interval: 86400 # Update rules every 24 hours
+    
+  pixiv:
+    type: http
+    format: mrs
+    behavior: domain
+    path: ./rule_provider/pixiv.mrs
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/pixiv.mrs
+    interval: 86400 # Update rules every 24 hours
+    
+  deviantart:
+    type: http
+    format: mrs
+    behavior: domain
+    path: ./rule_provider/deviantart.mrs
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/deviantart.mrs
+    interval: 86400 # Update rules every 24 hours
+    
+  google-ipcidr:
+    type: http
+    format: mrs
+    behavior: ipcidr
+    path: ./rule_provider/google-ipcidr.mrs
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/google.mrs
+    interval: 86400 # Update rules every 24 hours 
+    
+  google:
+    type: http
+    format: mrs
+    behavior: domain
+    path: ./rule_provider/google.mrs
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/google.mrs
+    interval: 86400 # Update rules every 24 hours
+    
+  github:
+    type: http
+    format: mrs
+    behavior: domain
+    path: ./rule_provider/github.mrs
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/github.mrs
+    interval: 86400 # Update rules every 24 hours
+    
+  openai:
+    type: http
+    format: mrs
+    behavior: domain
+    path: ./rule_provider/openai.mrs
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/openai.mrs
+    interval: 86400 # Update rules every 24 hours
+    
+  gemini:
+    type: http
+    format: yaml
+    behavior: classical
+    path: ./rule_provider/gemini.yaml
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Gemini/Gemini.yaml
+    interval: 86400 # Update rules every 24 hours
+    
+  copilot:
+    type: http
+    format: yaml
+    behavior: classical
+    path: ./rule_provider/Copilot.yaml
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Copilot/Copilot.yaml
+    interval: 86400 # Update rules every 24 hours
+     
+  oisd_big:
+    type: http
+    format: yaml
+    behavior: classical
+    path: ./rule_provider/oisd_big.yaml
+    url: https://raw.githubusercontent.com/hillz2/openclash_adblock/main/oisd_big.yaml
+    interval: 28800 # Update rules every 8 hours
+  
+  ubuntu-rule:
+    type: http
+    format: yaml
+    behavior: classical
+    path: ./rule_provider/Ubuntu.yaml
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Ubuntu/Ubuntu.yaml
+    interval: 86400 # Update rules every 24 hours
+    
+  game-kakao:
+    type: http
+    format: yaml
+    behavior: classical
+    path: ./rule_provider/Kakao-game.yaml
+    url: https://raw.githubusercontent.com/Mayumiwandi/Kakao-game/refs/heads/main/Kakao-game.yaml
+    interval: 86400 # Update rules every 24 hours
+
+rules:
+
+#OPEN AI
+- RULE-SET,openai,Open AI
+- RULE-SET,gemini,Open AI
+- RULE-SET,copilot,Open AI
+
+#E-COMMERCE
+- RULE-SET,category-ecommerce,E-commerce
+- RULE-SET,paypal,E-commerce
+# > E-commerce Domain Indonesian
+- RULE-SET,onlineshop,E-commerce
+- RULE-SET,payment,E-commerce
+
+
+#Ubuntu rules
+- RULE-SET,ubuntu-rule,Gaming
+#GAMING
+- RULE-SET,category-games,Gaming
+- RULE-SET,game,Gaming
+- RULE-SET,game-kakao,Gaming
+
+
+#ADSBLOCK
+- RULE-SET,oisd_big,Block Ads
+- RULE-SET,d3ward,Block Ads
+
+#STREAMING
+- RULE-SET,netflix,Streaming
+- RULE-SET,netflix-ipcidr,Streaming
+- RULE-SET,imdb,Streaming
+- RULE-SET,iqiyi,Streaming
+- RULE-SET,spotify,Streaming
+- RULE-SET,twitch,Streaming
+- RULE-SET,youtube,Streaming
+- RULE-SET,youtubemusic,Streaming
+- RULE-SET,disney,Streaming
+- RULE-SET,streaming,Streaming
+
+#ANIME
+- RULE-SET,bilibili,Anime
+- RULE-SET,pixiv,Anime 
+- RULE-SET,deviantart,Anime
+- RULE-SET,anime,Anime
+
+#TELEGRAM
+- RULE-SET,telegram,Telegram
+- RULE-SET,telegramNL,Telegram
+- RULE-SET,telegramSG,Telegram
+- RULE-SET,telegramUS,Telegram
+
+#SOSMED
+- RULE-SET,x,Social Media
+- RULE-SET,twitter-ipcidr,Social Media
+- RULE-SET,facebook,Social Media
+- RULE-SET,facebook-dev,Social Media
+- RULE-SET,facebook-ipcidr,Social Media
+- RULE-SET,messenger,Social Media
+- RULE-SET,threads,Social Media
+- RULE-SET,pinterest,Social Media
+- RULE-SET,reddit,Social Media
+- RULE-SET,vk,Social Media
+- RULE-SET,tiktok,Social Media
+- RULE-SET,line,Social Media
+- RULE-SET,discord,Social Media
+- RULE-SET,instagram,Social Media
+- RULE-SET,bluesky,Social Media
+- RULE-SET,category-forums,Social Media
+- DOMAIN-KEYWORD,meta,Social Media
+- DOMAIN-KEYWORD,meta.ai,Social Media
+
+#WHATSAPP
+- RULE-SET,whatsapp,WhatsApp
+
+#SPEEDTEST
+- RULE-SET,Speedtest,Speed Test
+
+#GOOGLE
+- RULE-SET,google,Google
+- RULE-SET,google-ipcidr,Google
+
+#OPSIONAL
+- RULE-SET,github,Global Selected
+
+#NSFW
+- RULE-SET,category-porn,Nsfw
+
+#FINAL
+- MATCH,Global Selected
