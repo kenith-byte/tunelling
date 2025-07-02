@@ -456,7 +456,7 @@ proxy-providers:
       
   Account Vless:
     type: http
-    url: https://github.com/kenith-byte/tunelling/blob/main/vless
+    url: https://yumicftigarun.web.id/api/v1/sub?cc=ID&format=clash&&domain=support.vidio.com&vpn=vless,trojan&port=443,80
     interval: 86400 # Update every 24 hours
     path: ./account/Vless.yaml
     header:
