@@ -481,25 +481,11 @@ proxy-groups:
   - Load Balance
   - Fallback
   - Manual Selected
-  - Subscription
   # - Account Vmess
   - Account Vless
   - Account Private
   - Account Trojan
   - DIRECT
-  
-- name: Subscription
-  icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Server.png
-  type: url-test
-  url: https://www.gstatic.com/generate_204
-  interval: 300
-  tolerance: 50
-  lazy: true
-  disable-udp: false
-  timeout: 5000
-  max-failed-times: 5
-  use:
-  - Subscription
   
 - name: Account Vmess
   icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/VIP.png
@@ -565,7 +551,6 @@ proxy-groups:
   timeout: 5000
   max-failed-times: 5
   proxies:
-  - Subscription
   - Account Vmess
   - Account Vless
   - Account Trojan
@@ -610,7 +595,6 @@ proxy-groups:
   - Load Balance
   - Fallback
   - Manual Selected
-  - Subscription
   - Account Vmess
   - Account Vless
   - Account Trojan
@@ -627,7 +611,6 @@ proxy-groups:
   - Load Balance
   - Fallback
   - Manual Selected
-  - Subscription
   - Account Vmess
   - Account Vless
   - Account Trojan
@@ -645,7 +628,6 @@ proxy-groups:
   - Fallback
   - Manual Selected
   - Global Selected
-  - Subscription
   - Account Vmess
   - Account Vless
   - Account Private
@@ -663,7 +645,6 @@ proxy-groups:
   - Fallback
   - Manual Selected
   - Global Selected
-  - Subscription
   - Account Vmess
   - Account Vless
   - Account Trojan
@@ -688,7 +669,6 @@ proxy-groups:
   - Fallback
   - Manual Selected
   - Global Selected
-  - Subscription
   - Account Vmess
   - Account Vless
   - Account Trojan
@@ -706,7 +686,6 @@ proxy-groups:
   - Fallback
   - Manual Selected
   - Global Selected
-  - Subscription
   - Account Vmess
   - Account Vless
   - Account Trojan
@@ -724,7 +703,6 @@ proxy-groups:
   - Fallback
   - Manual Selected
   - Global Selected
-  - Subscription
   - Account Vmess
   - Account Vless
   - Account Trojan
@@ -742,7 +720,6 @@ proxy-groups:
   - Fallback
   - Manual Selected
   - Global Selected
-  - Subscription
   - Account Vmess
   - Account Vless
   - Account Trojan
@@ -760,7 +737,6 @@ proxy-groups:
   - Fallback
   - Manual Selected
   - Global Selected
-  - Subscription
   - Account Vmess
   - Account Vless
   - Account Trojan
@@ -777,7 +753,6 @@ proxy-groups:
   - Load Balance
   - Fallback
   - Manual Selected
-  - Subscription
   - Account Vmess
   - Account Vless
   - Account Trojan
