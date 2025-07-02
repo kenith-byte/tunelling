@@ -1,103 +1,51 @@
 proxies:
-  - name: ID Maquia
+  - name: PT. Industri Kreatif Digital
     server: zaintest.vuclip.com
     port: 443
     type: vmess
-    uuid: 7209ff68-d4e8-4f8b-b7e5-c1e241316870
+    uuid: 746342fd-5bc4-4dd6-89a4-454db777cf5a
     alterId: 0
     cipher: zero
     tls: true
     skip-cert-verify: true
-    servername: maquia.jayecyumi.workers.dev
+    servername: zaintest.vuclip.com.2.round.web.id
     network: ws
     ws-opts:
-      path: /172.232.239.151-587
+      path: /vmess
       headers:
-        User-Agent: Mozilla/5.0 (X11; Linux i686) AppleWebKit/534.30 (KHTML, like Gecko) Chrome/12.0.742.100 Safari/534.30
-        Host: maquia.jayecyumi.workers.dev
+        Host: zaintest.vuclip.com.2.round.web.id
     udp: true
 
-  - name: ID Eka Mas Republik Maquia
+  - name: PT. Uninet Media Sakti
     server: cache.netflix.com
     port: 443
     type: vmess
-    uuid: 7209ff68-d4e8-4f8b-b7e5-c1e241316870
+    uuid: 8a28acc6-19be-4c84-a5a3-d14c7506d5cb
     alterId: 0
     cipher: zero
     tls: true
     skip-cert-verify: true
-    servername: maquia.jayecyumi.workers.dev
+    servername: cache.netflix.com.1.round.web.id
     network: ws
     ws-opts:
-      path: /103.130.17.116-12336
+      path: /vmess
       headers:
-        User-Agent: Mozilla/5.0 (X11; Linux i686) AppleWebKit/534.30 (KHTML, like Gecko) Chrome/12.0.742.100 Safari/534.30
-        Host: maquia.jayecyumi.workers.dev
+        Host: cache.netflix.com.1.round.web.id
     udp: true
 
-  - name: ID Random Maquia
-    server: zaintest.vuclip.com
+  - name: PT. DEWAWEB
+    server: ava.game.naver.com
     port: 443
     type: vmess
-    uuid: 7209ff68-d4e8-4f8b-b7e5-c1e241316870
+    uuid: e87e3fb0-c9ce-424d-b828-62477d0b4861
     alterId: 0
     cipher: zero
     tls: true
     skip-cert-verify: true
-    servername: maquia.jayecyumi.workers.dev
+    servername: ava.game.naver.com.7.round.web.id
     network: ws
     ws-opts:
-      path: /ID
+      path: /vmess
       headers:
-        User-Agent: Mozilla/5.0 (X11; Linux i686) AppleWebKit/534.30 (KHTML, like Gecko) Chrome/12.0.742.100 Safari/534.30
-        Host: maquia.jayecyumi.workers.dev
+        Host: ava.game.naver.com.7.round.web.id
     udp: true
-
-  - name: SG Random Maquia
-    server: cache.netflix.com
-    port: 443
-    type: vmess
-    uuid: 7209ff68-d4e8-4f8b-b7e5-c1e241316870
-    alterId: 0
-    cipher: zero
-    tls: true
-    skip-cert-verify: true
-    servername: maquia.jayecyumi.workers.dev
-    network: ws
-    ws-opts:
-      path: /SG
-      headers:
-        User-Agent: Mozilla/5.0 (X11; Linux i686) AppleWebKit/534.30 (KHTML, like Gecko) Chrome/12.0.742.100 Safari/534.30
-        Host: maquia.jayecyumi.workers.dev
-    udp: true
-
-  - name: SG OVH Singapore PTE LTD Maquia
-    server: zaintest.vuclip.com
-    port: 443
-    type: vmess
-    uuid: 7209ff68-d4e8-4f8b-b7e5-c1e241316870
-    alterId: 0
-    cipher: zero
-    tls: true
-    skip-cert-verify: true
-    servername: maquia.jayecyumi.workers.dev
-    network: ws
-    ws-opts:
-      path: /15.235.199.103-2053
-      headers:
-        User-Agent: Mozilla/5.0 (X11; Linux i686) AppleWebKit/534.30 (KHTML, like Gecko) Chrome/12.0.742.100 Safari/534.30
-        Host: maquia.jayecyumi.workers.dev
-    udp: true
-  - name: Nautica UDP
-    network: ws
-    password: t.me/foolvpn
-    port: "443"
-    server: support.vidio.com
-    skip-cert-verify: false
-    sni: id1.foolvpn.me
-    type: trojan
-    udp: true
-    ws-opts:
-        headers:
-            User-Agent: Mozilla/5.0 (X11; Linux i686) AppleWebKit/534.30 (KHTML, like Gecko) Chrome/12.0.742.100 Safari/534.30
-        path: /trojan-udp
