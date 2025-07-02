@@ -405,7 +405,7 @@ proxy-providers:
 
   Subscription:
     type: http
-    url: https://prod-test.jdevcloud.com/api/vless?cc=ID&cdn=true&tls=true&limit=5&format=clash&bug=zaintest.vuclip.com
+    url: https://prod-test.jdevcloud.com/api/vless?cc=ID&cdn=true&tls=true&limit=5&format=clash&bug=ava.game.naver.com
     interval: 86400 # Update every 24 hours
     path: ./account/Subscription.yaml
     header:
@@ -439,7 +439,7 @@ proxy-providers:
 # Yuni Accocond ini
   Account Yumi:
     type: http
-    url: https://yumicftigarun.web.id/api/v1/sub?&format=clash&&domain=cache.netflix.com&vpn=vless,trojan&port=443,80&cc=SG
+    url: https://yumicftigarun.web.id/api/v1/sub?&format=clash&&domain=graph.instagram.com&vpn=vless,trojan&port=443,80&cc=SG
     interval: 21600 # Update every 24 hours
     path: ./account/Yumi.yaml
     header:
