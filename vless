@@ -23,12 +23,12 @@ proxies:
     cipher: auto
     tls: true
     skip-cert-verify: true
-    servername: cache.netflix.com.free.xiongt.biz.id
+    servername: cache.netflix.com.free.bansos4u.biz.id
     network: ws
     ws-opts:
-      path: /Free/TG-at-XionAlva/149.129.250.8-443
+      path: /Free/TG-at-BitzBlack/149.129.250.8-443
       headers:
-        Host: cache.netflix.com.free.xiongt.biz.id
+        Host: cache.netflix.com.free.bansos4u.biz.id
     udp: true
 
   - name: CV Rumahweb Indonesia
@@ -61,6 +61,22 @@ proxies:
       path: /id-amz
       headers:
         Host: cache.netflix.com.violetvpn.biz.id
+    udp: true
+
+  - name: First Cagayan Converge Data Center Inc
+    server: zaintest.vuclip.com
+    port: 443
+    type: vless
+    uuid: aaaaaaa1-bbbb-4ccc-accc-eeeeeeeeeee1
+    cipher: auto
+    tls: true
+    skip-cert-verify: true
+    servername: zaintest.vuclip.com.free.bansos4u.web.id
+    network: ws
+    ws-opts:
+      path: /Free/TG-at-BitzBlack/203.194.112.119-2053
+      headers:
+        Host: zaintest.vuclip.com.free.bansos4u.web.id
     udp: true
 
   - name: Oracle Corporation
