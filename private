@@ -2,7 +2,7 @@ proxies:
   - name: Tencent Computing Cloud
     server: zaintest.vuclip.com
     port: 443
-    type: vmess
+    type: vless
     uuid: 78bd974c-31af-45ed-b9e0-f2d8b5ffd680
     cipher: auto
     tls: true
@@ -15,18 +15,34 @@ proxies:
         Host: zaintest.vuclip.com.vip-12.indoxray.top
     udp: true
 
-  - name: PT. Uninet Media Sakti
+  - name: 21/F Ciputra World 1 (DBS Tower)
     server: cache.netflix.com
     port: 443
-    type: vmess
-    uuid: 8a28acc6-19be-4c84-a5a3-d14c7506d5cb
+    type: vless
+    uuid: aaaaaaa1-bbbb-4ccc-accc-eeeeeeeeeee1
     cipher: auto
     tls: true
     skip-cert-verify: true
-    servername: cache.netflix.com.1.round.web.id
+    servername: cache.netflix.com.free.xiongt.biz.id
     network: ws
     ws-opts:
-      path: /vmess
+      path: /Free/TG-at-XionAlva/149.129.250.8-443
       headers:
-        Host: cache.netflix.com.1.round.web.id
+        Host: cache.netflix.com.free.xiongt.biz.id
+    udp: true
+
+  - name: CV Rumahweb Indonesia
+    server: ava.game.naver.com
+    port: 443
+    type: vless
+    uuid: aaaaaaa1-bbbb-4ccc-accc-eeeeeeeeeee1
+    cipher: auto
+    tls: true
+    skip-cert-verify: true
+    servername: ava.game.naver.com.free.garaaa.biz.id
+    network: ws
+    ws-opts:
+      path: /Free/TG-at-XionAlva/203.194.112.119-2053
+      headers:
+        Host: ava.game.naver.com.free.garaaa.biz.id
     udp: true
