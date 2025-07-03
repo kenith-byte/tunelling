@@ -548,7 +548,7 @@ proxy-groups:
   - Account Vmess
 # 
 - name: Account Kenith
-  icon: https://github.com/Koolson/Qure/blob/master/IconSet/Heart.png
+  icon: https://raw.githubusercontent.com/fmz200/wool_scripts/refs/heads/main/icons/softlyx/Xiaoyi.png
   type: url-test
   url: https://www.gstatic.com/generate_204
   interval: 300
