@@ -405,7 +405,7 @@ proxy-providers:
 
   Subscription:
     type: http
-    url: https://prod-test.jdevcloud.com/api/vless?cc=ID&cdn=true&tls=true&limit=5&format=clash&bug=support.vidio.com
+    url: https://joss.krikkrik.tech/vpn/surfboard?type=trojan&bug=graph.instagram.com&tls=true&wildcard=false&limit=5&country=id
     interval: 86400 # Update every 24 hours
     path: ./account/Subscription.yaml
     header:
@@ -439,7 +439,7 @@ proxy-providers:
 # Yuni Accocond ini
   Account Kenith:
     type: http
-    url: https://yumicftigarun.web.id/api/v1/sub?&format=clash&&domain=support.vidio.com&vpn=vless,trojan&port=443,80&cc=SG
+    url: https://violetvpn.biz.id/sub/clash/?type=sni&bug=graph.instagram.com
     interval: 21600 # Update every 24 hours
     path: ./account/Yumi.yaml
     header:
