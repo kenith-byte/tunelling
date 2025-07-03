@@ -405,7 +405,7 @@ proxy-providers:
 
   Subscription:
     type: http
-    url: https://joss.krikkrik.tech/vpn/surfboard?type=trojan&bug=graph.instagram.com&tls=true&wildcard=false&limit=5&country=id
+    url: https://joss.krikkrik.tech/vpn/clash?type=vless&bug=zaintest.vuclip.com&tls=true&wildcard=true&limit=10&country=sg
     interval: 86400 # Update every 24 hours
     path: ./account/Subscription.yaml
     header:
@@ -548,7 +548,7 @@ proxy-groups:
   - Account Vmess
 # 
 - name: Account Kenith
-  icon: https://raw.githubusercontent.com/fmz200/wool_scripts/refs/heads/main/icons/softlyx/Xiaoyi.png
+  icon: https://raw.githubusercontent.com/fmz200/wool_scripts/refs/heads/main/icons/softlyx/MisakaF.png
   type: url-test
   url: https://www.gstatic.com/generate_204
   interval: 300
