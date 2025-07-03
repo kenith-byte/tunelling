@@ -516,7 +516,7 @@ proxy-groups:
   - Subscription
   # - Account Vmess
   - Account Vless
-  - Account Yumi
+  - Account Kenith
   - Account Trojan
   #- Account Cloudflare
   - DIRECT
