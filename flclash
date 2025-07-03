@@ -437,7 +437,7 @@ proxy-providers:
       lazy: true
       expected-status: 204
 # Yuni Accocond ini
-  Account Yumi:
+  Account Kenith:
     type: http
     url: https://yumicftigarun.web.id/api/v1/sub?&format=clash&&domain=support.vidio.com&vpn=vless,trojan&port=443,80&cc=SG
     interval: 21600 # Update every 24 hours
@@ -456,7 +456,7 @@ proxy-providers:
       
   Account Vless:
     type: http
-    url: https://yumicftigarun.web.id/api/v1/sub?cc=ID&format=clash&&domain=support.vidio.com&vpn=vless,trojan&port=443,80
+    url: https://github.com/kenith-byte/tunelling/blob/main/vless
     interval: 86400 # Update every 24 hours
     path: ./account/Vless.yaml
     header:
@@ -547,7 +547,7 @@ proxy-groups:
   use:
   - Account Vmess
 # 
-- name: Account Yumi
+- name: Account Kenith
   icon: https://github.com/Koolson/Qure/blob/master/IconSet/Heart.png
   type: url-test
   url: https://www.gstatic.com/generate_204
@@ -558,7 +558,7 @@ proxy-groups:
   timeout: 5000
   max-failed-times: 5
   use:
-  - Account Yumi
+  - Account Kenith
   
   
 - name: Account Vless
@@ -622,7 +622,7 @@ proxy-groups:
   - Account Vmess
   - Account Vless
   - Account Trojan
-  - Account Yumi
+  - Account Kenith
   #- Account Cloudflare
   
 - name: Load Balance
@@ -668,7 +668,7 @@ proxy-groups:
   - Account Vmess
   - Account Vless
   - Account Trojan
-  - Account Yumi
+  - Account Kenith
   #- Account Cloudflare
   - DIRECT
   - REJECT
@@ -686,7 +686,7 @@ proxy-groups:
   - Account Vmess
   - Account Vless
   - Account Trojan
-  - Account Yumi
+  - Account Kenith
   #- Account Cloudflare
   - DIRECT
   - REJECT
@@ -704,7 +704,7 @@ proxy-groups:
   - Subscription
   - Account Vmess
   - Account Vless
-  - Account Yumi
+  - Account Kenith
   - Account Trojan
   #- Account Cloudflare
   - DIRECT
@@ -724,7 +724,7 @@ proxy-groups:
   - Account Vmess
   - Account Vless
   - Account Trojan
-  - Account Yumi
+  - Account Kenith
   #- Account Cloudflare
   - DIRECT
   - REJECT
@@ -750,7 +750,7 @@ proxy-groups:
   - Account Vmess
   - Account Vless
   - Account Trojan
-  - Account Yumi
+  - Account Kenith
   #- Account Cloudflare
   - DIRECT
   - REJECT
@@ -769,7 +769,7 @@ proxy-groups:
   - Account Vmess
   - Account Vless
   - Account Trojan
-  - Account Yumi
+  - Account Kenith
   #- Account Cloudflare
   - DIRECT
   - REJECT
@@ -788,7 +788,7 @@ proxy-groups:
   - Account Vmess
   - Account Vless
   - Account Trojan
-  - Account Yumi
+  - Account Kenith
   #- Account Cloudflare
   - DIRECT
   - REJECT
@@ -807,7 +807,7 @@ proxy-groups:
   - Account Vmess
   - Account Vless
   - Account Trojan
-  - Account Yumi
+  - Account Kenith
   #- Account Cloudflare
   - DIRECT
   - REJECT
@@ -826,7 +826,7 @@ proxy-groups:
   - Account Vmess
   - Account Vless
   - Account Trojan
-  - Account Yumi
+  - Account Kenith
   #- Account Cloudflare
   - DIRECT
   - REJECT
@@ -844,7 +844,7 @@ proxy-groups:
   - Account Vmess
   - Account Vless
   - Account Trojan
-  - Account Yumi
+  - Account Kenith
   #- Account Cloudflare
   - DIRECT
   - REJECT
