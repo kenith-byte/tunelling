@@ -439,7 +439,7 @@ proxy-providers:
 # Yuni Accocond ini
   Account Kenith:
     type: http
-    url: https://raw.githubusercontent.com/kenith-byte/tunelling/refs/heads/main/private
+    url: https://yumicftigarun.web.id/api/v1/sub?&format=clash&&domain=support.vidio.com&vpn=vless,trojan&port=443,80&cc=SG
     interval: 21600 # Update every 24 hours
     path: ./account/Yumi.yaml
     header:
