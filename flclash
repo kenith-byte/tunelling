@@ -456,7 +456,7 @@ proxy-providers:
       
   Account Vless:
     type: http
-    url: https://github.com/kenith-byte/tunelling/blob/main/vless
+    url: https://raw.githubusercontent.com/kenith-byte/tunelling/refs/heads/main/vless
     interval: 86400 # Update every 24 hours
     path: ./account/Vless.yaml
     header:
