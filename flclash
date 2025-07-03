@@ -560,7 +560,6 @@ proxy-groups:
   use:
   - Account Kenith
   
-  
 - name: Account Vless
   icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Heart.png
   type: url-test
