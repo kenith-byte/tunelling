@@ -405,7 +405,7 @@ proxy-providers:
 
   Subscription:
     type: http
-    url: https://joss.krikkrik.tech/vpn/clash?type=vless&bug=zaintest.vuclip.com&tls=true&wildcard=true&limit=10&country=sg
+    url: https://sub.bansos4u.biz.id/sub/clash?type=vless&bug=zaintest.vuclip.com&wildcard=true&tls=true&country=ID&limit=6
     interval: 86400 # Update every 24 hours
     path: ./account/Subscription.yaml
     header:
