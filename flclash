@@ -405,7 +405,7 @@ proxy-providers:
 
   Subscription:
     type: http
-    url: https://sub.bansos4u.biz.id/sub/clash?type=vless&bug=zaintest.vuclip.com&wildcard=true&tls=true&country=ID&limit=6
+    url: https://mstkkee3.dpdns.org/sub/clash/?method=wildcard&bug=zaintest.vuclip.com
     interval: 86400 # Update every 24 hours
     path: ./account/Subscription.yaml
     header:
