@@ -345,6 +345,14 @@ dns:
   
   proxy-server-nameserver:
   #- https://doh.pub/dns-query
+  - 104.18.38.43 #IP VIU
+  - 172.64.149.213 #IP VIU
+  - 104.17.241.25 #IP NETFLIX
+  - 104.17.237.25 #IP NETFLIX
+  - 170.114.45.6 #IP XCV
+  - 170.114.46.6 #IP XCV
+  - 104.18.213.235 #IP XCV
+  - 104.18.214.235 #IP XCV
   - 112.215.203.246 #DNS XL
   - 112.215.203.247 #DNS XL
   - 112.215.203.248 #DNS XL
