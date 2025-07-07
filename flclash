@@ -206,7 +206,7 @@ dns:
   listen: 0.0.0.0:1053
   prefer-h3: false
   use-host: true # Custom DNS
-  use-system-hosts: false # Use system DNS true / false
+  use-system-hosts: true # Use system DNS true / false
   respect-rules: false
   enhanced-mode: redir-host #fake-ip
   fake-ip-range: 198.18.0.1/16
