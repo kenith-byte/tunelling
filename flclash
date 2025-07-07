@@ -3,7 +3,7 @@ socks-port: 2080
 redir-port: 2080
 mixed-port: 2099
 tproxy-port: 9898
-ipv6: true
+ipv6: false
 mode: rule
 log-level: silent # info / warning / error / debug / silent
 allow-lan: true
@@ -31,11 +31,11 @@ find-process-mode: strict
 
 #  TCP keep alive interval
 keep-alive-idle: 600 # Idle time Reduce battery consumption on mobile devices
-keep-alive-interval: 30 # Interval time
+keep-alive-interval: 15 # Interval time
 disable-keep-alive: true # Currently forced to true on the Android side
 
 global-client-fingerprint: chrome # chrome / firefox / safari / iOS / android / edge / 360 / qq / random
-tcp-concurrent: true # TCP Concurrency
+tcp-concurrent: false # TCP Concurrency
 #interface-name: en0 # Clash's traffic outbound interface
 #routing-mark: 6666 # Provides a default traffic mark for outbound connections on Linux
 global-ua: clash.meta # Custom UA used when downloading external resources, default is clash.meta
@@ -99,9 +99,9 @@ experimental:
 # Domain name sniffing  
 sniffer:
   enable: true
-  force-dns-mapping: true
-  parse-pure-ip: true
-  override-destination: true
+  force-dns-mapping: false
+  parse-pure-ip: false
+  override-destination: false
   sniff:
     TLS:
       ports: [443, 8443]
@@ -109,7 +109,7 @@ sniffer:
       ports: [80, 8080-8880]
       override-destination: true
     QUIC:
-      ports: [443,8443]
+      ports: [443]
       override-destination: true
       sniffing: [http, tls, quic] # add ", quic" after tls
       port-whitelist: [80, 443, 8080, 8443]
@@ -138,16 +138,16 @@ sniffer:
 # Virtual network card mode  
 tun:
   enable: true
-  stack: gvisor # gvisor / mixed / system
+  stack: mixed # gvisor / mixed / system
   auto-route: true
   auto-redirect: true
   auto-detect-interface: true
   dns-hijack: # additional dns server listen on TUN
     - any:53
     - tcp://any:53
-  device: utun0
-  mtu: 1500
-  strict-route: true
+  device: clash
+  mtu: 9000
+  strict-route: false
   gso: true
   gso-max-size: 65536
   udp-timeout: 300
@@ -201,13 +201,13 @@ tun:
 dns:
   enable: true
   cache-algorithm: arc
-  ipv6: true
+  ipv6: false
   ipv6-timeout: 300
   listen: 0.0.0.0:1053
   prefer-h3: false
   use-host: true # Custom DNS
   use-system-hosts: true # Use system DNS true / false
-  respect-rules: true
+  respect-rules: false
   enhanced-mode: redir-host #fake-ip
   fake-ip-range: 198.18.0.1/16
   fake-ip-filter-mode: blacklist
@@ -420,6 +420,7 @@ proxy-providers:
     path: ./account/Subscription.yaml
     header:
       User-Agent:
+      - "clash-verge/1.6.6"
       - "Clash/v1.18.0"
       - "mihomo/1.18.3"
     health-check:
@@ -437,6 +438,7 @@ proxy-providers:
     path: ./account/Vmess.yaml
     header:
       User-Agent:
+      - "clash-verge/1.6.6"
       - "Clash/v1.18.0"
       - "mihomo/1.18.3"
     health-check:
@@ -454,6 +456,7 @@ proxy-providers:
     path: ./account/Yumi.yaml
     header:
       User-Agent:
+      - "clash-verge/1.6.6"
       - "Clash/v1.18.0"
       - "mihomo/1.18.3"
     health-check:
@@ -471,6 +474,7 @@ proxy-providers:
     path: ./account/Vless.yaml
     header:
       User-Agent:
+      - "clash-verge/1.6.6"
       - "Clash/v1.18.0"
       - "mihomo/1.18.3"
     health-check:
@@ -488,6 +492,7 @@ proxy-providers:
     path: ./account/Trojan.yaml
     header:
       User-Agent:
+      - "clash-verge/1.6.6"
       - "Clash/v1.18.0"
       - "mihomo/1.18.3"
     health-check:
@@ -503,6 +508,7 @@ proxy-providers:
     #path: ./account/Cloudflare.yaml
     #header:
       #User-Agent:
+      #- "clash-verge/1.6.6"
       #- "Clash/v1.18.0"
       #- "mihomo/1.18.3"
     #health-check:
@@ -738,7 +744,7 @@ proxy-groups:
   - DIRECT
   - REJECT
   
-- name: Speed Test
+- name: Speedtest
   icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Speedtest.png
   type: select
   disable-udp: false
@@ -840,7 +846,7 @@ proxy-groups:
   - DIRECT
   - REJECT
   
-- name: Nsfw
+- name: NSFW
   icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Reject.png
   type: select 
   disable-udp: false
@@ -1367,7 +1373,7 @@ rules:
 - RULE-SET,whatsapp,WhatsApp
 
 #SPEEDTEST
-- RULE-SET,Speedtest,Speed Test
+- RULE-SET,Speedtest,Speedtest
 
 #GOOGLE
 - RULE-SET,google,Google
@@ -1377,7 +1383,7 @@ rules:
 - RULE-SET,github,Global Selected
 
 #NSFW
-- RULE-SET,category-porn,Nsfw
+- RULE-SET,category-porn,NSFW
 
 #FINAL
 - MATCH,Global Selected
