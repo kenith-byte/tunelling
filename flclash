@@ -206,7 +206,7 @@ dns:
   listen: 0.0.0.0:1053
   prefer-h3: false
   use-host: true # Custom DNS
-  use-system-hosts: true # Use system DNS true / false
+  use-system-hosts: false # Use system DNS true / false
   respect-rules: false
   enhanced-mode: redir-host #fake-ip
   fake-ip-range: 198.18.0.1/16
@@ -345,7 +345,7 @@ dns:
   - 112.215.203.247
   
   proxy-server-nameserver:
-  #- https://doh.pub/dns-query
+  - https://doh.pub/dns-query
   - 104.18.38.43 #IP VIU
   - 172.64.149.213 #IP VIU
   - 104.17.241.25 #IP NETFLIX
@@ -415,7 +415,7 @@ proxy-providers:
   Subscription:
     type: http
     url: https://mstkkee3.dpdns.org/sub/clash/?method=wildcard&bug=zaintest.vuclip.com
-    interval: 86400 # Update every 24 hours
+    interval: 21600 # Update every 24 hours
     path: ./account/Subscription.yaml
     header:
       User-Agent:
@@ -433,7 +433,7 @@ proxy-providers:
   Account Vmess:
     type: http
     url: https://raw.githubusercontent.com/kenith-byte/tunelling/refs/heads/main/vmess
-    interval: 86400 # Update every 24 hours
+    interval: 21600 # Update every 24 hours
     path: ./account/Vmess.yaml
     header:
       User-Agent:
@@ -447,7 +447,7 @@ proxy-providers:
       url: http://www.gstatic.com/generate_204
       lazy: true
       expected-status: 204
-# Yuni Accocond ini
+
   Account Kenith:
     type: http
     url: https://violetvpn.biz.id/sub/clash/?type=wildcard&bug=cache.netflix.com
@@ -469,7 +469,7 @@ proxy-providers:
   Account Vless:
     type: http
     url: https://raw.githubusercontent.com/kenith-byte/tunelling/refs/heads/main/vless
-    interval: 86400 # Update every 24 hours
+    interval: 21600 # Update every 24 hours
     path: ./account/Vless.yaml
     header:
       User-Agent:
@@ -487,7 +487,7 @@ proxy-providers:
   Account Trojan:
     type: http
     url: https://raw.githubusercontent.com/kenith-byte/tunelling/refs/heads/main/trojan
-    interval: 86400 # Update every 24 hours
+    interval: 21600 # Update every 24 hours
     path: ./account/Trojan.yaml
     header:
       User-Agent:
@@ -529,7 +529,7 @@ proxy-groups:
   - Fallback
   - Manual Selected
   - Subscription
-  # - Account Vmess
+  - Account Vmess
   - Account Vless
   - Account Kenith
   - Account Trojan
@@ -561,17 +561,14 @@ proxy-groups:
   max-failed-times: 5
   use:
   - Account Vmess
-# 
+
 - name: Account Kenith
   icon: https://raw.githubusercontent.com/lige47/QuanX-icon-rule/main/icon/zhipianren-emby.png
-  type: url-test
+  type: fallback
   url: http://www.gstatic.com/generate_204
   interval: 300
-  tolerance: 50
   lazy: true
   disable-udp: false
-  timeout: 5000
-  max-failed-times: 5
   use:
   - Account Kenith
   
@@ -613,14 +610,7 @@ proxy-groups:
   #max-failed-times: 5
   #use:
   #- Account Cloudflare
-#
-#https://github.com/Koolson/Qure/blob/master/IconSet/Heart.png
-#
-#
-#
-
-
-      
+   
 - name: Best Latency
   icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Auto.png
   type: url-test
@@ -1311,14 +1301,12 @@ rules:
 - RULE-SET,onlineshop,E-commerce
 - RULE-SET,payment,E-commerce
 
-
 #Ubuntu rules
 - RULE-SET,ubuntu-rule,Gaming
 #GAMING
 - RULE-SET,category-games,Gaming
 - RULE-SET,game,Gaming
 - RULE-SET,game-kakao,Gaming
-
 
 #ADSBLOCK
 - RULE-SET,oisd_big,Block Ads
