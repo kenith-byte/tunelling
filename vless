@@ -15,6 +15,38 @@ proxies:
         Host: cache.netflix.com.vip-12.indoxray.top
     udp: true
 
+  - name: PT. Industri Kreatif Digital
+    server: cache.netflix.com
+    port: 443
+    type: vless
+    uuid: 02965ddb-2461-473c-ba24-7adfe11e11c4
+    cipher: auto
+    tls: true
+    skip-cert-verify: true
+    servername: cache.netflix.com.3.round.web.id
+    network: ws
+    ws-opts:
+      path: /vless
+      headers:
+        Host: cache.netflix.com.3.round.web.id
+    udp: true
+
+  - name: PT. Uninet Media Sakti
+    server: ava.game.naver.com
+    port: 443
+    type: vless
+    uuid: e30e09e7-484c-48dc-8973-6e61c3b86818
+    cipher: auto
+    tls: true
+    skip-cert-verify: true
+    servername: ava.game.naver.com.11.round.web.id
+    network: ws
+    ws-opts:
+      path: /vless
+      headers:
+        Host: ava.game.naver.com.11.round.web.id
+    udp: true
+
   - name: 21/F Ciputra World 1 (DBS Tower)
     server: cache.netflix.com
     port: 443
