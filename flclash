@@ -100,8 +100,8 @@ experimental:
 sniffer:
   enable: true
   force-dns-mapping: false
-  parse-pure-ip: false
-  override-destination: false
+  parse-pure-ip: true
+  override-destination: true
   sniff:
     TLS:
       ports: [443, 8443]
@@ -129,7 +129,7 @@ sniffer:
   - 192.168.0.3/32
     
 # ntp:
-#   enable: true
+#   enable: false
 #   write-to-system: true
 #   server: time.apple.com
 #   port: 123
@@ -137,7 +137,7 @@ sniffer:
   
 # Virtual network card mode  
 tun:
-  enable: true
+  enable: false
   stack: mixed # gvisor / mixed / system
   auto-route: true
   auto-redirect: true
