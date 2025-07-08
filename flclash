@@ -496,7 +496,7 @@ proxy-providers:
       
   Account Trojan:
     type: http
-    url: https://sub.bansos4u.biz.id/sub/clash?type=trojan&bug=graph.instagram.com&wildcard=true&tls=true&country=ID&limit=5
+    url: https://raw.githubusercontent.com/kenith-byte/tunelling/refs/heads/main/trojan
     interval: 21600 # Update every 24 hours
     path: ./account/Trojan.yaml
     header:
@@ -514,7 +514,7 @@ proxy-providers:
       
   Account Cloudflare:
     type: http
-    url: https://sub.bansos4u.biz.id/sub/clash?type=vless&bug=ava.game.naver.com&wildcard=true&tls=true&country=SG&limit=5
+    url: https://sub.bansos4u.biz.id/sub/v2ray?type=vless&bug=ava.game.naver.com&wildcard=true&tls=true&country=SG&limit=15
     interval: 21600 # Update every 24 hours
     path: ./account/Cloudflare.yaml
     header:
@@ -545,7 +545,7 @@ proxy-groups:
   - Account Vless
   - Account Kenith
   - Account Trojan
-  #- Account Cloudflare
+  - Account Cloudflare
   - DIRECT
   
 - name: Subscription
