@@ -1,18 +1,18 @@
 proxies:
   - name: Tencent Computing Cloud
-    server: zaintest.vuclip.com
+    server: cache.netflix.com
     port: 443
     type: vless
     uuid: 78bd974c-31af-45ed-b9e0-f2d8b5ffd680
     cipher: auto
     tls: true
     skip-cert-verify: true
-    servername: zaintest.vuclip.com.vip-12.indoxray.top
+    servername: cache.netflix.com.vip-12.indoxray.top
     network: ws
     ws-opts:
       path: /websocket-vless
       headers:
-        Host: zaintest.vuclip.com.vip-12.indoxray.top
+        Host: cache.netflix.com.vip-12.indoxray.top
     udp: true
 
   - name: 21/F Ciputra World 1 (DBS Tower)
@@ -48,35 +48,19 @@ proxies:
     udp: true
 
   - name: Amazon.com, Inc
-    server: cache.netflix.com
+    server: graph.instagram.com
     port: 443
     type: vless
     uuid: d3ce1dfb-a5e7-4903-92e5-b2300208be0c
     cipher: auto
     tls: true
     skip-cert-verify: true
-    servername: cache.netflix.com.violetvpn.biz.id
+    servername: graph.instagram.com.violetvpn.biz.id
     network: ws
     ws-opts:
       path: /id-amz
       headers:
-        Host: cache.netflix.com.violetvpn.biz.id
-    udp: true
-
-  - name: First Cagayan Converge Data Center Inc
-    server: zaintest.vuclip.com
-    port: 443
-    type: vless
-    uuid: aaaaaaa1-bbbb-4ccc-accc-eeeeeeeeeee1
-    cipher: auto
-    tls: true
-    skip-cert-verify: true
-    servername: zaintest.vuclip.com.free.bansos4u.web.id
-    network: ws
-    ws-opts:
-      path: /Free/TG-at-BitzBlack/203.194.112.119-2053
-      headers:
-        Host: zaintest.vuclip.com.free.bansos4u.web.id
+        Host: graph.instagram.com.violetvpn.biz.id
     udp: true
 
   - name: Oracle Corporation
