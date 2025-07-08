@@ -424,7 +424,7 @@ proxy-providers:
 
   Subscription:
     type: http
-    url: https://mstkkee3.dpdns.org/sub/clash/?method=wildcard&bug=zaintest.vuclip.com
+    url: https://sub.bansos4u.biz.id/sub/clash?type=vless&bug=cache.netflix.com&wildcard=true&tls=true&country=ID&limit=15
     interval: 21600 # Update every 24 hours
     path: ./account/Subscription.yaml
     header:
@@ -460,7 +460,7 @@ proxy-providers:
 
   Account Kenith:
     type: http
-    url: https://violetvpn.biz.id/sub/clash/?type=wildcard&bug=cache.netflix.com
+    url: https://violetvpn.biz.id/sub/clash/?type=wildcard&bug=zaintest.vuclip.com
     interval: 21600 # Update every 24 hours
     path: ./account/Yumi.yaml
     header:
