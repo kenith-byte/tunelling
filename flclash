@@ -1,7 +1,7 @@
-port: 2080
-socks-port: 2080
-redir-port: 2080
-mixed-port: 2099
+port: 7890
+socks-port: 7891
+redir-port: 9797
+mixed-port: 7893
 tproxy-port: 9898
 ipv6: false
 mode: rule
@@ -129,7 +129,7 @@ sniffer:
   - 192.168.0.3/32
     
 # ntp:
-#   enable: false
+#   enable: true
 #   write-to-system: true
 #   server: time.apple.com
 #   port: 123
@@ -203,14 +203,14 @@ dns:
   cache-algorithm: arc
   ipv6: false
   ipv6-timeout: 300
-  listen: 0.0.0.0:1053
+  listen: 0.0.0.0:7874
   prefer-h3: false
   use-host: true # Custom DNS
   use-system-hosts: false # Use system DNS true / false
   respect-rules: false
   enhanced-mode: fake-ip #fake-ip
   fake-ip-range: 198.18.0.1/16
-  fake-ip-filter-mode: whitelist
+  fake-ip-filter-mode: blacklist
   fake-ip-filter: # fake ip whitelist list The following addresses will not send fakeip mapping for connection
   - "*.lan"
   - "*.localdomain"
@@ -349,10 +349,9 @@ dns:
   - 1.0.0.1
   - 8.8.8.8
   - 8.8.4.4
+  - 114.114.114.114
   - 208.67.222.222
   - 208.67.220.220
-  - 112.215.203.246
-  - 112.215.203.247
   
   proxy-server-nameserver:
   #- https://doh.pub/dns-query
@@ -553,7 +552,7 @@ proxy-groups:
   type: url-test
   url: http://www.gstatic.com/generate_204
   interval: 300
-  tolerance: 100
+  tolerance: 50
   lazy: false
   disable-udp: false
   timeout: 5000
@@ -566,7 +565,7 @@ proxy-groups:
   type: url-test
   url: http://www.gstatic.com/generate_204
   interval: 300
-  tolerance: 100
+  tolerance: 50
   lazy: false
   disable-udp: false
   timeout: 5000
@@ -589,7 +588,7 @@ proxy-groups:
   type: url-test
   url: http://www.gstatic.com/generate_204
   interval: 300
-  tolerance: 100
+  tolerance: 50
   lazy: false
   disable-udp: false
   timeout: 5000
@@ -602,7 +601,7 @@ proxy-groups:
   type: url-test
   url: http://www.gstatic.com/generate_204
   interval: 300
-  tolerance: 100
+  tolerance: 50
   lazy: false
   disable-udp: false
   timeout: 5000
@@ -615,7 +614,7 @@ proxy-groups:
   type: url-test
   url: http://www.gstatic.com/generate_204
   interval: 300
-  tolerance: 100
+  tolerance: 50
   lazy: false
   disable-udp: false
   timeout: 5000
@@ -628,7 +627,7 @@ proxy-groups:
   type: url-test
   url: http://www.gstatic.com/generate_204
   interval: 300
-  tolerance: 100
+  tolerance: 50
   lazy: false
   disable-udp: false
   timeout: 5000
