@@ -496,7 +496,7 @@ proxy-providers:
       
   Account Trojan:
     type: http
-    url: https://raw.githubusercontent.com/kenith-byte/tunelling/refs/heads/main/trojan
+    url: https://sub.bansos4u.biz.id/sub/clash?type=trojan&bug=graph.instagram.com&wildcard=true&tls=true&country=ID&limit=5
     interval: 21600 # Update every 24 hours
     path: ./account/Trojan.yaml
     header:
@@ -512,21 +512,23 @@ proxy-providers:
       lazy: false
       expected-status: 204
       
-  #Account Cloudflare:
-    #type: file
-    #path: ./account/Cloudflare.yaml
-    #header:
-      #User-Agent:
-      #- "clash-verge/1.6.6"
-      #- "Clash/v1.18.0"
-      #- "mihomo/1.18.3"
-    #health-check:
-      #enable: true
-      #interval: 300
-      #timeout: 5000
-      #url: http://www.gstatic.com/generate_204
-      #lazy: false
-      #expected-status: 204
+  Account Cloudflare:
+    type: http
+    url: https://sub.bansos4u.biz.id/sub/clash?type=vless&bug=ava.game.naver.com&wildcard=true&tls=true&country=SG&limit=5
+    interval: 21600 # Update every 24 hours
+    path: ./account/Cloudflare.yaml
+    header:
+      User-Agent:
+      - "clash-verge/1.6.6"
+      - "Clash/v1.18.0"
+      - "mihomo/1.18.3"
+    health-check:
+      enable: true
+      interval: 300
+      timeout: 5000
+      url: http://www.gstatic.com/generate_204
+      lazy: false
+      expected-status: 204
       
 proxy-groups:
 
@@ -608,18 +610,18 @@ proxy-groups:
   use:
   - Account Trojan
   
-#- name: Account Cloudflare
-  #icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Cloudflare.png
- # type: url-test
-  #url: http://www.gstatic.com/generate_204
-  #interval: 300
-  #tolerance: 100
-  #lazy: false
-  #disable-udp: false
-  #timeout: 5000
-  #max-failed-times: 5
-  #use:
-  #- Account Cloudflare
+- name: Account Cloudflare
+  icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Cloudflare.png
+  type: url-test
+  url: http://www.gstatic.com/generate_204
+  interval: 300
+  tolerance: 100
+  lazy: false
+  disable-udp: false
+  timeout: 5000
+  max-failed-times: 5
+  use:
+  - Account Cloudflare
    
 - name: Best Latency
   icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Auto.png
@@ -637,7 +639,7 @@ proxy-groups:
   - Account Vless
   - Account Trojan
   - Account Kenith
-  #- Account Cloudflare
+  - Account Cloudflare
   
 - name: Load Balance
   icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Round_Robin.png
@@ -683,7 +685,7 @@ proxy-groups:
   - Account Vless
   - Account Trojan
   - Account Kenith
-  #- Account Cloudflare
+  - Account Cloudflare
   - DIRECT
   - REJECT
   
@@ -701,7 +703,7 @@ proxy-groups:
   - Account Vless
   - Account Trojan
   - Account Kenith
-  #- Account Cloudflare
+  - Account Cloudflare
   - DIRECT
   - REJECT
   
@@ -720,7 +722,7 @@ proxy-groups:
   - Account Vless
   - Account Kenith
   - Account Trojan
-  #- Account Cloudflare
+  - Account Cloudflare
   - DIRECT
   - REJECT
    
@@ -739,7 +741,7 @@ proxy-groups:
   - Account Vless
   - Account Trojan
   - Account Kenith
-  #- Account Cloudflare
+  - Account Cloudflare
   - DIRECT
   - REJECT
   
@@ -765,7 +767,7 @@ proxy-groups:
   - Account Vless
   - Account Trojan
   - Account Kenith
-  #- Account Cloudflare
+  - Account Cloudflare
   - DIRECT
   - REJECT
   
@@ -784,7 +786,7 @@ proxy-groups:
   - Account Vless
   - Account Trojan
   - Account Kenith
-  #- Account Cloudflare
+  - Account Cloudflare
   - DIRECT
   - REJECT
   
@@ -803,7 +805,7 @@ proxy-groups:
   - Account Vless
   - Account Trojan
   - Account Kenith
-  #- Account Cloudflare
+  - Account Cloudflare
   - DIRECT
   - REJECT
   
@@ -822,7 +824,7 @@ proxy-groups:
   - Account Vless
   - Account Trojan
   - Account Kenith
-  #- Account Cloudflare
+  - Account Cloudflare
   - DIRECT
   - REJECT
   
@@ -841,7 +843,7 @@ proxy-groups:
   - Account Vless
   - Account Trojan
   - Account Kenith
-  #- Account Cloudflare
+  - Account Cloudflare
   - DIRECT
   - REJECT
   
@@ -859,7 +861,7 @@ proxy-groups:
   - Account Vless
   - Account Trojan
   - Account Kenith
-  #- Account Cloudflare
+  - Account Cloudflare
   - DIRECT
   - REJECT
 
