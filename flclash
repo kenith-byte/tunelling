@@ -31,7 +31,7 @@ find-process-mode: strict
 
 #  TCP keep alive interval
 keep-alive-idle: 600 # Idle time Reduce battery consumption on mobile devices
-keep-alive-interval: 15 # Interval time
+keep-alive-interval: 30 # Interval time
 disable-keep-alive: true # Currently forced to true on the Android side
 
 global-client-fingerprint: chrome # chrome / firefox / safari / iOS / android / edge / 360 / qq / random
@@ -321,6 +321,16 @@ dns:
   - local.adguard.org
   - "+.sandai.net"
   - "+.n0808.com"
+  - dns.msftnsci.com
+  - www.msftnsci.com
+  - www.msftconnecttest.com
+  - time.android.com
+  - lens.l.google.com
+  - stun.l.google.com
+  - global.stun.twilio.com
+  - stun.nextcloud.com
+  - stun.cloudflare.com
+  - stun.voip.blackberry.com
   
 # DNS server used to resolve non-IP DNS, only supports pure IP
   nameserver:
@@ -427,7 +437,7 @@ proxy-providers:
       interval: 300
       timeout: 5000
       url: http://www.gstatic.com/generate_204
-      lazy: true
+      lazy: false
       expected-status: 204
       
   Account Vmess:
@@ -445,7 +455,7 @@ proxy-providers:
       interval: 300
       timeout: 5000
       url: http://www.gstatic.com/generate_204
-      lazy: true
+      lazy: false
       expected-status: 204
 
   Account Kenith:
@@ -463,8 +473,8 @@ proxy-providers:
       interval: 300
       timeout: 5000
       url: http://www.gstatic.com/generate_204
-      lazy: true
-      expected-status: 204   
+      lazy: false
+      expected-status: 204
       
   Account Vless:
     type: http
@@ -481,7 +491,7 @@ proxy-providers:
       interval: 300
       timeout: 5000
       url: http://www.gstatic.com/generate_204
-      lazy: true
+      lazy: false
       expected-status: 204
       
   Account Trojan:
@@ -499,7 +509,7 @@ proxy-providers:
       interval: 300
       timeout: 5000
       url: http://www.gstatic.com/generate_204
-      lazy: true
+      lazy: false
       expected-status: 204
       
   #Account Cloudflare:
@@ -515,7 +525,7 @@ proxy-providers:
       #interval: 300
       #timeout: 5000
       #url: http://www.gstatic.com/generate_204
-      #lazy: true
+      #lazy: false
       #expected-status: 204
       
 proxy-groups:
@@ -541,8 +551,8 @@ proxy-groups:
   type: url-test
   url: http://www.gstatic.com/generate_204
   interval: 300
-  tolerance: 50
-  lazy: true
+  tolerance: 100
+  lazy: false
   disable-udp: false
   timeout: 5000
   max-failed-times: 5
@@ -554,8 +564,8 @@ proxy-groups:
   type: url-test
   url: http://www.gstatic.com/generate_204
   interval: 300
-  tolerance: 50
-  lazy: true
+  tolerance: 100
+  lazy: false
   disable-udp: false
   timeout: 5000
   max-failed-times: 5
@@ -567,7 +577,7 @@ proxy-groups:
   type: fallback
   url: http://www.gstatic.com/generate_204
   interval: 300
-  lazy: true
+  lazy: false
   disable-udp: false
   use:
   - Account Kenith
@@ -577,8 +587,8 @@ proxy-groups:
   type: url-test
   url: http://www.gstatic.com/generate_204
   interval: 300
-  tolerance: 50
-  lazy: true
+  tolerance: 100
+  lazy: false
   disable-udp: false
   timeout: 5000
   max-failed-times: 5
@@ -590,8 +600,8 @@ proxy-groups:
   type: url-test
   url: http://www.gstatic.com/generate_204
   interval: 300
-  tolerance: 50
-  lazy: true
+  tolerance: 100
+  lazy: false
   disable-udp: false
   timeout: 5000
   max-failed-times: 5
@@ -603,8 +613,8 @@ proxy-groups:
  # type: url-test
   #url: http://www.gstatic.com/generate_204
   #interval: 300
-  #tolerance: 50
-  #lazy: true
+  #tolerance: 100
+  #lazy: false
   #disable-udp: false
   #timeout: 5000
   #max-failed-times: 5
@@ -616,8 +626,8 @@ proxy-groups:
   type: url-test
   url: http://www.gstatic.com/generate_204
   interval: 300
-  tolerance: 50
-  lazy: true
+  tolerance: 100
+  lazy: false
   disable-udp: false
   timeout: 5000
   max-failed-times: 5
@@ -634,7 +644,7 @@ proxy-groups:
   type: load-balance
   url: http://www.gstatic.com/generate_204
   interval: 300
-  lazy: true
+  lazy: false
   strategy: round-robin
   disable-udp: false
   include-all-providers: true
@@ -647,7 +657,7 @@ proxy-groups:
   type: fallback
   url: http://www.gstatic.com/generate_204
   interval: 300
-  lazy: true
+  lazy: false
   disable-udp: false
   include-all-providers: true
   use:
