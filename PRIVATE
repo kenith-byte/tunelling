@@ -208,7 +208,7 @@ dns:
   use-host: true # Custom DNS
   use-system-hosts: true # Use system DNS true / false
   respect-rules: true
-  enhanced-mode: redir-host #fake-ip
+  enhanced-mode: fake-ip #fake-ip
   fake-ip-range: 198.18.0.1/16
   fake-ip-filter-mode: blacklist
   fake-ip-filter: # fake ip whitelist list The following addresses will not send fakeip mapping for connection
