@@ -1,7 +1,7 @@
-port: 7890
-socks-port: 7891
+port: 9794
+socks-port: 9795
 redir-port: 9797
-mixed-port: 7893
+mixed-port: 9796
 tproxy-port: 9898
 ipv6: false
 mode: rule
@@ -99,18 +99,18 @@ experimental:
 # Domain name sniffing  
 sniffer:
   enable: true
-  force-dns-mapping: false
-  parse-pure-ip: false
+  force-dns-mapping: true
+  parse-pure-ip: true
   override-destination: false
   sniff:
     TLS:
       ports: [443, 8443]
     HTTP:
       ports: [80, 8080-8880]
-      override-destination: false
+      override-destination: true
     QUIC:
       ports: [443]
-      override-destination: false
+      override-destination: true
       sniffing: [http, tls, quic] # add ", quic" after tls
       port-whitelist: [80, 443, 8080, 8443]
   force-domain: # Force sniffing, don't add it randomly
@@ -137,7 +137,7 @@ sniffer:
   
 # Virtual network card mode  
 tun:
-  enable: false
+  enable: true
   stack: system # gvisor / mixed / system
   auto-route: true
   auto-redirect: true
@@ -207,7 +207,7 @@ dns:
   prefer-h3: false
   use-host: true # Custom DNS
   use-system-hosts: true # Use system DNS true / false
-  respect-rules: false
+  respect-rules: true
   enhanced-mode: fake-ip #fake-ip
   fake-ip-range: 198.18.0.1/16
   fake-ip-filter-mode: blacklist
@@ -349,6 +349,8 @@ dns:
   - 1.0.0.1
   - 8.8.8.8
   - 8.8.4.4
+  - 112.215.203.247
+  - 112.215.203.248
   - 208.67.222.222
   - 208.67.220.220
   
