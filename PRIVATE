@@ -98,9 +98,9 @@ experimental:
   
 # Domain name sniffing  
 sniffer:
-  enable: false
-  force-dns-mapping: false
-  parse-pure-ip: false
+  enable: true
+  force-dns-mapping: true
+  parse-pure-ip: true
   override-destination: false
   sniff:
     TLS:
@@ -137,7 +137,7 @@ sniffer:
   
 # Virtual network card mode  
 tun:
-  enable: false
+  enable: true
   stack: mixed # gvisor / mixed / system
   auto-route: true
   auto-redirect: true
@@ -206,8 +206,8 @@ dns:
   listen: 0.0.0.0:7874
   prefer-h3: false
   use-host: true # Custom DNS
-  use-system-hosts: true # Use system DNS true / false
-  respect-rules: true
+  use-system-hosts: false # Use system DNS true / false
+  respect-rules: false
   enhanced-mode: fake-ip #fake-ip
   fake-ip-range: 198.18.0.1/16
   fake-ip-filter-mode: blacklist
@@ -426,7 +426,7 @@ proxy-providers:
       interval: 300
       timeout: 5000
       url: https://www.gstatic.com/generate_204
-      lazy: true
+      lazy: false
       expected-status: 204
       
   Account Vmess:
@@ -443,7 +443,7 @@ proxy-providers:
       interval: 300
       timeout: 5000
       url: https://www.gstatic.com/generate_204
-      lazy: true
+      lazy: false
       expected-status: 204
 
   Account Matcha:
@@ -460,7 +460,7 @@ proxy-providers:
       interval: 300
       timeout: 5000
       url: https://www.gstatic.com/generate_204
-      lazy: true
+      lazy: false
       expected-status: 204   
       
   Account Vless:
@@ -477,7 +477,7 @@ proxy-providers:
       interval: 300
       timeout: 5000
       url: https://www.gstatic.com/generate_204
-      lazy: true
+      lazy: false
       expected-status: 204
       
   Account Trojan:
@@ -494,7 +494,7 @@ proxy-providers:
       interval: 300
       timeout: 5000
       url: https://www.gstatic.com/generate_204
-      lazy: true
+      lazy: false
       expected-status: 204
       
   Account Cloudflare:
@@ -511,7 +511,7 @@ proxy-providers:
       interval: 300
       timeout: 5000
       url: https://www.gstatic.com/generate_204
-      lazy: true
+      lazy: false
       expected-status: 204
       
 proxy-groups:
@@ -538,7 +538,7 @@ proxy-groups:
   url: https://www.gstatic.com/generate_204
   interval: 300
   tolerance: 50
-  lazy: true
+  lazy: false
   disable-udp: false
   timeout: 5000
   max-failed-times: 5
@@ -551,7 +551,7 @@ proxy-groups:
   url: https://www.gstatic.com/generate_204
   interval: 300
   tolerance: 50
-  lazy: true
+  lazy: false
   disable-udp: false
   timeout: 5000
   max-failed-times: 5
@@ -563,7 +563,7 @@ proxy-groups:
   type: select
   url: https://www.gstatic.com/generate_204
   interval: 300
-  lazy: true
+  lazy: false
   disable-udp: false
   use:
   - Account Matcha
@@ -574,7 +574,7 @@ proxy-groups:
   url: https://www.gstatic.com/generate_204
   interval: 300
   tolerance: 50
-  lazy: true
+  lazy: false
   disable-udp: false
   timeout: 5000
   max-failed-times: 5
@@ -587,7 +587,7 @@ proxy-groups:
   url: https://www.gstatic.com/generate_204
   interval: 300
   tolerance: 50
-  lazy: true
+  lazy: false
   disable-udp: false
   timeout: 5000
   max-failed-times: 5
@@ -600,7 +600,7 @@ proxy-groups:
   url: https://www.gstatic.com/generate_204
   interval: 300
   tolerance: 50
-  lazy: true
+  lazy: false
   disable-udp: false
   timeout: 5000
   max-failed-times: 5
@@ -613,7 +613,7 @@ proxy-groups:
   url: https://www.gstatic.com/generate_204
   interval: 300
   tolerance: 50
-  lazy: true
+  lazy: false
   disable-udp: false
   timeout: 5000
   max-failed-times: 5
@@ -630,7 +630,7 @@ proxy-groups:
   type: load-balance
   url: https://www.gstatic.com/generate_204
   interval: 300
-  lazy: true
+  lazy: false
   strategy: round-robin
   disable-udp: false
   include-all-providers: true
@@ -643,7 +643,7 @@ proxy-groups:
   type: fallback
   url: https://www.gstatic.com/generate_204
   interval: 300
-  lazy: true
+  lazy: false
   disable-udp: false
   include-all-providers: true
   use:
