@@ -1,9 +1,9 @@
-port: 2080
-socks-port: 2080
-redir-port: 2080
-mixed-port: 2099
-tproxy-port: 9898
-ipv6: true
+port: 7890
+socks-port: 7891
+redir-port: 7892
+mixed-port: 7893
+tproxy-port: 7895
+ipv6: false
 mode: rule
 log-level: silent # info / warning / error / debug / silent
 allow-lan: true
@@ -98,10 +98,10 @@ experimental:
   
 # Domain name sniffing  
 sniffer:
-  enable: true
-  force-dns-mapping: true
-  parse-pure-ip: true
-  override-destination: true
+  enable: false
+  force-dns-mapping: false
+  parse-pure-ip: false
+  override-destination: false
   sniff:
     TLS:
       ports: [443, 8443]
@@ -137,8 +137,8 @@ sniffer:
   
 # Virtual network card mode  
 tun:
-  enable: true
-  stack: gvisor # gvisor / mixed / system
+  enable: false
+  stack: mixed # gvisor / mixed / system
   auto-route: true
   auto-redirect: true
   auto-detect-interface: true
@@ -147,7 +147,7 @@ tun:
     - tcp://any:53
   device: utun0
   mtu: 1500
-  strict-route: true
+  strict-route: false
   gso: true
   gso-max-size: 65536
   udp-timeout: 300
@@ -203,7 +203,7 @@ dns:
   cache-algorithm: arc
   ipv6: true
   ipv6-timeout: 300
-  listen: 0.0.0.0:1053
+  listen: 0.0.0.0:7874
   prefer-h3: false
   use-host: true # Custom DNS
   use-system-hosts: true # Use system DNS true / false
