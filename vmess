@@ -1,51 +1,102 @@
 proxies:
-  - name: PT. Uninet Media Sakti
-    server: cache.netflix.com
-    port: 443
-    type: vmess
-    uuid: 8a28acc6-19be-4c84-a5a3-d14c7506d5cb
-    alterId: 0
-    cipher: zero
-    tls: true
-    skip-cert-verify: true
-    servername: cache.netflix.com.1.round.web.id
-    network: ws
-    ws-opts:
-      path: /vmess
-      headers:
-        Host: cache.netflix.com.1.round.web.id
-    udp: true
-
-  - name: PT. Industri Kreatif Digital
+  - name: ID CV. Rumahweb Indonesia CDN TLS 🇮🇩
     server: zaintest.vuclip.com
     port: 443
     type: vmess
-    uuid: 746342fd-5bc4-4dd6-89a4-454db777cf5a
+    uuid: 2bcfbfba-b446-4ad5-93ad-72af9e008f61
     alterId: 0
     cipher: zero
     tls: true
     skip-cert-verify: true
-    servername: zaintest.vuclip.com.2.round.web.id
+    servername: zaintest.vuclip.com.jeelsboobz.biz.id
     network: ws
     ws-opts:
-      path: /vmess
+      path: /free/203.194.112.119:8443
       headers:
-        Host: zaintest.vuclip.com.2.round.web.id
+        Host: zaintest.vuclip.com.jeelsboobz.biz.id
     udp: true
 
-  - name: PT. DEWAWEB
+  - name: ID Amazon.com, Inc. CDN TLS 🇮🇩
+    server: cache.netflix.com
+    port: 443
+    type: vmess
+    uuid: 2bcfbfba-b446-4ad5-93ad-72af9e008f61
+    alterId: 0
+    cipher: zero
+    tls: true
+    skip-cert-verify: true
+    servername: cache.netflix.com.worker.biz.id
+    network: ws
+    ws-opts:
+      path: /free/43.218.77.16:443
+      headers:
+        Host: cache.netflix.com.worker.biz.id
+    udp: true
+
+  - name: ID PT. Pusat Media Indonesia CDN TLS 🇮🇩
     server: ava.game.naver.com
     port: 443
     type: vmess
-    uuid: e87e3fb0-c9ce-424d-b828-62477d0b4861
+    uuid: 2bcfbfba-b446-4ad5-93ad-72af9e008f61
     alterId: 0
     cipher: zero
     tls: true
     skip-cert-verify: true
-    servername: ava.game.naver.com.7.round.web.id
+    servername: ava.game.naver.com.worker.biz.id
     network: ws
     ws-opts:
-      path: /vmess
+      path: /free/103.6.207.108:8080
       headers:
-        Host: ava.game.naver.com.7.round.web.id
+        Host: ava.game.naver.com.worker.biz.id
+    udp: true
+
+  - name: SG Oracle Corporation CDN TLS 🇸🇬
+    server: graph.instagram.com
+    port: 443
+    type: vmess
+    uuid: 2bcfbfba-b446-4ad5-93ad-72af9e008f61
+    alterId: 0
+    cipher: zero
+    tls: true
+    skip-cert-verify: true
+    servername: graph.instagram.com.worker.my.id
+    network: ws
+    ws-opts:
+      path: /free/138.2.78.38:1443
+      headers:
+        Host: graph.instagram.com.worker.my.id
+    udp: true
+
+  - name: SG Alibaba Cloud LLC CDN TLS 🇸🇬
+    server: zaintest.vuclip.com
+    port: 443
+    type: vmess
+    uuid: 2bcfbfba-b446-4ad5-93ad-72af9e008f61
+    alterId: 0
+    cipher: zero
+    tls: true
+    skip-cert-verify: true
+    servername: zaintest.vuclip.com.worker.my.id
+    network: ws
+    ws-opts:
+      path: /free/47.236.119.190:51342
+      headers:
+        Host: zaintest.vuclip.com.worker.my.id
+    udp: true
+
+  - name: SG 365 Group LLC CDN TLS 🇸🇬
+    server: cache.netflix.com
+    port: 443
+    type: vmess
+    uuid: 2bcfbfba-b446-4ad5-93ad-72af9e008f61
+    alterId: 0
+    cipher: zero
+    tls: true
+    skip-cert-verify: true
+    servername: cache.netflix.com.worker.my.id
+    network: ws
+    ws-opts:
+      path: /free/167.253.158.63:8443
+      headers:
+        Host: cache.netflix.com.worker.my.id
     udp: true
