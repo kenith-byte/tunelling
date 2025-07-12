@@ -146,7 +146,7 @@ tun:
     - any:53
     - tcp://any:53
   device: utun0
-  mtu: 1500
+  mtu: 9000
   strict-route: false
   gso: true
   gso-max-size: 65536
@@ -321,6 +321,15 @@ dns:
   - local.adguard.org
   - "+.sandai.net"
   - "+.n0808.com"
+  - dns.msftnsci.com
+  - www.msftnsci.com
+  - www.msftconnecttest.com
+  - lens.l.google.com
+  - stun.l.google.com
+  - global.stun.twilio.com
+  - stun.nextcloud.com
+  - stun.cloudflare.com
+  - stun.voip.blackberry.com
   
 # DNS server used to resolve non-IP DNS, only supports pure IP
   nameserver:
@@ -354,6 +363,17 @@ dns:
   - 170.114.46.6 #IP XCV
   - 104.18.213.235 #IP XCV
   - 104.18.214.235 #IP XCV
+  - 104.22.4.240 #IP VIDIO
+  - 104.22.5.240 #IP VIDIO
+  - 104.17.156.243 #IP VIDIO
+  - 104.17.157.243 #IP VIDIO
+  - 104.17.158.243 #IP VIDIO
+  - 104.17.159.243 #IP VIDIO
+  - 104.17.71.206 #IP VIDIO
+  - 104.17.72.206 #IP VIDIO
+  - 104.17.73.206 #IP VIDIO
+  - 104.17.74.206 #IP VIDIO
+  - 172.64.32.202 #IP VIDIO
   - 112.215.203.246 #DNS XL
   - 112.215.203.247 #DNS XL
   - 112.215.203.248 #DNS XL
@@ -560,7 +580,14 @@ proxy-groups:
 
 - name: Account Matcha
   icon: https://raw.githubusercontent.com/lige47/QuanX-icon-rule/main/icon/zhipianren-emby.png
-  type: select
+  type: url-test
+  url: http://www.gstatic.com/generate_204
+  interval: 300
+  tolerance: 50
+  lazy: false
+  disable-udp: false
+  timeout: 5000
+  max-failed-times: 5
   disable-udp: false
   use:
   - Account Matcha
@@ -606,7 +633,14 @@ proxy-groups:
       
 - name: Best Latency
   icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Auto.png
-  type: select
+  type: url-test
+  url: http://www.gstatic.com/generate_204
+  interval: 300
+  tolerance: 50
+  lazy: false
+  disable-udp: false
+  timeout: 5000
+  max-failed-times: 5
   disable-udp: false
   proxies:
   - Subscription
