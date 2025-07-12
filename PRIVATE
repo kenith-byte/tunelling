@@ -1423,7 +1423,7 @@ rules:
 - RULE-SET,whatsapp,WhatsApp
 
 #SPEEDTEST
-- RULE-SET,Speedtest,Speed Test
+- RULE-SET,Speedtest,Speedtest
 
 #GOOGLE
 - RULE-SET,google,Google
