@@ -698,6 +698,7 @@ proxy-groups:
   - Best Latency
   - Load Balance
   - Fallback
+  - Node
   - Manual Selected
   - Subscription
   - Account Vmess
@@ -716,6 +717,7 @@ proxy-groups:
   - Best Latency
   - Load Balance
   - Fallback
+  - Node
   - Manual Selected
   - Subscription
   - Account Vmess
@@ -734,6 +736,7 @@ proxy-groups:
   - Best Latency
   - Load Balance
   - Fallback
+  - Node
   - Manual Selected
   - Global Selected
   - Subscription
@@ -753,6 +756,7 @@ proxy-groups:
   - Best Latency
   - Load Balance
   - Fallback
+  - Node
   - Manual Selected
   - Global Selected
   - Subscription
@@ -779,6 +783,7 @@ proxy-groups:
   - Best Latency
   - Load Balance
   - Fallback
+  - Node
   - Manual Selected
   - Global Selected
   - Subscription
@@ -798,6 +803,7 @@ proxy-groups:
   - Best Latency
   - Load Balance
   - Fallback
+  - Node
   - Manual Selected
   - Global Selected
   - Subscription
@@ -817,6 +823,7 @@ proxy-groups:
   - Best Latency
   - Load Balance
   - Fallback
+  - Node
   - Manual Selected
   - Global Selected
   - Subscription
@@ -836,6 +843,7 @@ proxy-groups:
   - Best Latency
   - Load Balance
   - Fallback
+  - Node
   - Manual Selected
   - Global Selected
   - Subscription
@@ -855,6 +863,7 @@ proxy-groups:
   - Best Latency
   - Load Balance
   - Fallback
+  - Node
   - Manual Selected
   - Global Selected
   - Subscription
@@ -874,6 +883,7 @@ proxy-groups:
   - Best Latency
   - Load Balance
   - Fallback
+  - Node
   - Manual Selected
   - Subscription
   - Account Vmess
