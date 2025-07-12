@@ -588,7 +588,6 @@ proxy-groups:
   disable-udp: false
   timeout: 5000
   max-failed-times: 5
-  disable-udp: false
   use:
   - Account Matcha
   
@@ -641,7 +640,6 @@ proxy-groups:
   disable-udp: false
   timeout: 5000
   max-failed-times: 5
-  disable-udp: false
   proxies:
   - Subscription
   - Account Vmess
