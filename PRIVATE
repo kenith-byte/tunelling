@@ -551,6 +551,18 @@ proxy-groups:
   - Account Trojan
   - Account Cloudflare
   - DIRECT
+
+- name: Node
+  icon: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/icon/qure/color/Airport.png
+  type: select
+  proxies:
+  - Load Balance
+  - Fallback
+  - Account Vmess
+  - Account Vless
+  - Account Matcha
+  - Account Trojan
+  - Account Cloudflare
   
 - name: Subscription
   icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Server.png
