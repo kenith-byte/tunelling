@@ -561,9 +561,6 @@ proxy-groups:
 - name: Account Matcha
   icon: https://raw.githubusercontent.com/lige47/QuanX-icon-rule/main/icon/zhipianren-emby.png
   type: select
-  url: https://www.gstatic.com/generate_204
-  interval: 300
-  lazy: false
   disable-udp: false
   use:
   - Account Matcha
@@ -609,14 +606,8 @@ proxy-groups:
       
 - name: Best Latency
   icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Auto.png
-  type: url-test
-  url: https://www.gstatic.com/generate_204
-  interval: 300
-  tolerance: 50
-  lazy: false
+  type: select
   disable-udp: false
-  timeout: 5000
-  max-failed-times: 5
   proxies:
   - Subscription
   - Account Vmess
