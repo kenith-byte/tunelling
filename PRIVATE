@@ -34,7 +34,7 @@ keep-alive-idle: 600 # Idle time Reduce battery consumption on mobile devices
 keep-alive-interval: 30 # Interval time
 disable-keep-alive: true # Currently forced to true on the Android side
 
-global-client-fingerprint: firefox # chrome / firefox / safari / iOS / android / edge / 360 / qq / random
+global-client-fingerprint: chrome # chrome / firefox / safari / iOS / android / edge / 360 / qq / random
 tcp-concurrent: true # TCP Concurrency
 #interface-name: en0 # Clash's traffic outbound interface
 #routing-mark: 6666 # Provides a default traffic mark for outbound connections on Linux
@@ -138,7 +138,7 @@ sniffer:
 # Virtual network card mode  
 tun:
   enable: true
-  stack: gvisor # gvisor / mixed / system
+  stack: mixed # gvisor / mixed / system
   auto-route: true
   auto-redirect: true
   auto-detect-interface: true
