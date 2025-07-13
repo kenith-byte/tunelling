@@ -1,106 +1,26 @@
-port: 9794
-socks-port: 9795
-redir-port: 9797
-mixed-port: 9796
-tproxy-port: 9898
-ipv6: false
+redir-port: 9696
+tproxy-port: 9999
+
 mode: rule
-log-level: silent # info / warning / error / debug / silent
 allow-lan: true
-lan-allowed-ips: # The IP address range allowed to connect, only works when allow-lan is true, the default value is 0.0.0.0/0 and ::/0
-- 0.0.0.0/0
-- ::/0
-lan-disallowed-ips: # The IP address segment that is prohibited from connecting. The blacklist has a higher priority than the whitelist. The default value is empty.
-- 192.168.0.3/32
-# authentication: # http,socks entry authentication username and password
-# - "user1:pass1"
-# - "user2:pass2"
-skip-auth-prefixes: # Set the IP range that skips verification
-- 127.0.0.1/8
-- ::1/128
 bind-address: "*"
-unified-delay: true # Unified Delay
-enable-process: true
-udp: true
-
-#  find-process-mode has 3 values:always, strict, off
-#  - always, enable, force matching of all processes
-#  - strict, by default, whether to enable it is determined by mihomo
-#  - off, do not match the process, recommended for routers
-find-process-mode: strict
-
-#  TCP keep alive interval
-keep-alive-idle: 600 # Idle time Reduce battery consumption on mobile devices
-keep-alive-interval: 30 # Interval time
-disable-keep-alive: true # Currently forced to true on the Android side
-
-global-client-fingerprint: chrome # chrome / firefox / safari / iOS / android / edge / 360 / qq / random
-tcp-concurrent: false # TCP Concurrency
-#interface-name: en0 # Clash's traffic outbound interface
-#routing-mark: 6666 # Provides a default traffic mark for outbound connections on Linux
-global-ua: clash.meta # Custom UA used when downloading external resources, default is clash.meta
-#etag-support: true
-external-doh-server: /dns-query
-
-# External Control (API)
-external-controller: 0.0.0.0:9090
-#external-controller-unix: mihomo.sock
-#external-controller-pipe: \\.\pipe\mihomo
-#external-controller-tls: 127.0.0.1:9443
-#external-controller-cors:
-  #allow-origins:
-    #- http://127.0.0.1
-    #- http://metacubex.github.io/metacubexd
-  #allow-private-network: true
-#external-ui: /data/adb/box/dashboard/metacubexd
-external-ui-url: https://github.com/MetaCubeX/metacubexd/archive/refs/heads/gh-pages.zip
-external-ui-name: metacubexd
-#secret: 12345
-
-# Customize GEO download address
+log-level: silent # info / warning / error / debug / silent
+ipv6: false
+unified-delay: true
+tcp-concurrent: true
 geodata-loader: memconservative # standard / memconservative
-geodata-mode: true
-geo-auto-update: false
-geo-update-interval: 24
-geox-url:
-  geoip: https://github.com/Loyalsoldier/v2ray-rules-dat/releases/latest/download/geoip.dat
-  geosite: https://github.com/Loyalsoldier/v2ray-rules-dat/releases/latest/download/geosite.dat
-  mmdb: https://github.com/Loyalsoldier/geoip/releases/latest/download/Country.mmdb
-  asn: https://github.com/Loyalsoldier/geoip/releases/latest/download/GeoLite2-ASN.mmdb
-  
-# cache
+find-process-mode: strict # always / strict / off
+external-controller: 0.0.0.0:9090
+external-ui: dashboard
+
 profile:
-  store-selected: true # Store the API policy group selection for next startup
-  store-fake-ip: true # Store the fakeip mapping table. When the domain name is connected again, use the original mapping address
-  
-hosts:
-  '*.mihomo.dev': 127.0.0.1
-  'alpha.mihomo.dev': '::1'
-  test.com: [1.1.1.1, 2.2.2.2]
-  baidu.com: google.com
-  # block update system android
-  'ota.googlezip.net': 127.0.0.1
-  'ota-cache1.googlezip.net': 127.0.0.1
-  'ota-cache2.googlezip.net': 127.0.0.1
-  
-tls:
-  certificate: "./tls/ca_cert.pem" # Certificate PEM format or certificate path
-  private-key: "./tls/ca_key.pem" # Private key PEM format corresponding to the certificate, or private key path
-  custom-certifactes:
-    - |
-      -----BEGIN CERTIFICATE-----
-      format/pem...
-      -----END CERTIFICATE-----
-  
-experimental:
-  quic-go-disable-gso: false
-  quic-go-disable-ecn: false
-  
-# Domain name sniffing  
+  store-selected: true
+  store-fake-ip: false
+
 sniffer:
-  enable: true
-  force-dns-mapping: true
-  parse-pure-ip: true
+  enable: false
+  force-dns-mapping: false
+  parse-pure-ip: false
   override-destination: false
   sniff:
     TLS:
@@ -108,316 +28,46 @@ sniffer:
     HTTP:
       ports: [80, 8080-8880]
       override-destination: true
-    QUIC:
-      ports: [443]
-      override-destination: true
-      sniffing: [http, tls, quic] # add ", quic" after tls
-      port-whitelist: [80, 443, 8080, 8443]
-  force-domain: # Force sniffing, don't add it randomly
-  - "+.netflix.com"
-  - "+.nflxvideo.net"
-  - "+.amazonaws.com"
-  - "+.media.dssot.com"
-  skip-domain: # Ignore sniffing
-  - "+.courier.push.apple.com"
-  - Mijia Cloud
-  - "+.jd.com"
-  - dlg.io.mi.com
-  skip-src-address:
-  - 192.168.0.3/32
-  skip-dst-address:
-  - 192.168.0.3/32
-    
-# ntp:
-#   enable: false
-#   write-to-system: true
-#   server: time.apple.com
-#   port: 123
-#   interval: 30
-  
-# Virtual network card mode  
-tun:
-  enable: true
-  stack: system # gvisor / mixed / system
-  auto-route: true
-  auto-redirect: true
-  auto-detect-interface: true
-  dns-hijack: # additional dns server listen on TUN
-    - any:53
-    - tcp://any:53
-  device: utun
-  mtu: 9000
-  strict-route: false
-  gso: true
-  gso-max-size: 65536
-  udp-timeout: 300
-  iproute2-table-index: 2022
-  iproute2-rule-index: 9000
-  endpoint-independent-nat: false
-  route-address-set:
-    - ruleset-1
-  route-exclude-address-set:
-    - ruleset-2
-  route-address:
-    - 0.0.0.0/1
-    - 128.0.0.0/1
-    - "::/1"
-    - "8000::/1"
-  route-exclude-address:
-  - 192.168.0.0/16
-  - fc00::/7
-  include-interface:
-  - eth0
-  exclude-interface:
-  - eth1
-  include-uid:
-  - 0
-  include-uid-range:
-  - 1000:9999
-  exclude-uid:
-  - 1000
-  exclude-uid-range:
-  - 1000:9999
-  include-android-user:
-  - 0
-  - 10
-  include-package:
-  - com.android.chrome
-  exclude-package: 
-  - com.whatsapp
-# Old writing
-  inet4-route-address:
-  - 0.0.0.0/1
-  - 128.0.0.0/1
-  inet6-route-address:
-  - "::/1"
-  - "8000::/1"
-  inet4-route-exclude-address:
-  - 192.168.0.0/16
-  inet6-route-exclude-address:
-  - fc00::/7
-  
-# DNS settings  
+  sniffing: [tls, http]
+  port-whitelist: [80, 443]
+
 dns:
   enable: true
-  cache-algorithm: arc
-  ipv6: false
-  ipv6-timeout: 300
-  listen: 0.0.0.0:7874
   prefer-h3: false
-  use-host: true # Custom DNS
-  use-system-hosts: true # Use system DNS true / false
-  respect-rules: true
-  enhanced-mode: fake-ip #fake-ip
+  ipv6: true
+  listen: 0.0.0.0:1053
+  use-hosts: true
+  enhanced-mode: fake-ip
   fake-ip-range: 198.18.0.1/16
   fake-ip-filter-mode: blacklist
-  fake-ip-filter: # fake ip whitelist list The following addresses will not send fakeip mapping for connection
-  - "*.lan"
-  - "*.localdomain"
-  - "*.example"
-  - "*.invalid"
-  - "*.localhost"
-  - "*.test"
-  - "*.local"
-  - "*.home.arpa"
-  - time.*.com
-  - time.*.gov
-  - time.*.edu.cn
-  - time.*.apple.com
-  - time-ios.apple.com
-  - time1.*.com
-  - time2.*.com
-  - time3.*.com
-  - time4.*.com
-  - time5.*.com
-  - time6.*.com
-  - time7.*.com
-  - ntp.*.com
-  - ntp1.*.com
-  - ntp2.*.com
-  - ntp3.*.com
-  - ntp4.*.com
-  - ntp5.*.com
-  - ntp6.*.com
-  - ntp7.*.com
-  - "*.time.edu.cn"
-  - "*.ntp.org.cn"
-  - "+.pool.ntp.org"
-  - time1.cloud.tencent.com
-  - music.163.com
-  - "*.music.163.com"
-  - "*.126.net"
-  - musicapi.taihe.com
-  - music.taihe.com
-  - songsearch.kugou.com
-  - trackercdn.kugou.com
-  - "*.kuwo.cn"
-  - api-jooxtt.sanook.com
-  - api.joox.com
-  - joox.com
-  - y.qq.com
-  - "*.y.qq.com"
-  - streamoc.music.tc.qq.com
-  - mobileoc.music.tc.qq.com
-  - isure.stream.qqmusic.qq.com
-  - dl.stream.qqmusic.qq.com
-  - aqqmusic.tc.qq.com
-  - amobile.music.tc.qq.com
-  - "*.xiami.com"
-  - "*.music.migu.cn"
-  - music.migu.cn
-  - "+.msftconnecttest.com"
-  - "+.msftncsi.com"
-  - msftconnecttest.com
-  - msftncsi.com
-  - localhost.ptlogin2.qq.com
-  - localhost.sec.qq.com
-  - "+.srv.nintendo.net"
-  - "*.n.n.srv.nintendo.net"
-  - "+.stun.playstation.net"
-  - xbox.*.*.microsoft.com
-  - "*.*.xboxlive.com"
-  - xbox.*.microsoft.com
-  - xnotify.xboxlive.com
-  - "+.battlenet.com.cn"
-  - "+.wotgame.cn"
-  - "+.wggames.cn"
-  - "+.wowsgame.cn"
-  - "+.wargaming.net"
-  - proxy.golang.org
-  - stun.*.*
-  - stun.*.*.*
-  - "+.stun.*.*"
-  - "+.stun.*.*.*"
-  - "+.stun.*.*.*.*"
-  - "+.stun.*.*.*.*.*"
-  - heartbeat.belkin.com
-  - "*.linksys.com"
-  - "*.linksyssmartwifi.com"
-  - "*.router.asus.com"
-  - mesu.apple.com
-  - swscan.apple.com
-  - swquery.apple.com
-  - swdownload.apple.com
-  - swcdn.apple.com
-  - swdist.apple.com
-  - lens.l.google.com
-  - stun.l.google.com
-  - "+.nflxvideo.net"
-  - "*.square-enix.com"
-  - "*.finalfantasyxiv.com"
-  - "*.ffxiv.com"
-  - "*.ff14.sdo.com"
-  - ff.dorado.sdo.com
-  - "*.mcdn.bilivideo.cn"
-  - "+.media.dssott.com"
-  - shark007.net
-  - "+.qq.com"
-  - "+.tencent.com"
-  - na.b.g-tun.com
-  - Mijia Cloud
-  - "+.cmbchina.com"
-  - "+.cmbimg.com"
-  - local.adguard.org
-  - "+.sandai.net"
-  - "+.n0808.com"
-  - dns.msftnsci.com
-  - www.msftnsci.com
-  - www.msftconnecttest.com
-  - time.android.com
-  - lens.l.google.com
-  - stun.l.google.com
-  - global.stun.twilio.com
-  - stun.nextcloud.com
-  - stun.cloudflare.com
-  - stun.voip.blackberry.com
-  
-# DNS server used to resolve non-IP DNS, only supports pure IP
-  nameserver:
-  - https://dns.google/dns-query
-  - https://doh.opendns.com/dns-query
-  - https://cloudflare-dns.com/dns-query
-  
-  fallback:
-  - tls://dns.google
-  - tls://1dot1dot1dot1.cloudflare-dns.com
-  - tls://doh.opendns.com
-  
-# DNS default server
-  default-nameserver:
-  - 1.1.1.1
-  - 1.0.0.1
-  - 8.8.8.8
-  - 8.8.4.4
-  - 112.215.203.247
-  - 112.215.203.248
-  - 208.67.222.222
-  - 208.67.220.220
-  
-  proxy-server-nameserver:
-  #- https://doh.pub/dns-query
-  - 104.18.38.43 #IP VIU
-  - 172.64.149.213 #IP VIU
-  - 104.17.241.25 #IP NETFLIX
-  - 104.17.237.25 #IP NETFLIX
-  - 170.114.45.6 #IP XCV
-  - 170.114.46.6 #IP XCV
-  - 104.18.213.235 #IP XCV
-  - 104.18.214.235 #IP XCV
-  - 112.215.203.246 #DNS XL
-  - 112.215.203.247 #DNS XL
-  - 112.215.203.248 #DNS XL
-  - 112.215.203.254 #DNS XL
-  - 112.215.198.248 #DNS XL
-  - 112.215.198.254 #DNS XL
-  - '[2400:9800:1b::246]' 
-  - '[2400:9800:1b::247]'
-  - '[2400:9800:2:2::245]' #DNS XL
-  - '[2400:9800:2:2::246]' #DNS XL
-    
-  direct-nameserver:
-  - system
-  direct-nameserver-follow-policy: false # Whether to follow nameserver-policy. The default is not to follow. This is only effective when direct-nameserver is not empty.
-  
-  # Override DNS policy Example
-  nameserver-policy:
-    #'+.arpa': '10.0.0.1'
-    'rule-set:oisd_big,d3ward':
-    - rcode://success
-    'rule-set:whatsapp,youtube,google':
-    - https://dns.google/dns-query
-    'rule-set:anime,category-porn':
-    - https://cloudflare-dns.com/dns-query
-    'rule-set:category-games,game':
-    - https://doh.opendns.com/dns-query
-    
+  fake-ip-filter:
+    - "+.lan"
   fallback-filter:
-    geoip: true
-    geoip-code: ID
-    geosite:
-      - gfw
     ipcidr:
-      - 0.0.0.0/8
-      - 10.0.0.0/8
-      - 100.64.0.0/10
-      - 127.0.0.0/8
-      - 169.254.0.0/16
-      - 172.16.0.0/12
-      - 192.0.0.0/24
-      - 192.0.2.0/24
-      - 192.88.99.0/24
-      - 192.168.0.0/16
-      - 198.18.0.0/15
-      - 198.51.100.0/24
-      - 203.0.113.0/24
-      - 224.0.0.0/4
-      - 240.0.0.0/4
-      - 255.255.255.255/32
-    domain:
-      - '+.google.com'
-      - '+.facebook.com'
-      - '+.youtube.com'
-      - '+.telegram.com'
+    - 0.0.0.0/8
+  nameserver:
+    - 8.8.8.8
+    - 1.1.1.1
+  fallback:
+    - https://dns.google/dns-query
+    - https://cloudflare-dns.com/dns-query
+  default-nameserver:
+    - 8.8.4.4
+    - 1.0.0.1
+
+tun:
+  enable: false
+  mtu: 1500
+  device: utun0
+  stack: mixed # gvisor / mixed / lwip
+  dns-hijack:
+    - any:53
+    - tcp://any:53
+  auto-route: true
+  strict-route: false
+  auto-detect-interface: true
+  route-exclude-address:
+    - 192.168.0.0/16
       
 proxies:
 proxy-providers:
@@ -435,7 +85,7 @@ proxy-providers:
       enable: true
       interval: 300
       timeout: 5000
-      url: http://www.gstatic.com/generate_204
+      url: https://www.gstatic.com/generate_204
       lazy: false
       expected-status: 204
       
@@ -452,15 +102,15 @@ proxy-providers:
       enable: true
       interval: 300
       timeout: 5000
-      url: http://www.gstatic.com/generate_204
+      url: https://www.gstatic.com/generate_204
       lazy: false
       expected-status: 204
 
-  Account Kenith:
+  Account Matcha:
     type: http
     url: https://sub.bansos4u.biz.id/sub/clash?type=vless&bug=cache.netflix.com&wildcard=true&tls=true&country=ID&limit=15
     interval: 21600 # Update every 24 hours
-    path: ./account/Yumi.yaml
+    path: ./account/Matcha.yaml
     header:
       User-Agent:
       - "Clash/v1.18.0"
@@ -469,7 +119,24 @@ proxy-providers:
       enable: true
       interval: 300
       timeout: 5000
-      url: http://www.gstatic.com/generate_204
+      url: https://www.gstatic.com/generate_204
+      lazy: false
+      expected-status: 204
+
+  Account Kenith:
+    type: http
+    url: https://violetvpn.biz.id/sub/clash/?type=wildcard&bug=zaintest.vuclip.com
+    interval: 21600 # Update every 24 hours
+    path: ./account/Kenith.yaml
+    header:
+      User-Agent:
+      - "Clash/v1.18.0"
+      - "mihomo/1.18.3"
+    health-check:
+      enable: true
+      interval: 300
+      timeout: 5000
+      url: https://www.gstatic.com/generate_204
       lazy: false
       expected-status: 204
       
@@ -486,7 +153,7 @@ proxy-providers:
       enable: true
       interval: 300
       timeout: 5000
-      url: http://www.gstatic.com/generate_204
+      url: https://www.gstatic.com/generate_204
       lazy: false
       expected-status: 204
       
@@ -503,7 +170,7 @@ proxy-providers:
       enable: true
       interval: 300
       timeout: 5000
-      url: http://www.gstatic.com/generate_204
+      url: https://www.gstatic.com/generate_204
       lazy: false
       expected-status: 204
       
@@ -520,7 +187,7 @@ proxy-providers:
       enable: true
       interval: 300
       timeout: 5000
-      url: http://www.gstatic.com/generate_204
+      url: https://www.gstatic.com/generate_204
       lazy: false
       expected-status: 204
       
@@ -537,6 +204,7 @@ proxy-groups:
   - Subscription
   - Account Vmess
   - Account Vless
+  - Account Matcha
   - Account Kenith
   - Account Trojan
   - Account Cloudflare
@@ -545,7 +213,7 @@ proxy-groups:
 - name: Subscription
   icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Server.png
   type: url-test
-  url: http://www.gstatic.com/generate_204
+  url: https://www.gstatic.com/generate_204
   interval: 300
   tolerance: 50
   lazy: false
@@ -558,7 +226,7 @@ proxy-groups:
 - name: Account Vmess
   icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/VIP.png
   type: url-test
-  url: http://www.gstatic.com/generate_204
+  url: https://www.gstatic.com/generate_204
   interval: 300
   tolerance: 50
   lazy: false
@@ -568,20 +236,36 @@ proxy-groups:
   use:
   - Account Vmess
 
-- name: Account Kenith
+- name: Account Matcha
   icon: https://raw.githubusercontent.com/lige47/QuanX-icon-rule/main/icon/zhipianren-emby.png
-  type: fallback
+  type: url-test
   url: http://www.gstatic.com/generate_204
   interval: 300
+  tolerance: 50
   lazy: false
   disable-udp: false
+  timeout: 5000
+  max-failed-times: 5
+  use:
+  - Account Matcha
+
+- name: Account Kenith
+  icon: https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/softlyx/MisakaF.png
+  type: url-test
+  url: http://www.gstatic.com/generate_204
+  interval: 300
+  tolerance: 50
+  lazy: false
+  disable-udp: false
+  timeout: 5000
+  max-failed-times: 5
   use:
   - Account Kenith
   
 - name: Account Vless
   icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Heart.png
   type: url-test
-  url: http://www.gstatic.com/generate_204
+  url: https://www.gstatic.com/generate_204
   interval: 300
   tolerance: 50
   lazy: false
@@ -594,7 +278,7 @@ proxy-groups:
 - name: Account Trojan
   icon: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/icon/color/trojan.png
   type: url-test
-  url: http://www.gstatic.com/generate_204
+  url: https://www.gstatic.com/generate_204
   interval: 300
   tolerance: 50
   lazy: false
@@ -607,7 +291,7 @@ proxy-groups:
 - name: Account Cloudflare
   icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Cloudflare.png
   type: url-test
-  url: http://www.gstatic.com/generate_204
+  url: https://www.gstatic.com/generate_204
   interval: 300
   tolerance: 50
   lazy: false
@@ -616,7 +300,7 @@ proxy-groups:
   max-failed-times: 5
   use:
   - Account Cloudflare
-   
+      
 - name: Best Latency
   icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Auto.png
   type: url-test
@@ -632,13 +316,14 @@ proxy-groups:
   - Account Vmess
   - Account Vless
   - Account Trojan
+  - Account Matcha
   - Account Kenith
   - Account Cloudflare
   
 - name: Load Balance
   icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Round_Robin.png
   type: load-balance
-  url: http://www.gstatic.com/generate_204
+  url: https://www.gstatic.com/generate_204
   interval: 300
   lazy: false
   strategy: round-robin
@@ -651,7 +336,7 @@ proxy-groups:
 - name: Fallback
   icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Available.png
   type: fallback
-  url: http://www.gstatic.com/generate_204
+  url: https://www.gstatic.com/generate_204
   interval: 300
   lazy: false
   disable-udp: false
@@ -678,6 +363,7 @@ proxy-groups:
   - Account Vmess
   - Account Vless
   - Account Trojan
+  - Account Matcha
   - Account Kenith
   - Account Cloudflare
   - DIRECT
@@ -696,6 +382,7 @@ proxy-groups:
   - Account Vmess
   - Account Vless
   - Account Trojan
+  - Account Matcha
   - Account Kenith
   - Account Cloudflare
   - DIRECT
@@ -714,6 +401,7 @@ proxy-groups:
   - Subscription
   - Account Vmess
   - Account Vless
+  - Account Matcha
   - Account Kenith
   - Account Trojan
   - Account Cloudflare
@@ -734,6 +422,7 @@ proxy-groups:
   - Account Vmess
   - Account Vless
   - Account Trojan
+  - Account Matcha
   - Account Kenith
   - Account Cloudflare
   - DIRECT
@@ -760,6 +449,7 @@ proxy-groups:
   - Account Vmess
   - Account Vless
   - Account Trojan
+  - Account Matcha
   - Account Kenith
   - Account Cloudflare
   - DIRECT
@@ -779,6 +469,7 @@ proxy-groups:
   - Account Vmess
   - Account Vless
   - Account Trojan
+  - Account Matcha
   - Account Kenith
   - Account Cloudflare
   - DIRECT
@@ -798,6 +489,7 @@ proxy-groups:
   - Account Vmess
   - Account Vless
   - Account Trojan
+  - Account Matcha
   - Account Kenith
   - Account Cloudflare
   - DIRECT
@@ -817,6 +509,7 @@ proxy-groups:
   - Account Vmess
   - Account Vless
   - Account Trojan
+  - Account Matcha
   - Account Kenith
   - Account Cloudflare
   - DIRECT
@@ -836,6 +529,7 @@ proxy-groups:
   - Account Vmess
   - Account Vless
   - Account Trojan
+  - Account Matcha
   - Account Kenith
   - Account Cloudflare
   - DIRECT
@@ -854,6 +548,7 @@ proxy-groups:
   - Account Vmess
   - Account Vless
   - Account Trojan
+  - Account Matcha
   - Account Kenith
   - Account Cloudflare
   - DIRECT
@@ -1307,12 +1002,14 @@ rules:
 - RULE-SET,onlineshop,E-commerce
 - RULE-SET,payment,E-commerce
 
+
 #Ubuntu rules
 - RULE-SET,ubuntu-rule,Gaming
 #GAMING
 - RULE-SET,category-games,Gaming
 - RULE-SET,game,Gaming
 - RULE-SET,game-kakao,Gaming
+
 
 #ADSBLOCK
 - RULE-SET,oisd_big,Block Ads
