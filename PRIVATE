@@ -31,11 +31,11 @@ find-process-mode: strict
 
 #  TCP keep alive interval
 keep-alive-idle: 600 # Idle time Reduce battery consumption on mobile devices
-keep-alive-interval: 30 # Interval time
+keep-alive-interval: 15 # Interval time
 disable-keep-alive: true # Currently forced to true on the Android side
 
 global-client-fingerprint: chrome # chrome / firefox / safari / iOS / android / edge / 360 / qq / random
-tcp-concurrent: true # TCP Concurrency
+tcp-concurrent: false # TCP Concurrency
 #interface-name: en0 # Clash's traffic outbound interface
 #routing-mark: 6666 # Provides a default traffic mark for outbound connections on Linux
 global-ua: clash.meta # Custom UA used when downloading external resources, default is clash.meta
@@ -71,7 +71,7 @@ geox-url:
 # cache
 profile:
   store-selected: true # Store the API policy group selection for next startup
-  store-fake-ip: true # Store the fakeip mapping table. When the domain name is connected again, use the original mapping address
+  store-fake-ip: false # Store the fakeip mapping table. When the domain name is connected again, use the original mapping address
   
 hosts:
   '*.mihomo.dev': 127.0.0.1
@@ -208,7 +208,7 @@ dns:
   use-host: true # Custom DNS
   use-system-hosts: false # Use system DNS true / false
   respect-rules: false
-  enhanced-mode: fake-ip #fake-ip
+  enhanced-mode: redir-host #fake-ip
   fake-ip-range: 198.18.0.1/16
   fake-ip-filter-mode: blacklist
   fake-ip-filter: # fake ip whitelist list The following addresses will not send fakeip mapping for connection
@@ -485,7 +485,7 @@ proxy-providers:
 
   Account Kenith:
     type: http
-    url: https://violetvpn.biz.id/sub/clash/?type=wildcard&bug=zaintest.vuclip.com
+    url: https://violetvpn.biz.id/sub/clash/?type=sni&bug=graph.instagram.com
     interval: 21600 # Update every 24 hours
     path: ./account/Kenith.yaml
     header:
