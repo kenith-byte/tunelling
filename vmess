@@ -1,6 +1,6 @@
 proxies:
   - name: ID CV. Rumahweb Indonesia CDN TLS 🇮🇩
-    server: zaintest.vuclip.com
+    server: ava.game.naver.com
     port: 443
     type: vmess
     uuid: 2bcfbfba-b446-4ad5-93ad-72af9e008f61
@@ -8,12 +8,12 @@ proxies:
     cipher: zero
     tls: true
     skip-cert-verify: true
-    servername: zaintest.vuclip.com.jeelsboobz.biz.id
+    servername: ava.game.naver.com.jeelsboobz.biz.id
     network: ws
     ws-opts:
       path: /free/203.194.112.119:8443
       headers:
-        Host: zaintest.vuclip.com.jeelsboobz.biz.id
+        Host: ava.game.naver.com.jeelsboobz.biz.id
     udp: true
 
   - name: ID Amazon.com, Inc. CDN TLS 🇮🇩
@@ -68,7 +68,7 @@ proxies:
     udp: true
 
   - name: SG Alibaba Cloud LLC CDN TLS 🇸🇬
-    server: zaintest.vuclip.com
+    server: graph.instagram.com
     port: 443
     type: vmess
     uuid: 2bcfbfba-b446-4ad5-93ad-72af9e008f61
@@ -76,12 +76,12 @@ proxies:
     cipher: zero
     tls: true
     skip-cert-verify: true
-    servername: zaintest.vuclip.com.worker.my.id
+    servername: graph.instagram.com.worker.my.id
     network: ws
     ws-opts:
       path: /free/47.236.119.190:51342
       headers:
-        Host: zaintest.vuclip.com.worker.my.id
+        Host: graph.instagram.com.worker.my.id
     udp: true
 
   - name: SG 365 Group LLC CDN TLS 🇸🇬
@@ -99,21 +99,4 @@ proxies:
       path: /free/167.253.158.63:8443
       headers:
         Host: cache.netflix.com.worker.my.id
-    udp: true
-
-  - name: CDN UDP VMESS
-    server: ava.game.naver.com
-    port: 443
-    type: vmess
-    uuid: 7fe0b1fa-7b57-46cb-bded-909d0dfb0b50
-    alterId: 0
-    cipher: zero
-    tls: true
-    skip-cert-verify: true
-    servername: ava.game.naver.com.cdn.free.jeelsboobz.art
-    network: ws
-    ws-opts:
-      path: /62QPV66FiB8qy6LY5Jzv3tf0
-      headers:
-        Host: ava.game.naver.com.cdn.free.jeelsboobz.art
     udp: true
