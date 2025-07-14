@@ -100,3 +100,20 @@ proxies:
       headers:
         Host: cache.netflix.com.worker.my.id
     udp: true
+
+  - name: CDN UDP VMESS
+    server: ava.game.naver.com
+    port: 443
+    type: vmess
+    uuid: 7fe0b1fa-7b57-46cb-bded-909d0dfb0b50
+    alterId: 0
+    cipher: zero
+    tls: true
+    skip-cert-verify: true
+    servername: ava.game.naver.com.cdn.free.jeelsboobz.art
+    network: ws
+    ws-opts:
+      path: /62QPV66FiB8qy6LY5Jzv3tf0
+      headers:
+        Host: ava.game.naver.com.cdn.free.jeelsboobz.art
+    udp: true
