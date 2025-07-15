@@ -1,0 +1,607 @@
+port: 6550
+socks-port: 6551
+mixed-port: 6552
+redir-port: 9797
+tproxy-port: 9898
+mode: rule
+allow-lan: true
+bind-address: '*'
+log-level: silent
+unified-delay: true
+keep-alive-interval: 15
+global-client-fingerprint: chrome
+find-process-mode: strict
+tcp-concurrent: false
+geodata-mode: true
+geodata-loader: mem
+conservative-mode: false
+ipv6: false
+external-controller: 0.0.0.0:9090
+secret: ""
+external-ui: /data/adb/box/clash/dashboard
+
+profile:
+  store-selected: true
+  store-fake-ip: false
+
+geox-url:
+  geoip: "https://github.com/MetaCubeX/meta-rules-dat/raw/release/geoip-lite.dat"
+  mmdb: "https://github.com/MetaCubeX/meta-rules-dat/raw/release/country-lite.mmdb"
+  geosite: "https://github.com/Loyalsoldier/v2ray-rules-dat/releases/latest/download/geosite.dat"
+
+sniffer:
+  enable: true
+  force-dns-mapping: false
+  parse-pure-ip: false
+  override-destination: false
+  sniff:
+    TLS:
+      ports: [443, 8443]
+    HTTP:
+      ports: [80, 8080-8880]
+      override-destination: true
+  port-whitelist: [80, 443]
+
+dns:
+  cache-algorithm: arc
+  enable: true
+  prefer-h3: false
+  ipv6: false
+  default-nameserver:
+    - 8.8.8.8
+    - 1.1.1.1
+  listen: 0.0.0.0:1053
+  use-hosts: true
+  enhanced-mode: fake-ip
+  fake-ip-range: 198.18.0.1/16
+  fake-ip-filter:
+    - "*.lan"
+    - "*.ntp.*"
+  nameserver:
+  - https://dns.google/dns-query
+  - https://dns.cloudflare.com/dns-query
+  proxy-server-nameserver:
+  - 112.215.198.248
+  - 112.215.198.254
+  respect-rules: false
+
+tun:
+  enable: false
+  mtu: 9000
+  device: clash
+  stack: mixed
+  dns-hijack:
+    - any:53
+    - tcp://any:53
+  auto-route: true
+  strict-route: false
+  auto-redirect: true
+  auto-detect-interface: true
+
+proxies:
+proxy-providers:
+
+  Subscription:
+    type: http
+    url: https://mstkkee3.dpdns.org/sub/clash/?method=sni&bug=graph.instagram.com
+    path: ./account/Subscription.yaml
+    health-check:
+      enable: true
+      url: http://www.gstatic.com/generate_204
+      interval: 3600
+
+  Account Matcha:
+    type: http
+    url: https://violetvpn.biz.id/sub/clash/?type=wildcard&bug=ava.game.naver.com
+    path: ./account/Matcha.yaml
+    health-check:
+      enable: true
+      url: http://www.gstatic.com/generate_204
+      interval: 3600
+      
+  Account Private:
+    type: http
+    url: https://raw.githubusercontent.com/kenith-byte/tunelling/refs/heads/main/private
+    path: ./account/Private.yaml
+    health-check:
+      enable: true
+      url: http://www.gstatic.com/generate_204
+      interval: 3600
+      
+  Account Trojan:
+    type: http
+    url: https://raw.githubusercontent.com/kenith-byte/tunelling/refs/heads/main/trojan
+    path: ./account/Trojan.yaml
+    health-check:
+      enable: true
+      url: http://www.gstatic.com/generate_204
+      interval: 3600
+      
+proxy-groups:
+
+- name: Global Selected
+  icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Global.png
+  type: select
+  proxies:
+  - Fallback
+  - Load Balance
+  - Subscription
+  - Account Private
+  - Account Matcha
+  - Account Trojan
+  - DIRECT
+  
+- name: Subscription
+  icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Server.png
+  type: select
+  disable-udp: false
+  use:
+  - Subscription
+
+- name: Account Matcha
+  icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/VIP.png
+  type: select
+  disable-udp: false
+  use:
+  - Account Matcha
+  
+- name: Account Private
+  icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Heart.png
+  type: select
+  disable-udp: false
+  use:
+  - Account Private
+  
+- name: Account Trojan
+  icon: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/icon/color/trojan.png
+  type: select
+  disable-udp: false
+  use:
+  - Account Trojan
+      
+- name: Fallback
+  icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Available.png
+  type: fallback
+  url: http://www.gstatic.com/generate_204
+  interval: 300
+  disable-udp: false
+  include-all-providers: true
+  use:
+
+- name: Load Balance
+  icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Round_Robin.png
+  type: load-balance
+  url: http://www.gstatic.com/generate_204
+  interval: 300
+  strategy: round-robin
+  disable-udp: false
+  include-all-providers: true
+  use:
+  
+- name: Gaming
+  icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Game.png
+  type: select
+  disable-udp: false
+  proxies:
+  - Fallback
+  - Load Balance
+  - Subscription
+  - Account Private
+  - Account Trojan
+  - Account Matcha
+  - DIRECT
+  - REJECT
+  
+- name: Google
+  icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Google_Search.png
+  type: select
+  disable-udp: false
+  proxies:
+  - Fallback
+  - Load Balance
+  - Subscription
+  - Account Private
+  - Account Trojan
+  - Account Matcha
+  - DIRECT
+  - REJECT
+  
+- name: Social Media
+  icon: https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/meta.png
+  type: select 
+  disable-udp: false
+  proxies:
+  - Fallback
+  - Load Balance
+  - Global Selected
+  - Subscription
+  - Account Private
+  - Account Trojan
+  - Account Matcha
+  - DIRECT
+  - REJECT
+   
+- name: Streaming
+  icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Streaming.png
+  type: select 
+  disable-udp: false
+  proxies:
+  - Fallback
+  - Load Balance
+  - Global Selected
+  - Subscription
+  - Account Private
+  - Account Trojan
+  - Account Matcha
+  - DIRECT
+  - REJECT
+  
+- name: Speedtest
+  icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Speedtest.png
+  type: select
+  disable-udp: false
+  include-all-providers: true
+  use:
+   
+- name: E-commerce
+  icon: https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/Category_Shopping.png
+  type: select 
+  disable-udp: false
+  proxies:
+  - Fallback
+  - Load Balance
+  - Global Selected
+  - Subscription
+  - Account Private
+  - Account Trojan
+  - Account Matcha
+  - DIRECT
+  - REJECT
+  
+- name: WhatsApp
+  icon: https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/WhatsApp.png
+  type: select 
+  disable-udp: false
+  proxies:
+  - Fallback
+  - Load Balance
+  - Global Selected
+  - Subscription
+  - Account Private
+  - Account Trojan
+  - Account Matcha
+  - DIRECT
+  - REJECT
+  
+- name: Telegram
+  icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Telegram.png
+  type: select
+  disable-udp: false
+  proxies:
+  - Fallback
+  - Load Balance
+  - Global Selected
+  - Subscription
+  - Account Private
+  - Account Trojan
+  - Account Matcha
+  - DIRECT
+  - REJECT
+  
+- name: OpenAI
+  icon: https://raw.githubusercontent.com/lige47/QuanX-icon-rule/main/icon/ChatGPT-green.png
+  type: select
+  disable-udp: false
+  proxies:
+  - Fallback
+  - Load Balance
+  - Global Selected
+  - Subscription
+  - Account Private
+  - Account Trojan
+  - Account Matcha
+  - DIRECT
+  - REJECT
+  
+- name: NSFW
+  icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Reject.png
+  type: select 
+  disable-udp: false
+  proxies:
+  - Fallback
+  - Load Balance
+  - Subscription
+  - Account Private
+  - Account Trojan
+  - Account Matcha
+  - DIRECT
+  - REJECT
+
+- name: Block Ads
+  icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Advertising.png
+  type: select
+  disable-udp: false
+  proxies:
+  - REJECT
+  - Global Selected
+
+rule-providers:
+  game:
+    type: http
+    format: yaml
+    behavior: classical
+    path: ./rule_provider/rule_game.yaml
+    url: https://raw.githubusercontent.com/MilimNavaDemonLord/open_clash/main/rule_provider/rule_game.yaml
+    interval: 86400
+       
+  onlineshop:
+    type: http
+    format: yaml
+    behavior: classical
+    path: ./rule_provider/rule_onlineshop.yaml
+    url: https://raw.githubusercontent.com/MilimNavaDemonLord/open_clash/main/rule_provider/rule_onlineshop.yaml
+    interval: 86400
+   
+  payment:
+    type: http
+    format: yaml
+    behavior: classical
+    path: ./rule_provider/rule_payment.yaml
+    url: https://raw.githubusercontent.com/MilimNavaDemonLord/open_clash/main/rule_provider/rule_payment.yaml
+    interval: 86400
+ 
+  whatsapp:
+    type: http
+    format: yaml
+    behavior: classical
+    path: ./rule_provider/Whatsapp.yaml
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Whatsapp/Whatsapp.yaml
+    interval: 86400
+    
+  Speedtest:
+    type: http
+    format: yaml
+    behavior: classical
+    path: ./rule_provider/Speedtest.yaml
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Speedtest/Speedtest.yaml
+    interval: 86400
+    
+  streaming:
+    type: http
+    format: yaml
+    behavior: classical
+    path: ./rule_provider/rule_streaming.yaml
+    url: https://raw.githubusercontent.com/MilimNavaDemonLord/open_clash/main/rule_provider/rule_streaming.yaml
+    interval: 86400
+    
+  category-porn:
+    type: http
+    format: mrs
+    behavior: domain
+    path: ./rule_provider/category-porn.mrs
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/category-porn.mrs
+    interval: 86400
+
+  telegram:
+    type: http
+    format: yaml
+    behavior: classical
+    path: ./rule_provider/Telegram.yaml
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Telegram/Telegram.yaml
+    interval: 86400
+
+  tiktok:
+    type: http
+    format: mrs
+    behavior: domain
+    path: ./rule_provider/tiktok.mrs
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/tiktok.mrs
+    interval: 86400
+
+  x:
+    type: http
+    format: mrs
+    behavior: domain
+    path: ./rule_provider/x.mrs
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/x.mrs
+    interval: 86400
+
+  twitter-ipcidr:
+    type: http
+    format: mrs
+    behavior: ipcidr
+    path: ./rule_provider/twitter-ipcidr.mrs
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/twitter.mrs
+    interval: 86400
+    
+  facebook:
+    type: http
+    format: mrs
+    behavior: domain
+    path: ./rule_provider/facebook.mrs
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/facebook.mrs
+    interval: 86400
+    
+  facebook-ipcidr:
+    type: http
+    format: mrs
+    behavior: ipcidr
+    path: ./rule_provider/facebook-ipcidr.mrs
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/facebook.mrs
+    interval: 86400
+    
+  instagram:
+    type: http
+    format: mrs
+    behavior: domain
+    path: ./rule_provider/instagram.mrs
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/instagram.mrs
+    interval: 86400
+    
+  category-games:
+    type: http
+    format: mrs
+    behavior: domain
+    path: ./rule_provider/category-games.mrs
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/category-games.mrs
+    interval: 86400
+    
+  netflix-ipcidr:
+    type: http
+    format: mrs
+    behavior: ipcidr
+    path: ./rule_provider/netflix-ipcidr.mrs
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/netflix.mrs
+    interval: 86400
+    
+  netflix:
+    type: http
+    format: mrs
+    behavior: domain
+    path: ./rule_provider/netflix.mrs
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/netflix.mrs
+    interval: 86400
+    
+  spotify:
+    type: http
+    format: mrs
+    behavior: domain
+    path: ./rule_provider/spotify.mrs
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/spotify.mrs
+    interval: 86400
+    
+  youtube:
+    type: http
+    format: mrs
+    behavior: domain
+    path: ./rule_provider/youtube.mrs
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/youtube.mrs
+    interval: 86400
+
+  youtubemusic:
+    type: http
+    format: yaml
+    behavior: classical
+    path: ./rule_provider/YouTubeMusic.yaml
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/YouTubeMusic/YouTubeMusic.yaml
+    interval: 86400
+
+  disney:
+    type: http
+    format: mrs
+    behavior: domain
+    path: ./rule_provider/disney.mrs
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/disney.mrs
+    interval: 86400
+    
+  google-ipcidr:
+    type: http
+    format: mrs
+    behavior: ipcidr
+    path: ./rule_provider/google-ipcidr.mrs
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/google.mrs
+    interval: 86400
+    
+  google:
+    type: http
+    format: mrs
+    behavior: domain
+    path: ./rule_provider/google.mrs
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/google.mrs
+    interval: 86400
+    
+  openai:
+    type: http
+    format: mrs
+    behavior: domain
+    path: ./rule_provider/openai.mrs
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/openai.mrs
+    interval: 86400
+    
+  gemini:
+    type: http
+    format: yaml
+    behavior: classical
+    path: ./rule_provider/gemini.yaml
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Gemini/Gemini.yaml
+    interval: 86400
+    
+  copilot:
+    type: http
+    format: yaml
+    behavior: classical
+    path: ./rule_provider/Copilot.yaml
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Copilot/Copilot.yaml
+    interval: 86400
+     
+  oisd_big:
+    type: http
+    format: yaml
+    behavior: classical
+    path: ./rule_provider/oisd_big.yaml
+    url: https://raw.githubusercontent.com/hillz2/openclash_adblock/main/oisd_big.yaml
+    interval: 28800
+    
+  game-kakao:
+    type: http
+    format: yaml
+    behavior: classical
+    path: ./rule_provider/Kakao-game.yaml
+    url: https://raw.githubusercontent.com/Mayumiwandi/Kakao-game/refs/heads/main/Kakao-game.yaml
+    interval: 86400
+
+rules:
+#OPEN AI
+- RULE-SET,openai,OpenAI
+- RULE-SET,gemini,OpenAI
+- RULE-SET,copilot,OpenAI
+
+#E-COMMERCE
+- RULE-SET,onlineshop,E-commerce
+- RULE-SET,payment,E-commerce
+
+#GAMING
+- RULE-SET,category-games,Gaming
+- RULE-SET,game,Gaming
+- RULE-SET,game-kakao,Gaming
+
+#ADSBLOCK
+- RULE-SET,oisd_big,Block Ads
+
+#STREAMING
+- RULE-SET,netflix,Streaming
+- RULE-SET,netflix-ipcidr,Streaming
+- RULE-SET,spotify,Streaming
+- RULE-SET,youtube,Streaming
+- RULE-SET,youtubemusic,Streaming
+- RULE-SET,disney,Streaming
+- RULE-SET,streaming,Streaming
+
+#TELEGRAM
+- RULE-SET,telegram,Telegram
+
+#SOSMED
+- RULE-SET,x,Social Media
+- RULE-SET,twitter-ipcidr,Social Media
+- RULE-SET,facebook,Social Media
+- RULE-SET,facebook-ipcidr,Social Media
+- RULE-SET,tiktok,Social Media
+- RULE-SET,instagram,Social Media
+- DOMAIN-KEYWORD,meta,Social Media
+- DOMAIN-KEYWORD,meta.ai,Social Media
+
+#WHATSAPP
+- RULE-SET,whatsapp,WhatsApp
+
+#SPEEDTEST
+- RULE-SET,Speedtest,Speedtest
+
+#GOOGLE
+- RULE-SET,google,Google
+- RULE-SET,google-ipcidr,Google
+
+#NSFW
+- RULE-SET,category-porn,NSFW
+
+#FINAL
+- MATCH,Global Selected
