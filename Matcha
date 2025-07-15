@@ -1,72 +1,62 @@
+port: 6550
+socks-port: 6551
+mixed-port: 6552
+redir-port: 9797
+tproxy-port: 9898
 mode: rule
 allow-lan: true
 bind-address: '*'
 log-level: silent
 unified-delay: true
-ipv6: false
+keep-alive-interval: 15
 global-client-fingerprint: chrome
 find-process-mode: strict
-keep-alive-interval: 15
 tcp-concurrent: false
-tun:
-  enable: true
-  mtu: 9000
-  device: clash
-  stack: mixed
-  dns-hijack:
-  - any:53
-  - tcp://any:53
-  auto-route: true
-  strict-route: false
-  auto-redirect: true
-  auto-detect-interface: true
+geodata-mode: true
+geodata-loader: mem
+conservative-mode: false
+ipv6: false
+external-controller: 0.0.0.0:9090
+secret: ""
+external-ui: /data/adb/box/clash/dashboard
+
 profile:
   store-selected: true
   store-fake-ip: false
+
 geox-url:
-  geoip: https://github.com/MetaCubeX/meta-rules-dat/raw/release/geoip-lite.dat
-  mmdb: https://github.com/MetaCubeX/meta-rules-dat/raw/release/country-lite.mmdb
-  geosite: https://github.com/MetaCubeX/meta-rules-dat/raw/release/geosite.dat
+  geoip: "https://github.com/MetaCubeX/meta-rules-dat/raw/release/geoip-lite.dat"
+  mmdb: "https://github.com/MetaCubeX/meta-rules-dat/raw/release/country-lite.mmdb"
+  geosite: "https://github.com/Loyalsoldier/v2ray-rules-dat/releases/latest/download/geosite.dat"
+
 sniffer:
   enable: true
   force-dns-mapping: false
   parse-pure-ip: false
   override-destination: false
   sniff:
-    QUIC:
-      ports:
-      - 443
     TLS:
-      ports:
-      - 443
-      - 8443
+      ports: [443, 8443]
     HTTP:
-      ports:
-      - 80
-      - 8080-8880
+      ports: [80, 8080-8880]
       override-destination: true
-  sniffing:
-  - tls
-  - http
-  port-whitelist:
-  - 80
-  - 443
+  port-whitelist: [80, 443]
+
 dns:
   cache-algorithm: arc
   enable: true
   prefer-h3: false
   ipv6: false
-  ipv6-timeout: 300
   default-nameserver:
-  - 8.8.8.8
-  - 1.1.1.1
+    - 8.8.8.8
+    - 1.1.1.1
   listen: 0.0.0.0:1053
   use-hosts: true
-  enhanced-mode: redir-host
+  enhanced-mode: fake-ip
   fake-ip-range: 198.18.0.1/16
   fake-ip-filter:
-  - '*.lan'
-  - '*.ntp.*'
+    - "*.lan"
+    - "*.ntp.*"
   nameserver:
   - https://dns.google/dns-query
   - https://dns.cloudflare.com/dns-query
@@ -74,6 +64,20 @@ dns:
   - 112.215.198.248
   - 112.215.198.254
   respect-rules: false
+
+tun:
+  enable: false
+  mtu: 9000
+  device: clash
+  stack: mixed
+  dns-hijack:
+    - any:53
+    - tcp://any:53
+  auto-route: true
+  strict-route: false
+  auto-redirect: true
+  auto-detect-interface: true
+
 proxies:
 proxy-providers:
   Subscription:
@@ -87,7 +91,7 @@ proxy-providers:
 
   Account Matcha:
     type: http
-    url: https://sub.bansos4u.biz.id/sub/clash?type=vless&bug=cache.netflix.com&wildcard=true&tls=true&country=ID&limit=15
+    url: https://violetvpn.biz.id/sub/clash/?type=wildcard&bug=ava.game.naver.com
     path: ./account/Matcha.yaml
     health-check:
       enable: true
@@ -115,14 +119,13 @@ proxy-providers:
       interval: 3600
       
 proxy-groups:
+
 - name: Global Selected
   icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Global.png
   type: select
   proxies:
-  - Best Latency
-  - Load Balance
   - Fallback
-  - Manual Selected
+  - Load Balance
   - Subscription
   - Account Private
   - Account Matcha
@@ -137,7 +140,7 @@ proxy-groups:
   - Subscription
 
 - name: Account Matcha
-  icon: https://raw.githubusercontent.com/lige47/QuanX-icon-rule/main/icon/zhipianren-emby.png
+  icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/VIP.png
   type: select
   disable-udp: false
   use:
@@ -157,22 +160,16 @@ proxy-groups:
   use:
   - Account Trojan
       
-- name: Best Latency
-  icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Auto.png
-  type: url-test
-  url: http://www.gstatic.com/generate_204
+- name: Fallback
+  icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Available.png
+  type: fallback
+  url: https://www.gstatic.com/generate_204
   interval: 300
-  tolerance: 50
   lazy: false
   disable-udp: false
-  timeout: 5000
-  max-failed-times: 5
-  proxies:
-  - Subscription
-  - Account Private
-  - Account Trojan
-  - Account Matcha
-  
+  include-all-providers: true
+  use:
+
 - name: Load Balance
   icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Round_Robin.png
   type: load-balance
@@ -186,32 +183,13 @@ proxy-groups:
   max-failed-times: 5
   use:
   
-- name: Fallback
-  icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Available.png
-  type: fallback
-  url: https://www.gstatic.com/generate_204
-  interval: 300
-  lazy: false
-  disable-udp: false
-  include-all-providers: true
-  use:
-  
-- name: Manual Selected
-  icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Static.png
-  type: select
-  disable-udp: false
-  include-all-providers: true
-  use:
-  
 - name: Gaming
   icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Game.png
   type: select
   disable-udp: false
   proxies:
-  - Best Latency
-  - Load Balance
   - Fallback
-  - Manual Selected
+  - Load Balance
   - Subscription
   - Account Private
   - Account Trojan
@@ -224,10 +202,8 @@ proxy-groups:
   type: select
   disable-udp: false
   proxies:
-  - Best Latency
-  - Load Balance
   - Fallback
-  - Manual Selected
+  - Load Balance
   - Subscription
   - Account Private
   - Account Trojan
@@ -240,10 +216,8 @@ proxy-groups:
   type: select 
   disable-udp: false
   proxies:
-  - Best Latency
-  - Load Balance
   - Fallback
-  - Manual Selected
+  - Load Balance
   - Global Selected
   - Subscription
   - Account Private
@@ -257,10 +231,8 @@ proxy-groups:
   type: select 
   disable-udp: false
   proxies:
-  - Best Latency
-  - Load Balance
   - Fallback
-  - Manual Selected
+  - Load Balance
   - Global Selected
   - Subscription
   - Account Private
@@ -281,10 +253,8 @@ proxy-groups:
   type: select 
   disable-udp: false
   proxies:
-  - Best Latency
-  - Load Balance
   - Fallback
-  - Manual Selected
+  - Load Balance
   - Global Selected
   - Subscription
   - Account Private
@@ -298,10 +268,8 @@ proxy-groups:
   type: select 
   disable-udp: false
   proxies:
-  - Best Latency
-  - Load Balance
   - Fallback
-  - Manual Selected
+  - Load Balance
   - Global Selected
   - Subscription
   - Account Private
@@ -315,10 +283,8 @@ proxy-groups:
   type: select
   disable-udp: false
   proxies:
-  - Best Latency
-  - Load Balance
   - Fallback
-  - Manual Selected
+  - Load Balance
   - Global Selected
   - Subscription
   - Account Private
@@ -332,10 +298,8 @@ proxy-groups:
   type: select
   disable-udp: false
   proxies:
-  - Best Latency
-  - Load Balance
   - Fallback
-  - Manual Selected
+  - Load Balance
   - Global Selected
   - Subscription
   - Account Private
@@ -349,10 +313,8 @@ proxy-groups:
   type: select 
   disable-udp: false
   proxies:
-  - Best Latency
-  - Load Balance
   - Fallback
-  - Manual Selected
+  - Load Balance
   - Subscription
   - Account Private
   - Account Trojan
@@ -520,7 +482,15 @@ rule-providers:
     path: ./rule_provider/youtube.mrs
     url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/youtube.mrs
     interval: 86400
-    
+
+  youtubemusic:
+    type: http
+    format: yaml
+    behavior: classical
+    path: ./rule_provider/YouTubeMusic.yaml
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/YouTubeMusic/YouTubeMusic.yaml
+    interval: 86400 # Update rules every 24 hours
+
   disney:
     type: http
     format: mrs
@@ -576,14 +546,6 @@ rule-providers:
     path: ./rule_provider/oisd_big.yaml
     url: https://raw.githubusercontent.com/hillz2/openclash_adblock/main/oisd_big.yaml
     interval: 28800
-  
-  ubuntu-rule:
-    type: http
-    format: yaml
-    behavior: classical
-    path: ./rule_provider/Ubuntu.yaml
-    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Ubuntu/Ubuntu.yaml
-    interval: 86400
     
   game-kakao:
     type: http
@@ -603,9 +565,6 @@ rules:
 - RULE-SET,onlineshop,E-commerce
 - RULE-SET,payment,E-commerce
 
-#Ubuntu rules
-- RULE-SET,ubuntu-rule,Gaming
-
 #GAMING
 - RULE-SET,category-games,Gaming
 - RULE-SET,game,Gaming
@@ -619,6 +578,7 @@ rules:
 - RULE-SET,netflix-ipcidr,Streaming
 - RULE-SET,spotify,Streaming
 - RULE-SET,youtube,Streaming
+- RULE-SET,youtubemusic,Streaming
 - RULE-SET,disney,Streaming
 - RULE-SET,streaming,Streaming
 
