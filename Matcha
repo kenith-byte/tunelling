@@ -86,7 +86,7 @@ proxy-providers:
     path: ./account/Subscription.yaml
     health-check:
       enable: true
-      url: https://www.gstatic.com/generate_204
+      url: http://www.gstatic.com/generate_204
       interval: 3600
 
   Account Matcha:
@@ -95,18 +95,16 @@ proxy-providers:
     path: ./account/Matcha.yaml
     health-check:
       enable: true
-      url: https://www.gstatic.com/generate_204
+      url: http://www.gstatic.com/generate_204
       interval: 3600
       
   Account Private:
     type: http
-    url: https://raw.githubusercontent.com/kenith-byte/tunelling/refs/heads/main/vless
+    url: https://raw.githubusercontent.com/kenith-byte/tunelling/refs/heads/main/private
     path: ./account/Private.yaml
     health-check:
       enable: true
-      url: https://www.gstatic.com/generate_204
-      lazy: false
-      expected-status: 204
+      url: http://www.gstatic.com/generate_204
       interval: 3600
       
   Account Trojan:
@@ -115,7 +113,7 @@ proxy-providers:
     path: ./account/Trojan.yaml
     health-check:
       enable: true
-      url: https://www.gstatic.com/generate_204
+      url: http://www.gstatic.com/generate_204
       interval: 3600
       
 proxy-groups:
@@ -163,9 +161,8 @@ proxy-groups:
 - name: Fallback
   icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Available.png
   type: fallback
-  url: https://www.gstatic.com/generate_204
+  url: http://www.gstatic.com/generate_204
   interval: 300
-  lazy: false
   disable-udp: false
   include-all-providers: true
   use:
@@ -173,14 +170,11 @@ proxy-groups:
 - name: Load Balance
   icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Round_Robin.png
   type: load-balance
-  url: https://www.gstatic.com/generate_204
+  url: http://www.gstatic.com/generate_204
   interval: 300
-  lazy: false
   strategy: round-robin
   disable-udp: false
   include-all-providers: true
-  timeout: 5000
-  max-failed-times: 5
   use:
   
 - name: Gaming
