@@ -619,7 +619,6 @@ rules:
 - RULE-SET,netflix-ipcidr,Streaming
 - RULE-SET,spotify,Streaming
 - RULE-SET,youtube,Streaming
-- RULE-SET,youtubemusic,Streaming
 - RULE-SET,disney,Streaming
 - RULE-SET,streaming,Streaming
 
