@@ -80,6 +80,7 @@ tun:
 
 proxies:
 proxy-providers:
+
   Subscription:
     type: http
     url: https://mstkkee3.dpdns.org/sub/clash/?method=sni&bug=graph.instagram.com
