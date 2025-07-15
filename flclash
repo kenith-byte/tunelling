@@ -148,7 +148,7 @@ proxy-groups:
   type: select
   disable-udp: false
   use:
-  - Account Vless
+  - Account Private
   
 - name: Account Trojan
   icon: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/icon/color/trojan.png
