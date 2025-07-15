@@ -41,20 +41,6 @@ proxies:
         Host: graph.instagram.com.joss.krikkrik.tech
     udp: true
 
-  - name: PT. Pusat Media
-    server: clubgratis.xyz
-    port: 443
-    type: trojan
-    password: aaaaaaa1-bbbb-4ccc-addd-eeeeeeeeeee1
-    skip-cert-verify: true
-    sni: graph.instagram.com.clubgratis.xyz
-    network: ws
-    ws-opts:
-      path: /Club-Gratis/103.6.207.108-8080
-      headers:
-        Host: graph.instagram.com.clubgratis.xyz
-    udp: true
-
   - name: Cloudflare
     server: free.xiongt.my.id
     port: 443
