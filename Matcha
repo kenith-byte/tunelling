@@ -22,7 +22,6 @@ geox-url:
 
 sniffer:
   enable: true
-  force-dns-mapping: false
   parse-pure-ip: true
   override-destination: true
   sniff:
@@ -34,9 +33,7 @@ sniffer:
   port-whitelist: [80, 443]
 
 dns:
-  cache-algorithm: arc
   enable: true
-  prefer-h3: false
   ipv6: false
   default-nameserver:
     - 8.8.8.8
