@@ -21,7 +21,7 @@ external-ui: /data/adb/box/clash/dashboard
 
 profile:
   store-selected: true
-  store-fake-ip: true
+  store-fake-ip: false
 
 geox-url:
   geoip: "https://github.com/MetaCubeX/meta-rules-dat/raw/release/geoip-lite.dat"
@@ -51,7 +51,7 @@ dns:
     - 1.1.1.1
   listen: 0.0.0.0:1053
   use-hosts: true
-  enhanced-mode: fake-ip
+  enhanced-mode: redir-host
   fake-ip-range: 198.18.0.1/16
   fake-ip-filter:
     - "*.lan"
