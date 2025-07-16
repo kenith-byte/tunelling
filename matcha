@@ -1,8 +1,8 @@
-port: 6550
-socks-port: 6551
-mixed-port: 6552
-redir-port: 9797
-tproxy-port: 9898
+port: 7890
+socks-port: 7891
+mixed-port: 7892
+redir-port: 7893
+tproxy-port: 7895
 mode: rule
 allow-lan: true
 bind-address: '*'
@@ -14,7 +14,6 @@ find-process-mode: strict
 tcp-concurrent: false
 geodata-mode: true
 geodata-loader: mem
-conservative-mode: false
 ipv6: false
 external-controller: 0.0.0.0:9090
 secret: ""
@@ -22,7 +21,7 @@ external-ui: /data/adb/box/clash/dashboard
 
 profile:
   store-selected: true
-  store-fake-ip: false
+  store-fake-ip: true
 
 geox-url:
   geoip: "https://github.com/MetaCubeX/meta-rules-dat/raw/release/geoip-lite.dat"
@@ -185,6 +184,7 @@ proxy-groups:
   proxies:
   - Fallback
   - Load Balance
+  - Global Selected
   - Subscription
   - Account Private
   - Account Trojan
@@ -199,6 +199,7 @@ proxy-groups:
   proxies:
   - Fallback
   - Load Balance
+  - Global Selected
   - Subscription
   - Account Private
   - Account Trojan
