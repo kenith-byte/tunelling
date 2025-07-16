@@ -1,27 +1,19 @@
-port: 7890
-socks-port: 7891
-mixed-port: 7892
-redir-port: 7893
-tproxy-port: 7895
+redir-port: 9797
+tproxy-port: 9898
 mode: rule
 allow-lan: true
 bind-address: '*'
 log-level: silent
 unified-delay: true
-keep-alive-interval: 15
 global-client-fingerprint: chrome
-find-process-mode: strict
-tcp-concurrent: false
-geodata-mode: true
-geodata-loader: mem
 ipv6: false
 external-controller: 0.0.0.0:9090
-secret: ""
+secret: "1234"
 external-ui: /data/adb/box/clash/dashboard
 
 profile:
   store-selected: true
-  store-fake-ip: false
+  store-fake-ip: true
 
 geox-url:
   geoip: "https://github.com/MetaCubeX/meta-rules-dat/raw/release/geoip-lite.dat"
@@ -31,8 +23,8 @@ geox-url:
 sniffer:
   enable: true
   force-dns-mapping: false
-  parse-pure-ip: false
-  override-destination: false
+  parse-pure-ip: true
+  override-destination: true
   sniff:
     TLS:
       ports: [443, 8443]
@@ -49,10 +41,11 @@ dns:
   default-nameserver:
     - 8.8.8.8
     - 1.1.1.1
-  listen: 0.0.0.0:1053
+  listen: 0.0.0.0:7874
   use-hosts: true
   enhanced-mode: redir-host
   fake-ip-range: 198.18.0.1/16
+  fake-ip-filter-mode: blacklist
   fake-ip-filter:
     - "*.lan"
     - "*.ntp.*"
@@ -62,12 +55,12 @@ dns:
   proxy-server-nameserver:
   - 112.215.198.248
   - 112.215.198.254
-  respect-rules: false
+  respect-rules: true
 
 tun:
   enable: false
   mtu: 9000
-  device: clash
+  device: utun
   stack: mixed
   dns-hijack:
     - any:53
