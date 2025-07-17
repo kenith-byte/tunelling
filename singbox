@@ -31,15 +31,10 @@
         "rules": [
             {
                 "domain": [
-                    "plus-store.naver.com",
+                    "cache.netflix.com",
                     "ava.game.naver.com",
                     "graph.instagram.com",
-                    "investor.fb.com",
-                    "investors.spotify.com",
-                    "nontontv.vidio.com",
-                    "support.vidio.com",
-                    "img.email2.vidio.com",
-                    "quiz.int.vidio.com",
+                    "zaintest.vuclip.com",
                     "quiz.vidio.com"
                 ],
                 "server": "dns-local"
@@ -63,7 +58,7 @@
             {
                 "outbound": "Latency",
                 "server": "google-dns",
-                "rewrite_ttl": 7200
+                "rewrite_ttl": 600
             },
             {
                 "outbound": "Region",
