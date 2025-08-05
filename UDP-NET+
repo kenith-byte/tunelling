@@ -1,0 +1,16 @@
+proxies:
+  - name: 🌟 UDP XUTP/XUTS
+    server: 104.18.214.235
+    port: 443
+    type: vless
+    uuid: 82d0fd77-dbc4-4f25-829d-d6bb13aaee49
+    cipher: auto
+    tls: true
+    skip-cert-verify: true
+    servername: ava.game.naver.com.free.unlimited.biz.id
+    network: ws
+    ws-opts:
+      path: /vless-express
+      headers:
+        Host: ava.game.naver.com.free.unlimited.biz.id
+    udp: true
