@@ -1,0 +1,355 @@
+port: 7890
+socks-port: 7891
+redir-port: 7892
+mixed-port: 7893
+tproxy-port: 7895
+mode: rule
+log-level: warning
+allow-lan: true
+external-controller: 0.0.0.0:9090
+secret: ""
+bind-address: "*"
+unified-delay: true
+external-ui: ./dashboard
+external-ui-url: https://github.com/MetaCubeX/yacd/archive/gh-pages.zip
+tcp-concurrent: true  
+ipv6: false
+
+sniffer:
+  enable: true
+  force-dns-mapping: true
+  parse-pure-ip: true
+  override-destination: true
+  sniff:
+    TLS:
+      ports: [443, 8443]
+    HTTP:
+      ports: [80, 8080-8880]
+      override-destination: true
+  force-domain:
+    - '+.v2ex.com'
+  skip-domain:
+    - '+.google.com'
+  sniffing:
+    - tls
+    - http
+  port-whitelist:
+    - "80"
+    - "443"
+
+tun:
+  enable: true
+  mtu: 9000
+  device: utun
+  stack: system
+  dns-hijack:
+    - any:53
+    - tcp://any:53
+  auto-route: true
+  strict-route: true
+  auto-redirect: true
+  auto-detect-interface: true
+  include-android-user: [0, 10]
+  exclude-package: []
+  include-package: []
+
+dns:
+  enable: true
+  ipv6: false
+  listen: 0.0.0.0:1053
+  enhanced-mode: fake-ip
+  respect-rules: true
+  fake-ip-range: 198.18.0.1/16
+  fake-ip-filter:
+    - '+.lan'
+    - '+.stun.*.*'
+    - '+.stun.*.*.*'
+    - '+.stun.*.*.*.*'
+    - '+.stun.*.*.*.*.*'
+  nameserver:
+    - 8.8.8.8
+    - 1.1.1.1
+  fallback:
+    - https://dns.google/dns-query#UMUM
+    - https://dns.alidns.com/dns-query
+  default-nameserver:
+    - 8.8.8.8
+    - 1.1.1.1
+  proxy-server-nameserver:
+    - 104.22.4.240 #IP VIDIO
+    - 104.22.5.240 #IP VIDIO
+    - 104.17.156.243 #IP VIDIO
+    - 104.17.157.243 #IP VIDIO
+    - 104.17.158.243 #IP VIDIO
+    - 104.17.159.243 #IP VIDIO
+    - 104.17.71.206 #IP VIDIO
+    - 104.17.72.206 #IP VIDIO
+    - 104.17.73.206 #IP VIDIO
+    - 104.17.74.206 #IP VIDIO
+    - 172.64.32.202 #IP VIDIO
+    - 104.18.38.43 #IP VIU
+    - 172.64.149.213 #IP VIU
+    - 104.17.241.25 #IP NETFLIX
+    - 104.17.237.25 #IP NETFLIX
+    - 170.114.45.6 #IP XCV
+    - 170.114.46.6 #IP XCV
+    - 104.18.213.235 #IP XCV
+    - 104.18.214.235 #IP XCV
+    - 112.215.203.246 #DNS XL
+    - 112.215.203.247 #DNS XL
+    - 112.215.203.248 #DNS XL
+    - 112.215.203.254 #DNS XL
+    - 112.215.198.248 #DNS XL
+    - 112.215.198.254 #DNS XL
+    - '[2400:9800:2:2::245]' #DNS XL
+    - '[2400:9800:2:2::246]' #DNS XL
+  fallback-filter:
+    geoip: true
+    geoip-code: ID
+    ipcidr:
+    - 0.0.0.0/8
+    - 10.0.0.0/8
+    - 100.64.0.0/10
+    - 127.0.0.0/8
+    - 169.254.0.0/16
+    - 172.16.0.0/12
+    - 192.0.0.0/24
+    - 192.0.2.0/24
+    - 192.88.99.0/24
+    - 192.168.0.0/16
+    - 198.18.0.0/15
+    - 198.51.100.0/24
+    - 203.0.113.0/24
+    - 224.0.0.0/4
+    - 240.0.0.0/4
+    - 255.255.255.255/32
+    domain:
+    - "+.google.com"
+    - "+.facebook.com"
+    - "+.youtube.com"
+    - "+.githubusercontent.com"
+    - "+.googlevideo.com"
+    - "+.msftconnecttest.com"
+    - "+.msftncsi.com"
+    - msftconnecttest.com
+    - msftncsi.com
+    - "+.*"
+profile:
+  store-selected: true
+  store-fake-ip: true
+
+proxies:
+proxy-providers:
+  AKUN-ID:
+    type: http
+    url:
+    path: ./AKUN-ID
+    health-check:
+      enable: true
+      interval: '120'
+      url: https://www.gstatic.com/generate_204
+
+  AKUN-SG:
+    type: file
+    url:
+    path: ./AKUN-SG.yaml
+    health-check:
+      enable: true
+      url: http://www.gstatic.com/generate_204
+      interval: '120'
+
+  AKUN-UDP:
+    type: file
+    url:
+    path: ./AKUN-UDP.yaml
+    health-check:
+      enable: true
+      url: http://www.gstatic.com/generate_204
+      interval: '120'
+
+proxy-groups:
+- name: ID-NET+
+  icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/VIP.png
+  type: select
+  disable-udp: false
+  use:
+  - AKUN-ID
+  url: http://www.gstatic.com/generate_204
+  interval: '300'
+- name: SG-NET+
+  icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Heart.png
+  type: select
+  disable-udp: false
+  use:
+  - AKUN-SG
+  url: http://www.gstatic.com/generate_204
+  interval: '300'
+- name: UDP-NET+
+  icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Server.png
+  type: select
+  disable-udp: false
+  use:
+  - AKUN-UDP
+  url: http://www.gstatic.com/generate_204
+  interval: '300'
+- name: INTERNET-UMUM
+  icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Global.png
+  type: select
+  disable-udp: false
+  proxies:
+  - FALLBACK
+  - DIRECT
+  - BALANCE
+  - ID-NET+
+  - SG-NET+
+  - UDP-NET+
+  url: http://www.gstatic.com/generate_204
+  interval: '180'
+- name: Block-Ads
+  icon,: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Advertising.png
+  type: select
+  disable-udp: false
+  proxies:
+  - REJECT
+  - DIRECT
+  - BALANCE
+  - ID-NET+
+  - SG-NET+
+  - UDP-NET+
+  url: http://www.gstatic.com/generate_204
+  interval: '180'
+- name: Market-Bank
+  icon: https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/Category_Shopping.png
+  type: select
+  disable-udp: false
+  proxies:
+  - FALLBACK
+  - DIRECT
+  - BALANCE
+  - ID-NET+
+  - SG-NET+
+  - UDP-NET+
+  url: http://www.gstatic.com/generate_204
+  interval: '180'
+- name: Social-Media
+  icon: https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/meta.png
+  type: select
+  disable-udp: false
+  proxies:
+  - FALLBACK
+  - DIRECT
+  - BALANCE
+  - ID-NET+
+  - SG-NET+
+  - UDP-NET+
+  url: http://www.gstatic.com/generate_204
+  interval: '180'
+- name: TikTok
+  icon: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/icon/qure/color/TikTok.png
+  type: select
+  disable-udp: false
+  proxies:
+  - FALLBACK
+  - DIRECT
+  - BALANCE
+  - ID-NET+
+  - SG-NET+
+  - UDP-NET+
+  url: http://www.gstatic.com/generate_204
+  interval: '180'
+- name: YouTube
+  icon: https://raw.githubusercontent.com/lige47/QuanX-icon-rule/main/icon/youtube.png
+  type: select
+  disable-udp: false
+  proxies:
+  - FALLBACK
+  - DIRECT
+  - BALANCE
+  - ID-NET+
+  - SG-NET+
+  - UDP-NET+
+  url: http://www.gstatic.com/generate_204
+  interval: '180'
+- name: WhatsApp
+  icon: https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/WhatsApp.png
+  type: select
+  disable-udp: false
+  proxies:
+  - FALLBACK
+  - DIRECT
+  - BALANCE
+  - ID-NET+
+  - SG-NET+
+  - UDP-NET+
+  url: http://www.gstatic.com/generate_204
+  interval: '180'
+- name: BALANCE
+  icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Round_Robin.png
+  type: load-balance
+  strategy: round-robin
+  disable-udp: false
+  use:
+  - ID-NET+
+  - SG-NET+
+  - UDP-NET+
+  url: http://www.gstatic.com/generate_204
+  interval: '300'
+- name: FALLBACK
+  icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Available.png
+  type: fallback
+  strategy: round-robin
+  disable-udp: false
+  use:
+  - ID-NET+
+  - SG-NET+
+  - UDP-NET+
+  url: http://www.gstatic.com/generate_204
+  interval: '300'
+- name: BEST-PING
+  icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Auto.png
+  type: url-test
+  use:
+  - ID-NET+
+  - SG-NET+
+  - UDP-NET+
+  url: http://www.gstatic.com/generate_204
+  interval: '300'
+
+rule-providers:
+  AdBlock:
+    type: file
+    behavior: classical
+    path: "./AdBlock.yaml"
+  MarketBank:
+    type: file
+    behavior: classical
+    path: "./MarketBank.yaml"
+  SocialMedia:
+    type: file
+    behavior: classical
+    path: "./SocialMedia.yaml"
+  TikTok:
+    type: file
+    behavior: classical
+    path: "./TikTok.yaml"
+  YouTube:
+    type: file
+    behavior: classical
+    path: "./YouTube.yaml"
+  WhatsApp:
+    type: file
+    behavior: classical
+    path: "./WhatsApp.yaml"
+
+rules:
+- IP-CIDR,127.0.0.1/32,REJECT,no-resolve
+- IP-CIDR,198.18.0.1/16,REJECT,no-resolve
+- IP-CIDR,28.0.0.1/8,REJECT,no-resolve
+- IP-CIDR6,::1/128,REJECT,no-resolve
+- RULE-SET,AdBlock,Block-Ads
+- RULE-SET,MarketBank,Market-Bank
+- RULE-SET,SocialMedia,Social-Media
+- RULE-SET,TikTok,TikTok
+- RULE-SET,YouTube,YouTube
+- RULE-SET,WhatsApp,WhatsApp
+- MATCH,INTERNET-UMUM
