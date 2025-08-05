@@ -140,17 +140,18 @@ profile:
 
 proxies:
 proxy-providers:
+
   AKUN-ID:
     type: http
     url: https://raw.githubusercontent.com/kenith-byte/tunelling/refs/heads/main/ID-NET%2B
-    path: ./account/AKUN-ID
+    path: ./account/AKUN-ID.yaml
     health-check:
       enable: true
       interval: '120'
       url: https://www.gstatic.com/generate_204
 
   AKUN-SG:
-    type: file
+    type: http
     url: https://raw.githubusercontent.com/kenith-byte/tunelling/refs/heads/main/SG-NET%2B
     path: ./account/AKUN-SG.yaml
     health-check:
@@ -159,7 +160,7 @@ proxy-providers:
       interval: '120'
 
   AKUN-UDP:
-    type: file
+    type: http
     url: https://raw.githubusercontent.com/kenith-byte/tunelling/refs/heads/main/UDP-NET%2B
     path: ./account/AKUN-UDP.yaml
     health-check:
@@ -168,30 +169,6 @@ proxy-providers:
       interval: '120'
 
 proxy-groups:
-- name: ID-NET+
-  icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/VIP.png
-  type: select
-  disable-udp: false
-  use:
-  - AKUN-ID
-  url: http://www.gstatic.com/generate_204
-  interval: '300'
-- name: SG-NET+
-  icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Heart.png
-  type: select
-  disable-udp: false
-  use:
-  - AKUN-SG
-  url: http://www.gstatic.com/generate_204
-  interval: '300'
-- name: UDP-NET+
-  icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Server.png
-  type: select
-  disable-udp: false
-  use:
-  - AKUN-UDP
-  url: http://www.gstatic.com/generate_204
-  interval: '300'
 - name: INTERNET-UMUM
   icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Global.png
   type: select
@@ -205,8 +182,30 @@ proxy-groups:
   - UDP-NET+
   url: http://www.gstatic.com/generate_204
   interval: '180'
+
+- name: ID-NET+
+  icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/VIP.png
+  type: select
+  disable-udp: false
+  use:
+  - AKUN-ID
+  
+- name: SG-NET+
+  icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Heart.png
+  type: select
+  disable-udp: false
+  use:
+  - AKUN-SG
+  
+- name: UDP-NET+
+  icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Server.png
+  type: select
+  disable-udp: false
+  use:
+  - AKUN-UDP
+  
 - name: Block-Ads
-  icon,: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Advertising.png
+  icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Advertising.png
   type: select
   disable-udp: false
   proxies:
@@ -218,6 +217,7 @@ proxy-groups:
   - UDP-NET+
   url: http://www.gstatic.com/generate_204
   interval: '180'
+
 - name: Market-Bank
   icon: https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/Category_Shopping.png
   type: select
@@ -231,6 +231,7 @@ proxy-groups:
   - UDP-NET+
   url: http://www.gstatic.com/generate_204
   interval: '180'
+
 - name: Social-Media
   icon: https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/meta.png
   type: select
@@ -244,6 +245,7 @@ proxy-groups:
   - UDP-NET+
   url: http://www.gstatic.com/generate_204
   interval: '180'
+
 - name: TikTok
   icon: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/icon/qure/color/TikTok.png
   type: select
@@ -257,8 +259,9 @@ proxy-groups:
   - UDP-NET+
   url: http://www.gstatic.com/generate_204
   interval: '180'
+
 - name: YouTube
-  icon: https://raw.githubusercontent.com/lige47/QuanX-icon-rule/main/icon/youtube.png
+  icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/YouTube.png
   type: select
   disable-udp: false
   proxies:
@@ -270,6 +273,7 @@ proxy-groups:
   - UDP-NET+
   url: http://www.gstatic.com/generate_204
   interval: '180'
+
 - name: WhatsApp
   icon: https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/WhatsApp.png
   type: select
@@ -283,6 +287,7 @@ proxy-groups:
   - UDP-NET+
   url: http://www.gstatic.com/generate_204
   interval: '180'
+
 - name: BALANCE
   icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Round_Robin.png
   type: load-balance
@@ -292,6 +297,7 @@ proxy-groups:
   use:
   url: http://www.gstatic.com/generate_204
   interval: '300'
+
 - name: FALLBACK
   icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Available.png
   type: fallback
@@ -301,6 +307,7 @@ proxy-groups:
   use:
   url: http://www.gstatic.com/generate_204
   interval: '300'
+
 - name: BEST-PING
   icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Auto.png
   type: url-test
@@ -316,30 +323,35 @@ rule-providers:
     behavior: classical
     path: ./rule_provider/AdBlock.yaml
     url: https://raw.githubusercontent.com/kenith-byte/Rule-Clash/refs/heads/main/AdBlock.yaml
+
   MarketBank:
     type: http
     format: yaml
     behavior: classical
     path: ./rule_provider/MarketBank.yaml
     url: https://raw.githubusercontent.com/kenith-byte/Rule-Clash/refs/heads/main/MarketBank.yaml
+
   SocialMedia:
     type: http
     format: yaml
     behavior: classical
     path: ./rule_provider/SocialMedia.yaml
     url: https://raw.githubusercontent.com/kenith-byte/Rule-Clash/refs/heads/main/SocialMedia.yaml
+
   TikTok:
     type: http
     format: yaml
     behavior: classical
     path: ./rule_provider/TikTok.yaml
     url: https://raw.githubusercontent.com/kenith-byte/Rule-Clash/refs/heads/main/TikTok.yaml
+
   YouTube:
     type: http
     format: yaml
     behavior: classical
     path: ./rule_provider/YouTube.yaml
     url: https://raw.githubusercontent.com/kenith-byte/Rule-Clash/refs/heads/main/YouTube.yaml
+
   WhatsApp:
     type: http
     format: yaml
