@@ -1,0 +1,61 @@
+proxies:
+  - name: 🇮🇩 ID1-XUTP/XUTS
+    server: 104.18.214.235
+    port: 443
+    type: vless
+    uuid: 268e44aa-f3b8-40fe-93b5-3c3eb3d4cfd1
+    cipher: none
+    tls: true
+    skip-cert-verify: true
+    network: ws
+    servername: ava.game.naver.com.atp.sing-box.space
+    ws-opts:
+      path: /modern-approaches-to-machine-learning/buy-vless-ws-pm-telegram-at-synricha
+      headers:
+        Host: ava.game.naver.com.atp.sing-box.space
+    udp: true
+  - name: 🇮🇩 ID2-XUTP/XUTS
+    server: 104.18.214.235
+    port: 443
+    type: vless
+    uuid: 88e075c5-4eef-48af-b8b8-c889fe6b4c0a
+    cipher: none
+    tls: true
+    skip-cert-verify: true
+    network: ws
+    servername: ava.game.naver.com.violetvpn.biz.id
+    ws-opts:
+      path: /id-tele
+      headers:
+        Host: ava.game.naver.com.violetvpn.biz.id
+    udp: true
+  - name: 🇮🇩 ID3-XUTP/XUTS
+    server: 104.18.214.235
+    port: 443
+    type: vless
+    uuid: aaaaaaa1-bbbb-4ccc-accc-eeeeeeeeeee1
+    cipher: none
+    tls: true
+    skip-cert-verify: true
+    network: ws
+    servername: ava.game.naver.com.free.xiongt.my.id
+    ws-opts:
+      path: /Free/TG-at-XionAlva/203.194.112.119-8443
+      headers:
+        Host: ava.game.naver.com.free.xiongt.my.id
+    udp: true
+  - name: 🇮🇩 ID4-XUTP/XUTS
+    server: 104.18.214.235
+    port: 443
+    type: vless
+    uuid: 5b7fb38d-f298-4fe9-ae07-09db6cddf4a6
+    cipher: auto
+    tls: true
+    skip-cert-verify: true
+    servername: ava.game.naver.com.mstkkee3.dpdns.org
+    network: ws
+    ws-opts:
+      path: /id-gllc
+      headers:
+        Host: ava.game.naver.com.mstkkee3.dpdns.org
+    udp: true
