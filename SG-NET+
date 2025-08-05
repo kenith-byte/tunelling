@@ -1,0 +1,61 @@
+proxies:
+  - name: 🇸🇬 SG1-XUTP/XUTS
+    server: 104.18.214.235
+    port: 443
+    type: vless
+    uuid: 763c3263-5c5c-4a3e-a1d0-25872aaa136d
+    cipher: none
+    tls: true
+    skip-cert-verify: true
+    network: ws
+    servername: ava.game.naver.com.sg.vpnyubi.my.id
+    ws-opts:
+      path: /?ed=2048
+      headers:
+        Host: ava.game.naver.com.sg.vpnyubi.my.id
+    udp: true
+  - name: 🇸🇬 SG2-XUTP/XUTS
+    server: 104.18.214.235
+    port: 443
+    type: vless
+    uuid: 2c0b61bf-d9a8-4259-afb8-7c8481881679
+    cipher: none
+    tls: true
+    skip-cert-verify: true
+    network: ws
+    servername: ava.game.naver.com.violetvpn.biz.id
+    ws-opts:
+      path: /sg-ovh
+      headers:
+        Host: ava.game.naver.com.violetvpn.biz.id
+    udp: true
+  - name: 🇸🇬 SG3-XUTP/XUTS
+    server: 104.18.214.235
+    port: 443
+    type: vless
+    uuid: f6b5d18a-66ab-404a-93e6-4eea6a8aec08
+    cipher: none
+    tls: true
+    skip-cert-verify: true
+    network: ws
+    servername: ava.game.naver.com.violetvpn.biz.id
+    ws-opts:
+      path: /sg-orcl
+      headers:
+        Host: ava.game.naver.com.violetvpn.biz.id
+    udp: true
+  - name: 🇸🇬 SG4-XUTP/XUTS
+    server: 104.18.214.235
+    port: 443
+    type: vless
+    uuid: 6283e4b3-e378-431f-999e-52e298056587
+    cipher: none
+    tls: true
+    skip-cert-verify: true
+    network: ws
+    servername: ava.game.naver.com.mstkkee3.dpdns.org
+    ws-opts:
+      path: /sg-hzr
+      headers:
+        Host: ava.game.naver.com.mstkkee3.dpdns.org
+    udp: true
