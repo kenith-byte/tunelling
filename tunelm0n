@@ -142,8 +142,8 @@ proxies:
 proxy-providers:
   AKUN-ID:
     type: http
-    url:
-    path: ./AKUN-ID
+    url: https://raw.githubusercontent.com/kenith-byte/tunelling/refs/heads/main/ID-NET%2B
+    path: ./account/AKUN-ID
     health-check:
       enable: true
       interval: '120'
@@ -151,8 +151,8 @@ proxy-providers:
 
   AKUN-SG:
     type: file
-    url:
-    path: ./AKUN-SG.yaml
+    url: https://raw.githubusercontent.com/kenith-byte/tunelling/refs/heads/main/SG-NET%2B
+    path: ./account/AKUN-SG.yaml
     health-check:
       enable: true
       url: http://www.gstatic.com/generate_204
@@ -160,8 +160,8 @@ proxy-providers:
 
   AKUN-UDP:
     type: file
-    url:
-    path: ./AKUN-UDP.yaml
+    url: https://raw.githubusercontent.com/kenith-byte/tunelling/refs/heads/main/UDP-NET%2B
+    path: ./account/AKUN-UDP.yaml
     health-check:
       enable: true
       url: http://www.gstatic.com/generate_204
@@ -317,29 +317,41 @@ proxy-groups:
 
 rule-providers:
   AdBlock:
-    type: file
+    type: http
+    format: yaml
     behavior: classical
-    path: "./AdBlock.yaml"
+    path: ./rule_provider/AdBlock.yaml
+    url: https://raw.githubusercontent.com/kenith-byte/Rule-Clash/refs/heads/main/AdBlock.yaml
   MarketBank:
-    type: file
+    type: http
+    format: yaml
     behavior: classical
-    path: "./MarketBank.yaml"
+    path: ./rule_provider/MarketBank.yaml
+    url: https://raw.githubusercontent.com/kenith-byte/Rule-Clash/refs/heads/main/MarketBank.yaml
   SocialMedia:
-    type: file
+    type: http
+    format: yaml
     behavior: classical
-    path: "./SocialMedia.yaml"
+    path: ./rule_provider/SocialMedia.yaml
+    url: https://raw.githubusercontent.com/kenith-byte/Rule-Clash/refs/heads/main/SocialMedia.yaml
   TikTok:
-    type: file
+    type: http
+    format: yaml
     behavior: classical
-    path: "./TikTok.yaml"
+    path: ./rule_provider/TikTok.yaml
+    url: https://raw.githubusercontent.com/kenith-byte/Rule-Clash/refs/heads/main/TikTok.yaml
   YouTube:
-    type: file
+    type: http
+    format: yaml
     behavior: classical
-    path: "./YouTube.yaml"
+    path: ./rule_provider/YouTube.yaml
+    url: https://raw.githubusercontent.com/kenith-byte/Rule-Clash/refs/heads/main/YouTube.yaml
   WhatsApp:
-    type: file
+    type: http
+    format: yaml
     behavior: classical
-    path: "./WhatsApp.yaml"
+    url: https://raw.githubusercontent.com/kenith-byte/Rule-Clash/refs/heads/main/WhatsApp.yaml
+    path: ./rule_provider/WhatsApp.yaml
 
 rules:
 - IP-CIDR,127.0.0.1/32,REJECT,no-resolve
