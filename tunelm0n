@@ -56,7 +56,7 @@ tun:
 dns:
   enable: true
   ipv6: false
-  listen: 0.0.0.0:1053
+  listen: 0.0.0.0:7874
   enhanced-mode: fake-ip
   respect-rules: true
   fake-ip-range: 198.18.0.1/16
@@ -71,69 +71,21 @@ dns:
     - 1.1.1.1
   fallback:
     - https://dns.google/dns-query#UMUM
-    - https://dns.alidns.com/dns-query
   default-nameserver:
     - 8.8.8.8
     - 1.1.1.1
   proxy-server-nameserver:
-    - 104.22.4.240 #IP VIDIO
-    - 104.22.5.240 #IP VIDIO
-    - 104.17.156.243 #IP VIDIO
-    - 104.17.157.243 #IP VIDIO
-    - 104.17.158.243 #IP VIDIO
-    - 104.17.159.243 #IP VIDIO
-    - 104.17.71.206 #IP VIDIO
-    - 104.17.72.206 #IP VIDIO
-    - 104.17.73.206 #IP VIDIO
-    - 104.17.74.206 #IP VIDIO
-    - 172.64.32.202 #IP VIDIO
-    - 104.18.38.43 #IP VIU
-    - 172.64.149.213 #IP VIU
-    - 104.17.241.25 #IP NETFLIX
-    - 104.17.237.25 #IP NETFLIX
-    - 170.114.45.6 #IP XCV
-    - 170.114.46.6 #IP XCV
-    - 104.18.213.235 #IP XCV
-    - 104.18.214.235 #IP XCV
-    - 112.215.203.246 #DNS XL
-    - 112.215.203.247 #DNS XL
-    - 112.215.203.248 #DNS XL
-    - 112.215.203.254 #DNS XL
-    - 112.215.198.248 #DNS XL
-    - 112.215.198.254 #DNS XL
-    - '[2400:9800:2:2::245]' #DNS XL
-    - '[2400:9800:2:2::246]' #DNS XL
+    - 112.215.198.248
+    - 112.215.198.254
   fallback-filter:
     geoip: true
-    geoip-code: ID
-    ipcidr:
-    - 0.0.0.0/8
-    - 10.0.0.0/8
-    - 100.64.0.0/10
-    - 127.0.0.0/8
-    - 169.254.0.0/16
-    - 172.16.0.0/12
-    - 192.0.0.0/24
-    - 192.0.2.0/24
-    - 192.88.99.0/24
-    - 192.168.0.0/16
-    - 198.18.0.0/15
-    - 198.51.100.0/24
-    - 203.0.113.0/24
-    - 224.0.0.0/4
-    - 240.0.0.0/4
-    - 255.255.255.255/32
+    geoip-code: "ID"
+    geosite: []
+    ipcidr: []
     domain:
-    - "+.google.com"
-    - "+.facebook.com"
-    - "+.youtube.com"
-    - "+.githubusercontent.com"
-    - "+.googlevideo.com"
-    - "+.msftconnecttest.com"
-    - "+.msftncsi.com"
-    - msftconnecttest.com
-    - msftncsi.com
-    - "+.*"
+      - '+.google.com'
+      - '+.facebook.com'
+      - '+.youtube.com'
 profile:
   store-selected: true
   store-fake-ip: true
@@ -360,10 +312,18 @@ rule-providers:
     path: ./rule_provider/WhatsApp.yaml
 
 rules:
+- AND,((GEOSITE,category-ads-all),(NOT,((DOMAIN-SUFFIX,googlesyndication.com)))),REJECT
+- GEOSITE,category-ads-all,REJECT
+- AND,((NETWORK,udp),(GEOSITE,youtube)),REJECT
 - IP-CIDR,127.0.0.1/32,REJECT,no-resolve
 - IP-CIDR,198.18.0.1/16,REJECT,no-resolve
 - IP-CIDR,28.0.0.1/8,REJECT,no-resolve
 - IP-CIDR6,::1/128,REJECT,no-resolve
+- GEOSITE,telegram,INTERNET
+- AND,((NETWORK,UDP),(DST-PORT,123)),DIRECT
+- DST-PORT,123/136/137-139,DIRECT,udp
+- AND,((PROCESS-NAME,clash),(NOT,((IN-TYPE,inner)))),REJECT
+- IN-TYPE,inner,INTERNET
 - RULE-SET,AdBlock,Block-Ads
 - RULE-SET,MarketBank,Market-Bank
 - RULE-SET,SocialMedia,Social-Media
